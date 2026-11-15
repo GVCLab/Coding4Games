@@ -1,0 +1,26 @@
+{
+  "buildid": "8170224",
+  "capture": "native PrintWindow at 854x480",
+  "source": "out/game_acceptance/kof98_20261023_01",
+  "images": [
+    {
+      "name": "attract_order.png",
+      "sha256": "6a694cd5e11c6e2f33191f2856bfe70e2e3d8e3f164c71815a31d1cb7554634e"
+    },
+    {
+      "name": "ready_59.png",
+      "sha256": "f7e1621e99bdc42dc1828d3646113c2bb2f553278b8ec126ffe10fcef72fa0f5"
+    },
+    {
+      "name": "start_go_60.png",
+      "sha256": "6254470c0a22e542ea947e9da072f0e5b33567cd18a2e20479b30615dc7f50e4"
+    },
+    {
+      "name": "ready_china_59.png",
+      "sha256": "3906133f320aa365bcc2b0d04de4a3537f590b308e904263a3bb2c3ab1fcc928",
+      "source": "smoke_02/episode_0_start.png",
+      "scope": "Frozen startup only; China channel 19, Kyo first, both full health, timer 59"
+    }
+  ],
+  "meaning": "Native startup/HUD evidence. Historical startup captures retain their original identity; ready_china_59 is the recorded menu 08 fixed-stage handoff. Human gameplay calibration remains pending."
+}

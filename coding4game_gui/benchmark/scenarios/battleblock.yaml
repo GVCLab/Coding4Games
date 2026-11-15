@@ -1,0 +1,189 @@
+# BattleBlock Theater (real Windows game) benchmark scenario.
+# No seeds: fairness comes from the same level and the same budget rather than
+# a shared random seed. Platformer: reach the exit, collect gems, avoid
+# hazards. The verb table was calibrated against the real game on 2026-07-14.
+
+title: "BattleBlock Theater (Windows real game)"
+engine: windows
+driver_game: battleblock
+
+gameplay: |
+  <!-- C4G_WINDOWS_INPUT:gamepad:begin -->
+  This task requires --windows-input gamepad-kbm. A virtual gamepad was not effective in the source calibration.
+  <!-- C4G_WINDOWS_INPUT:gamepad:end -->
+  <!-- C4G_WINDOWS_INPUT:gamepad-kbm:begin -->
+  Keyboard/mouse guide (game-default keyboard preset; no custom remapping is assumed):
+  LEFT/RIGHT move; SPACE jumps (tap twice for a double jump); A attacks; D grabs/pushes;
+  CTRL interacts with doors. ENTER confirms menus; BACKSPACE goes back.
+  Use KEY[...] for physical keys and separate ACT pulses for separate taps.
+
+  Goal: finish the level by reaching its exit.
+
+  The exit stays shut until enough green gems have been collected; the counter
+  at the top of the screen shows how many you are carrying. Scoring is in
+  bands, and a later band always outranks an earlier one no matter what
+  happened inside it:
+
+    1. some of the gems the exit needs — partial credit, in proportion
+    2. all of them, so the exit is open
+    3. the level finished
+
+  Finishing also scores speed, counted in game tics rather than real time.
+  Yarn balls are a bonus that counts only once the level is finished; no
+  amount of yarn is worth a single gem.
+
+  Restarting the level ends the episode. Dying does not — credit for gems
+  already collected is kept.
+
+  <!-- C4G_WINDOWS_INPUT:gamepad-kbm:end -->
+objective: |
+  Goal: finish the level by reaching its exit.
+
+  The exit stays shut until enough green gems have been collected; the counter
+  at the top of the screen shows how many you are carrying. Scoring is in
+  bands, and a later band always outranks an earlier one no matter what
+  happened inside it:
+
+    1. some of the gems the exit needs — partial credit, in proportion
+    2. all of them, so the exit is open
+    3. the level finished
+
+  Finishing also scores speed, counted in game tics rather than real time.
+  Yarn balls are a bonus that counts only once the level is finished; no
+  amount of yarn is worth a single gem.
+
+  Restarting the level ends the episode. Dying does not — credit for gems
+  already collected is kept.
+
+episode_contract: |
+  Each episode starts on the configured task from a fresh game process.
+  The episode ends on the registered terminal condition, an explicit stop,
+  unexpected game exit, or the configured resource limits. Scores settle after play.
+
+runtime:
+  scenario: battleblock
+  tics_per_second: 10
+  max_tics: 3000          # 300 unfrozen seconds at the declared 10 Hz
+  max_burst: 5
+  # MUST stay null. A finite value caps only the LANG arm's decision count;
+  # the code arm has no matching constraint, so one arm would be handed a
+  # resource the other pays for and the two stop being comparable. The former
+  # value of 80 was a guess ("platforming needs many small precise actions").
+  # main's test_no_windows_scenario_quietly_caps_one_arm sweeps every scenario,
+  # and its own comment names this exact trap: "the trackmania cap survived for
+  # three weeks precisely by being the only one that differed from its
+  # neighbours". Same hole, different game.
+  max_calls_per_ep:
+
+# lifecycle: what ends an episode. Reaching the exit completes it; spikes and
+# water kill, and BattleBlock normally respawns after a death, so a death is
+# not an ending here.
+lifecycle:
+  terminal_detection: true
+scorer:
+  # Corrected 2026-09-04. The previous [1920, 1056] was wrong in an instructive
+  # way: it was the UNCROPPED PrintWindow buffer size seen by a one-off
+  # recording script. BattleBlock is DPI-unaware, and at 1.25x scaling main's
+  # renderer crops the border and scaling slack itself:
+  #     [renderer] DPI-unaware game at 1.25x:
+  #                cropping capture 1940x1063 -> 1536x810 at (10,39)
+  # so what an episode actually receives is 1536x810. Measured on a real cold
+  # start (bbtcold2, 2026-09-04).
+  # Select the separately measured 1280x720 human-HUD calibration supported
+  # by bbt_hud, matching this host's declared native window dimensions.
+  calibrated_client_size: [1280, 720]
+  progress:
+    gem_quota: 3          # 1-1: three gems open the exit. Fixture
+                          # gem3_yarn1_exitopen is the evidence.
+                          # WARNING: confirmed one-sidedly only ("at 3 the exit
+                          # was open"); there is no evidence yet that it is
+                          # SHUT at 2. quota_disagreement is the backstop.
+    yarn_max: 1           # 1-1's A++ results screen is 3 gems + 1 yarn.
+    reference_tics: 518   # Human baseline, measured in THE SCORER'S OWN UNIT.
+                          # One run recorded through the benchmark renderer:
+                          # the first 29.8s were the operator reading a handover
+                          # message (inter-frame delta 0.47, versus 8-23 once
+                          # playing); the exit was reached at t=81.6s, so 51.8
+                          # seconds of unfrozen game time x 10 = 518 tics.
+                          # The 5.3s curtain between exit and results is NOT in
+                          # it: completion_tics accumulates only READABLE
+                          # in-level frames, and read() returns None during a
+                          # curtain.
+                          # The older 481 came from the wrong-reference-frame
+                          # recording and its tic unit was never established.
+                          # WARNING: this is ONE run, by someone who knew the
+                          # level and died four times -- a competent run, not a
+                          # speedrun. Matching it scores full marks for speed.
+  # Odometry is NO LONGER THE SCORE; it is kept as a diagnostic (a high
+  # path-length / net-displacement ratio means the player is shaking in place).
+  # WARNING: this crop has not been recalibrated. It was tuned against the old
+  # 1920x1056 fixtures, which are a different reference frame from the
+  # 1536x810 above, so it should not be trusted even as a diagnostic yet.
+  odometry:
+    input_size: [320, 180]
+    min_resp: 0.30
+    max_dx: 80.0
+    scale: 1.0
+    crop: [0.20, 0.80, 0.10, 0.75]
+  window_setup:
+    position: [0, 0]
+    size:
+    - 1280
+    - 720
+    mode: Windowed
+
+# golden_checkpoint is BACK, 2026-09-22. What follows is the history, because
+# the reason it was removed was correct and must not be read as a reason to
+# remove it again.
+#
+# It was once declared as a PLACEHOLDER while snapshots/battleblock_golden.zip
+# did not exist, so the scenario named a save that was not there.
+# `prepare_launch_state` raises FileNotFoundError on that, and it calls
+# kill_process BEFORE it checks the save -- so a missing snapshot did not
+# merely fail to start, it shut down a game that was already running. Both the
+# 2026-09-05 cold start and the pad recorder died on that. Removing it was
+# right: a scenario must not name a save that does not exist.
+#
+# The zip now exists. It was frozen on 2026-09-22 from mr-why's live save at a
+# moment when the opening animation had been watched, which is the state the
+# recorded menu_skip path was recorded against. games/battleblock.yaml's
+# save_state block documents what is in it, what a restore wipes, and the one
+# open question (Steam Cloud may overwrite the restored save at launch --
+# checkable by hashing user1.dat after a cold start, not by reading config).
+#
+# Why it is load-bearing here and was not for KOF: KOF's menu_skip drives a
+# stateless title screen, so there is nothing to pin. BattleBlock's path is a
+# TIMED replay through a campaign hub, and whether the intro has been watched
+# shifts the entire timeline. The earlier note in this file about the path
+# "not reaching 1-1" was that shift misread as a missing step.
+startup:
+  # Account-local native checkpoint; the source golden is preserved separately.
+  # See docs/games/battleblock/README.md for preparation and live gates.
+  golden_checkpoint: current_account_golden
+  menu_skip_ocr:
+    input_size: [1400, 340]
+    min_conf: 0.5
+    device: gpu:0
+    text_detection_model_name: PP-OCRv6_small_det
+    text_recognition_model_name: PP-OCRv6_small_rec
+  menu_skip_ocr_rect: [400, 300, 700, 170]
+  # Retain the recorded eight-second level-load wait; startup polling is not
+  # a substitute for the measured game-loading interval.
+  menu_skip_preserve_tail: true
+  start_check:
+    timeout_seconds: 20.0
+    image_templates:
+    - path: games/assets/battleblock/start_1_1.png
+      rect: [316, 160, 60, 75]
+      min_correlation: 0.90
+      search_margin: [25, 40]
+      rotations: [-15, -12, -9, -6, -3, 0, 3, 6, 9, 12, 15]
+    - path: games/assets/battleblock/start_1_1.png
+      rect: [957, 160, 53, 75]
+      min_correlation: 0.85
+      search_margin: [90, 50]
+      rotations: [-15, -12, -9, -6, -3, 0, 3, 6, 9, 12, 15]
+  # Re-recorded physical-key timeline, 2026-10-25; retain the frozen task check.
+  # No navigation OCR or automatic correction runs during open-loop input.
+  # The prior path and failed trial remain in the diagnosis evidence.
+  menu_skip_replay: open_loop

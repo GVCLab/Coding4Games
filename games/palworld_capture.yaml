@@ -1,0 +1,91 @@
+name: Palworld capture benchmark
+process: Palworld-Win64-Shipping.exe
+platform: windows-xinput
+screenshot_backend: dxcam
+
+# Dedicated capture-task world. The restore target is one approved Palworld
+# world directory, never the account-wide SaveGames directory.
+description: |
+  Palworld native Xbox controller integration, default preset, no remapping.
+  The benchmark restores the prepared entrance checkpoint, enters the dungeon
+  during startup, and asks the player to capture one Penking and one Pengullet
+  without attacking. Scored play starts from the stable dungeon interior.
+
+scorer:
+  kind: ocr
+  implementation: ocr
+
+save_state:
+  restore_to: '%LOCALAPPDATA%/Pal/Saved/SaveGames/76561199470060039/2B0866AE43596F6C267DD595DC4894DC'
+  golden: 'snapshots/palworld_capture_entrance_singleplayer_20260922.zip'
+
+auto_launch:
+  launch_path: 'D:/App/STEAM/steam.exe'
+  # Keep the benchmark's calibrated client geometry explicit at engine startup.
+  launch_args: ['-applaunch', '1623730', '-windowed', '-resx=2560', '-resy=1440']
+  window_wait_seconds: 180.0
+  settle_seconds: 60.0
+
+actions:
+  neutral: {description: 'Raw Xbox neutral state.'}
+  a: {description: 'Raw Xbox A face button.', buttons: [A]}
+  b: {description: 'Raw Xbox B face button.', buttons: [B]}
+  x: {description: 'Raw Xbox X face button.', buttons: [X]}
+  y: {description: 'Raw Xbox Y face button.', buttons: [Y]}
+  lb: {description: 'Raw Xbox left shoulder button.', buttons: [LB]}
+  rb: {description: 'Raw Xbox right shoulder button.', buttons: [RB]}
+  ls: {description: 'Raw Xbox left-stick click.', buttons: [LS]}
+  rs: {description: 'Raw Xbox right-stick click.', buttons: [RS]}
+  dpad_up: {description: 'Raw Xbox D-pad up.', buttons: [DPAD_UP]}
+  dpad_down: {description: 'Raw Xbox D-pad down.', buttons: [DPAD_DOWN]}
+  dpad_left: {description: 'Raw Xbox D-pad left.', buttons: [DPAD_LEFT]}
+  dpad_right: {description: 'Raw Xbox D-pad right.', buttons: [DPAD_RIGHT]}
+  start: {description: 'Raw Xbox Start button.', buttons: [START]}
+  back: {description: 'Raw Xbox Back button.', buttons: [BACK]}
+  guide: {description: 'Raw Xbox Guide button.', buttons: [GUIDE]}
+
+# Recorded mouse title-to-world path, followed by the entrance interaction.
+# Evidence: out/game_acceptance/20261022_followup/pal_mouse_menu_record/.
+# Entering the
+# dungeon is startup infrastructure: the policy receives its first frame only
+# after the known confirmation and loading sequence has completed.
+menu_skip:
+  - description: 'recorded mouse navigation: Title Start Game'
+    click: [1277, 825]
+    pad: 1
+    duration_seconds: 0.5717
+    expect: 'WORLD\s*SELECT'
+  - description: 'recorded mouse navigation: Select the single delivered world'
+    click: [1277, 338]
+    pad: 1
+    duration_seconds: 0.4052
+    expect: '更改世界设置'
+  - description: 'recorded mouse navigation: World Start Game'
+    click: [1944, 1308]
+    pad: 1
+    duration_seconds: 0.8776
+    expect: 'NOW\s*LOADING|进入地下城'
+  - description: 'measured world-load wait: stable entrance observed at 65 seconds'
+    pad: 1
+    duration_seconds: 65.0
+    expect: '进入地下城'
+    # The loading frame already draws the entrance HUD. Native loading luma
+    # was 5.79 versus 102.75 for the rendered exterior confirmation frame.
+    min_scene_luma: 30.0
+  - description: 'recorded entrance interaction: X until the confirmation is visible'
+    buttons: [X]
+    pad: 1
+    duration_seconds: 0.12
+    expect: '要进入地下城'
+  - description: wait for the dungeon confirmation prompt
+    pad: 1
+    duration_seconds: 3.0
+    expect: '要进入地下城'
+  - description: 'recorded dungeon confirmation: click the visible Yes button'
+    click: [1107, 953]
+    duration_seconds: 0.15
+    expect_absent: '要进入地下城'
+  - description: wait for the dungeon transition before policy tic zero
+    pad: 1
+    duration_seconds: 7.0
+    expect: '企丸王'

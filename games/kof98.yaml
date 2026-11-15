@@ -1,0 +1,178 @@
+name: KingOfFighters98UMFE
+
+# Verified: Steam appid 222420 is KOF '98 Ultimate Match Final Edition.
+# Current native PrintWindow viewport: 854x480; physical client: 1281x720 at 150% DPI.
+process: KingOfFighters98UM_x64.exe
+
+scorer:
+  kind: image
+  implementation: kof98_terminal
+
+description: |
+  Fighting game (harness config). Neutral infrastructure description only; no gameplay hints.
+
+# KOF uses DX9; PrintWindow captures correctly. Desktop duplication via dxcam denies SYSTEM/PsExec access.
+screenshot_backend: printwindow
+
+# Source: 427147c2ef50f9f1d039281f446c78d68d436989, games/kof98.yaml.
+# The original host used Steam's local CLI because direct game launch handed
+# control back to Steam. See docs/games/kof98/README.md for the task and evidence.
+auto_launch:
+  launch_path: "D:/App/STEAM/steam.exe"
+  launch_args: ["-applaunch", "222420"]
+  launch_method: desktop_shell
+  window_wait_seconds: 180.0
+  settle_seconds: 60.0
+
+# Recorded 2026-10-23: menu_record_08.log in out/game_acceptance/kof98_20261023_01/.
+# CPU VS; ADVANCED both sides; own Kyo/Benimaru/Daimon, CPU Yuri/Kyo/Benimaru.
+# X then A fixes the player order. The CPU chooses its own order.
+# DOWN selects channel 19 (China) before A confirms the stage.
+menu_skip:
+  - description: 'recorded: pad1 [START] held 0.16s'
+    buttons:
+      - START
+    pad: 1
+    duration_seconds: 0.16
+  - description: wait 3.06s
+    pad: 1
+    duration_seconds: 3.06
+  - description: 'recorded: pad1 [DPAD_RIGHT] held 0.16s'
+    buttons:
+      - DPAD_RIGHT
+    pad: 1
+    duration_seconds: 0.16
+  - description: wait 1.17s
+    pad: 1
+    duration_seconds: 1.17
+  - description: 'recorded: pad1 [DPAD_RIGHT] held 0.16s'
+    buttons:
+      - DPAD_RIGHT
+    pad: 1
+    duration_seconds: 0.16
+  - description: wait 1.09s
+    pad: 1
+    duration_seconds: 1.09
+  - description: 'recorded: pad1 [A] held 0.16s'
+    buttons:
+      - A
+    pad: 1
+    duration_seconds: 0.16
+  - description: wait 2.50s
+    pad: 1
+    duration_seconds: 2.5
+  - description: 'recorded: pad1 [A] held 0.16s'
+    buttons:
+      - A
+    pad: 1
+    duration_seconds: 0.16
+  - description: wait 2.42s
+    pad: 1
+    duration_seconds: 2.42
+  - description: 'recorded: pad1 [A] held 0.16s'
+    buttons:
+      - A
+    pad: 1
+    duration_seconds: 0.16
+  - description: wait 2.42s
+    pad: 1
+    duration_seconds: 2.42
+  - description: 'recorded: pad1 [A] held 0.16s'
+    buttons:
+      - A
+    pad: 1
+    duration_seconds: 0.16
+  - description: wait 1.69s
+    pad: 1
+    duration_seconds: 1.69
+  - description: 'recorded: pad1 [A] held 0.16s'
+    buttons:
+      - A
+    pad: 1
+    duration_seconds: 0.16
+  - description: wait 1.77s
+    pad: 1
+    duration_seconds: 1.77
+  - description: 'recorded: pad1 [A] held 0.16s'
+    buttons:
+      - A
+    pad: 1
+    duration_seconds: 0.16
+  - description: wait 1.92s
+    pad: 1
+    duration_seconds: 1.92
+  - description: 'recorded: pad1 [A] held 0.16s'
+    buttons:
+      - A
+    pad: 1
+    duration_seconds: 0.16
+  - description: wait 1.61s
+    pad: 1
+    duration_seconds: 1.61
+  - description: 'recorded: pad1 [A] held 0.16s'
+    buttons:
+      - A
+    pad: 1
+    duration_seconds: 0.16
+  - description: wait 1.70s
+    pad: 1
+    duration_seconds: 1.7
+  - description: 'recorded: pad1 [A] held 0.16s'
+    buttons:
+      - A
+    pad: 1
+    duration_seconds: 0.16
+  - description: wait 10.50s
+    pad: 1
+    duration_seconds: 10.5
+  - description: 'recorded: pad1 [X] held 0.16s'
+    buttons:
+      - X
+    pad: 1
+    duration_seconds: 0.16
+  - description: wait 0.98s
+    pad: 1
+    duration_seconds: 0.98
+  - description: 'recorded: pad1 [A] held 0.16s'
+    buttons:
+      - A
+    pad: 1
+    duration_seconds: 0.16
+  - description: wait 6.48s
+    pad: 1
+    duration_seconds: 6.48
+  - description: 'recorded: pad1 [DPAD_DOWN] held 0.16s'
+    buttons:
+      - DPAD_DOWN
+    pad: 1
+    duration_seconds: 0.16
+  - description: wait 58.42s
+    pad: 1
+    duration_seconds: 58.42
+  - description: 'recorded: pad1 [A] held 0.16s'
+    buttons:
+      - A
+    pad: 1
+    duration_seconds: 0.16
+  - description: wait 0.94s (trailing — last input → SAVE)
+    pad: 1
+    duration_seconds: 0.94
+
+# Minimal game-neutral controls for configuration parsing and navigation; fighting moves await calibration.
+actions:
+  neutral: {description: 'Raw Xbox neutral state.'}
+  a: {description: 'Raw Xbox A face button.', buttons: [A]}
+  b: {description: 'Raw Xbox B face button.', buttons: [B]}
+  x: {description: 'Raw Xbox X face button.', buttons: [X]}
+  y: {description: 'Raw Xbox Y face button.', buttons: [Y]}
+  lb: {description: 'Raw Xbox left shoulder button.', buttons: [LB]}
+  rb: {description: 'Raw Xbox right shoulder button.', buttons: [RB]}
+  ls: {description: 'Raw Xbox left-stick click.', buttons: [LS]}
+  rs: {description: 'Raw Xbox right-stick click.', buttons: [RS]}
+  dpad_up: {description: 'Raw Xbox D-pad up.', buttons: [DPAD_UP]}
+  dpad_down: {description: 'Raw Xbox D-pad down.', buttons: [DPAD_DOWN]}
+  dpad_left: {description: 'Raw Xbox D-pad left.', buttons: [DPAD_LEFT]}
+  dpad_right: {description: 'Raw Xbox D-pad right.', buttons: [DPAD_RIGHT]}
+  start: {description: 'Raw Xbox Start button.', buttons: [START]}
+  back: {description: 'Raw Xbox Back button.', buttons: [BACK]}
+  guide: {description: 'Raw Xbox Guide button.', buttons: [GUIDE]}

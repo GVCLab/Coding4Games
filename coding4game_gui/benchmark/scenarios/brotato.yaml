@@ -1,0 +1,106 @@
+title: "Brotato (Windows real game)"
+engine: windows
+driver_game: brotato
+
+gameplay: |
+  Brotato is a top-down arena survival game. The character auto-aims and
+  auto-fires; the player steers. Enemies drop materials. Between waves the
+  player must navigate level-up and shop screens, buy useful items, and start
+  the next wave. Movement directions may be combined for diagonal movement.
+
+  <!-- C4G_WINDOWS_INPUT:gamepad:begin -->
+  Controller guide (game-default controller preset; context-sensitive):
+  Game-default preset: Brotato's unmodified default Xbox controller layout; no
+  custom remapping is assumed.
+
+  | Input token | Gameplay meaning | Menu / contextual meaning |
+  |-------------|------------------|---------------------------|
+  | `neutral` | Release movement; the character stops while combat remains auto-aim/auto-fire. | Wait for transitions without moving focus. |
+  | `LS[x,y]` | Move the character continuously; diagonal values move diagonally. | Navigate the level-up, shop, and other focus-based screens. |
+  | `RS[x,y]` | Manual aim only if that gameplay option is enabled; the benchmark normally uses auto-aim. | Use only when the current screen explicitly assigns the right stick. |
+  | `LT[v]` | Avoid during combat; auto-aim and auto-fire cover the scored task. | Use only when an LT glyph is visible. |
+  | `RT[v]` | Avoid during combat; auto-aim and auto-fire cover the scored task. | Use only when an RT glyph is visible. |
+  | `a` | No manual attack is needed because weapons auto-fire. | Confirm, select an upgrade, buy the focused item, or activate Start/Go when focused. |
+  | `b` | Avoid during combat; weapons attack automatically. | Cancel, close details, or go back. |
+  | `x` | Use during combat only when a visible X prompt identifies its effect. | Use the screen-specific shortcut only when an X glyph identifies its effect. |
+  | `y` | Avoid during combat; weapons attack automatically. | Reroll on level-up/shop screens only when the visible UI assigns Y to reroll. |
+  | `lb` | Avoid during combat; the scored task does not depend on an LB action. | Use only from a visible LB prompt. |
+  | `rb` | Avoid during combat; the scored task does not depend on an RB action. | Use only from a visible RB prompt. |
+  | `ls` | Avoid during scored play; the task does not require a left-stick-click action. | Use only if an LS glyph appears. |
+  | `rs` | Avoid during scored play; the task does not require a right-stick-click action. | Use only if an RS glyph appears. |
+  | `dpad_up` | Prefer LS for combat movement. | Move focus up. |
+  | `dpad_down` | Prefer LS for combat movement. | Move focus down. |
+  | `dpad_left` | Prefer LS for combat movement. | Move focus left. |
+  | `dpad_right` | Prefer LS for combat movement. | Move focus right. |
+  | `start` | Pause the current wave; avoid unless recovery requires it. | Open or close pause/options. |
+  | `back` | Avoid during combat; the scored task does not require the View/Back action. | Open or close stats only when the screen shows the View glyph. |
+  | `guide` | Opens the platform guide rather than a game action; avoid it. | Avoid it because it can cover the captured game window. |
+  <!-- C4G_WINDOWS_INPUT:gamepad:end -->
+
+  <!-- C4G_WINDOWS_INPUT:gamepad-kbm:begin -->
+  Keyboard/mouse guide (game-default PC preset; context-sensitive):
+  Game-default preset: Brotato's unmodified default PC keyboard/mouse layout;
+  no custom remapping is assumed.
+
+  | Input token | Gameplay meaning | Menu / contextual meaning |
+  |-------------|------------------|---------------------------|
+  | `NEUTRAL` | Release movement; combat remains auto-aim/auto-fire. | Wait for transitions without moving or clicking. |
+  | `KEY[W]`, `KEY[A]`, `KEY[S]`, `KEY[D]` | Hold movement up, left, down, or right; combine keys for diagonal movement. | Prefer clicking visible controls instead of guessing menu keyboard focus. |
+  | `MOVE[x,y]` | Move and remain at a 1280x768 policy-screenshot pixel coordinate; no pointer action is normally needed during auto-fire combat. | Hover a visible level-up or shop control to inspect any hover-dependent details without activating it. |
+  | `CLICK[x,y]` | No click is needed during auto-fire combat. | Left-click the visible level-up choice, shop item, reroll, or Start/Go control at its 1280x768 policy-screenshot pixel coordinate. |
+  <!-- C4G_WINDOWS_INPUT:gamepad-kbm:end -->
+
+  Auto-fire and manual aiming are distinct settings. Do not assume mouse
+  movement aims weapons when auto-aim is active. Read item and weapon details
+  and verify purchase, reroll and wave-start outcomes from the resulting UI.
+
+objective: |
+  Survive as many waves as possible and collect materials.
+  Score = 100 x current wave + materials collected during combat.
+  The first valid WAVE 1 reading awards 100. A sequential N -> N+1 transition
+  awards exactly 100; larger OCR jumps award no wave points. Positive material
+  gains during combat award +1 each. Shop spending never subtracts score.
+  Examples: dying during Wave 1 after collecting 23 materials scores 123;
+  reaching Wave 4 with 80 collected materials scores 480.
+
+episode_contract: |
+  Every episode cold-starts the game, clears any resumable run while preserving
+  permanent progression, replays the recorded title/menu path, verifies Wave 1,
+  and then gives control to the policy. Combat, level-up, and shop screens are
+  all part of the episode. The host ends the episode on RUN LOST.
+  Leave that screen visible for settlement. An episode can also end
+  only by explicit stop, program exit, a configured resource limit, operator
+  interruption, or infrastructure failure. The game is closed after every
+  episode; the next episode repeats the complete cold-start path.
+
+runtime:
+  scenario: brotato
+  tics_per_second: 10
+  # Episodes share the run budget unless the caller requests a shorter trial.
+  max_tics: 10000
+  max_burst: null
+  max_calls_per_ep: null
+
+startup:
+  start_check:
+    pattern: '(\d+)/\1'
+    rect: [0, 0, 320, 90]
+    regions: {wave: 1}
+  menu_skip_replay: closed_loop
+
+
+lifecycle:
+  terminal_detection: true
+
+scorer:
+  calibrated_client_size: [1280, 720]
+  ocr: {input_size: [640, 360], min_conf: 0.5, device: "gpu:0"}
+  phases:
+    death: {any: ["RUN LOST"]}
+    levelup: {any: ["LEVEL UP"]}
+    shop: {any: ["SHOP"]}
+    combat: {pattern: 'WAVE\s*\d'}
+  regions:
+    wave: {pattern: 'WAVE\s*(\d+)', max_increment: 1, baseline: 0}
+    materials: {rect: [52, 88, 110, 42], kind: number, spendable: true, max_increment: 50, max_jump: 50}
+  weights: {wave: 100, materials: 1}

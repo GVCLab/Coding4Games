@@ -1,0 +1,218 @@
+name: Forza Horizon 5
+
+# Steam appid 1551360. The install ships a sibling ForzaProtocolSelector.exe;
+# the long-running game process is ForzaHorizon5.exe. Confirm with Stage-1
+# dry launch (scripts/test_auto_launch_dry.py) before trusting this.
+process: ForzaHorizon5.exe
+
+# The benchmark reads the route distance printed above the minimap. Task-level
+# ROI, baseline, OCR, and reward calibration live in the Windows scenario YAML.
+scorer:
+  kind: ocr
+  implementation: forza_horizon_5
+
+# DX12 title: PrintWindow returns black frames on DX12 swapchains, so pin
+# dxcam explicitly rather than relying on auto-detection. dxcam captures a
+# screen region, so the game window must stay visible and on top, in windowed
+# or borderless-windowed mode (NOT exclusive fullscreen).
+screenshot_backend: dxcam
+
+description: |
+  Forza Horizon 5: an open-world arcade racing game set in a large map of
+  Mexico. The player drives a car in a persistent open world (the "Horizon
+  Festival") and can free-roam or enter events — road races, dirt/cross-country
+  races, street scenes, and timed challenges such as speed traps, speed zones
+  and danger signs. There is no fail state while free-roaming: crashing costs
+  speed and time but the car respawns on the road. In a race the objective is
+  to finish ahead of the AI drivers within the lap/checkpoint structure shown
+  on the HUD.
+
+  HUD: a minimap with the route line sits in one corner, speed and gear are
+  shown as a large readout, and the current event's position/lap/checkpoint
+  info appears while an event is active. A route line and floating waypoint
+  markers indicate where to drive when a destination is set.
+
+  Driving controls (standard Xbox layout): the RIGHT TRIGGER is the throttle
+  and the LEFT TRIGGER is the brake — both are analog, so partial presses give
+  partial throttle/braking. The LEFT STICK steers left and right. A handbrake,
+  gear shifts, rewind and horn are bound to the face and shoulder buttons.
+  In menus the D-pad or left stick moves the selection, the south button
+  confirms and the east button cancels.
+
+  Note on timing: this is a real-time continuous-control game. Steering and
+  throttle are held states, not discrete taps, so a single short button press
+  produces only a small change in the car's trajectory.
+
+# ---------------------------------------------------------------------------
+# RAW GAMEPAD ACTIONS. The policy sees physical XInput controls only — no
+# semantic aliases such as ACCELERATE/STEER_LEFT, and no mouse coordinates.
+# Discovering which physical control does what is part of what the policy must
+# learn. Triggers are exposed as full-press states here; the analog range is
+# reachable by varying duration, not magnitude.
+# ---------------------------------------------------------------------------
+
+actions:
+  neutral: {description: 'Raw Xbox neutral state.'}
+  a: {description: 'Raw Xbox A face button.', buttons: [A]}
+  b: {description: 'Raw Xbox B face button.', buttons: [B]}
+  x: {description: 'Raw Xbox X face button.', buttons: [X]}
+  y: {description: 'Raw Xbox Y face button.', buttons: [Y]}
+  lb: {description: 'Raw Xbox left shoulder button.', buttons: [LB]}
+  rb: {description: 'Raw Xbox right shoulder button.', buttons: [RB]}
+  ls: {description: 'Raw Xbox left-stick click.', buttons: [LS]}
+  rs: {description: 'Raw Xbox right-stick click.', buttons: [RS]}
+  dpad_up: {description: 'Raw Xbox D-pad up.', buttons: [DPAD_UP]}
+  dpad_down: {description: 'Raw Xbox D-pad down.', buttons: [DPAD_DOWN]}
+  dpad_left: {description: 'Raw Xbox D-pad left.', buttons: [DPAD_LEFT]}
+  dpad_right: {description: 'Raw Xbox D-pad right.', buttons: [DPAD_RIGHT]}
+  start: {description: 'Raw Xbox Start button.', buttons: [START]}
+  back: {description: 'Raw Xbox Back button.', buttons: [BACK]}
+  guide: {description: 'Raw Xbox Guide button.', buttons: [GUIDE]}
+
+# Restore the complete Steam userdata app directory before every benchmark
+# episode.  The archive contains both remote/ and remotecache.vdf, so the
+# destination must be the app root rather than only the active profile folder.
+save_state:
+  golden: snapshots/forza_horizon_5_golden.zip
+  restore_to: "D:/App/STEAM/userdata/1509794311/1551360"
+
+# One-command cold start THROUGH THE STEAM CLIENT'S CLI — not through the
+# game's own exe, and not through a URI.
+#
+# Measured 2026-08-13 with three window-free launch probes:
+#   A) ForzaHorizon5.exe directly, Steam already running -> window appears,
+#      then the process EXITS ~4s later. (The original failure looked like a
+#      focus bug: 'error(1400) BringWindowToTop, invalid window handle' during
+#      the settle wait. It was not — the window was already gone.)
+#   B) steam://rungameid/1551360                         -> boots fine
+#   C) steam.exe -applaunch 1551360                      -> boots fine
+#
+# Why this game and not the other eight: Forza ships Xbox-GDK components next
+# to Steamworks — PartyXboxLive.dll/PartyWin.dll, ten app-container CRT
+# variants (msvcp140_app.dll, vccorlib140_app.dll, ...), cpprest140_uwp_2_9.dll,
+# and an installscript.vdf registering Xbox Live Accept/Join protocols under
+# HKLM\SOFTWARE\Microsoft\XboxLive\2030093255. It treats the platform user
+# context as a hard precondition and quits without it. Contrast Black Myth
+# (games/black_myth.yaml), a plain UE5 title whose only Steam artifact is
+# Engine/Binaries/ThirdParty/Steamworks/.../steam_api64.dll: Steam is an
+# OPTIONAL online subsystem there, so its own exe boots fine.
+# Note steam_appid.txt does NOT predict this — Forza has one and still fails,
+# Black Myth has none and works.
+#
+# Form C is used rather than B because it is still an absolute local .exe:
+# game_launch rejects any path containing '://', and that rule stays intact.
+# CONSEQUENCE: launch_path is the CLIENT, while process: below is the GAME, so
+# the window wait must key on process: (it does) and the Popen returned by
+# launch_game is steam.exe's short-lived bootstrap — useless for crash
+# detection. Every current caller discards it, so nothing regresses.
+# Requires Steam installed at this path and already signed in.
+#
+# settle_seconds: 30.0 set by operator request, NOT measured with
+# scripts/test_auto_launch_calibrate.py. Forza's cold start is long and partly
+# network-dependent (logos -> account/online handshake -> "press any button"),
+# and routing through the Steam client adds another hop, so 30s may well land
+# before the input-ready screen. If Stage-4 01_post_settle.png shows an intro
+# or a sign-in prompt rather than the state the recording starts from, raise it.
+auto_launch:
+  launch_path: "D:/App/STEAM/steam.exe"
+  launch_args: ["-applaunch", "1551360"]
+  window_wait_seconds: 180.0
+  settle_seconds: 45.0
+
+# Recorded raw-pad cold path from the title screen into the drivable world.
+# EMPTY until recorded — do NOT hand-write these steps. Record with:
+#   python scripts/record_pad_to_yaml.py --game forza_horizon_5 --section menu_skip
+menu_skip:
+  - description: 'recorded: pad1 [A] held 0.08s'
+    buttons:
+      - A
+    pad: 1
+    duration_seconds: 0.08
+  - description: wait 43.72s
+    pad: 1
+    duration_seconds: 43.72
+  - description: 'recorded: pad1 [A] held 0.05s'
+    buttons:
+      - A
+    pad: 1
+    duration_seconds: 0.05
+  - description: wait 60s
+    pad: 1
+    duration_seconds: 60
+  - description: 'recorded: pad1 [B] held 0.18s'
+    buttons:
+      - B
+    pad: 1
+    duration_seconds: 0.18
+  - description: wait 2.67s
+    pad: 1
+    duration_seconds: 2.67
+  - description: 'recorded: pad1 [B] held 0.06s'
+    buttons:
+      - B
+    pad: 1
+    duration_seconds: 0.06
+  - description: wait 20.12s
+    pad: 1
+    duration_seconds: 20.12
+  - description: 'recorded: pad1 [START] held 0.09s'
+    buttons:
+      - START
+    pad: 1
+    duration_seconds: 0.09
+  - description: wait 10.73s
+    pad: 1
+    duration_seconds: 10.73
+  - description: 'recorded: pad1 [A] held 0.08s'
+    buttons:
+      - A
+    pad: 1
+    duration_seconds: 0.08
+  - description: wait 1.81s
+    pad: 1
+    duration_seconds: 1.81
+  - description: 'recorded: pad1 [DPAD_DOWN] held 0.1s'
+    buttons:
+      - DPAD_DOWN
+    pad: 1
+    duration_seconds: 0.1
+  - description: wait 1.44s
+    pad: 1
+    duration_seconds: 1.44
+  - description: 'recorded: pad1 [DPAD_DOWN] held 0.09s'
+    buttons:
+      - DPAD_DOWN
+    pad: 1
+    duration_seconds: 0.09
+  - description: 'recorded: pad1 [DPAD_DOWN] held 0.09s'
+    buttons:
+      - DPAD_DOWN
+    pad: 1
+    duration_seconds: 0.09
+  - description: wait 1.41s
+    pad: 1
+    duration_seconds: 1.41
+  - description: 'recorded: pad1 [A] held 0.09s'
+    buttons:
+      - A
+    pad: 1
+    duration_seconds: 0.09
+  - description: wait 1.36s
+    pad: 1
+    duration_seconds: 1.36
+  - description: 'recorded: pad1 [B] held 0.11s'
+    buttons:
+      - B
+    pad: 1
+    duration_seconds: 0.11
+  - description: wait 1.67s
+    pad: 1
+    duration_seconds: 1.67
+  - description: 'recorded: pad1 [B] held 0.16s'
+    buttons:
+      - B
+    pad: 1
+    duration_seconds: 0.16
+  - description: wait 5.31s
+    pad: 1
+    duration_seconds: 5.31

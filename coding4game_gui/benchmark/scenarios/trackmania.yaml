@@ -1,0 +1,133 @@
+# TrackMania Nations Forever (real Windows game) -- time-trial scenario.
+#
+# Capability axis: CONTINUOUS CONTROL + TIMING. Balatro reaches the symbolic
+# planning corner and kof98 the reactive-fighting one; neither asks the agent
+# to hold a line through a corner.
+#
+# Rebuilt 2026-09-23 on main's scenario schema from the legacy scenario
+# (C4G-why-legacy/.../benchmarks/windows/games/trackmania.yaml, calibration
+# VERIFIED 2026-08-21 on the Win laptop). The scorer block is carried over
+# unchanged except for the host OCR device. The current acceptance host uses
+# its existing NVIDIA GPU. The medal times were re-read on mr-why's
+# own opponent dialog: gold 0:19.84, silver 0:22.29, bronze 0:28.61.
+
+title: "TrackMania Nations Forever (Windows real game) -- time trial"
+engine: windows
+driver_game: trackmania
+
+gameplay: |
+  <!-- C4G_WINDOWS_INPUT:gamepad:begin -->
+  This task requires --windows-input gamepad-kbm. A virtual gamepad was not effective in the source calibration.
+  <!-- C4G_WINDOWS_INPUT:gamepad:end -->
+  <!-- C4G_WINDOWS_INPUT:gamepad-kbm:begin -->
+  Keyboard/mouse guide (game-default keyboard preset; no custom remapping is assumed):
+  UP accelerates; DOWN brakes; LEFT/RIGHT steer. ENTER returns to the last checkpoint.
+  Use KEY[...] for these physical keys. BACKSPACE and DELETE restart the race; avoid them.
+
+  Goal: complete the lap as fast as possible.
+
+  A finished lap is scored against the track's own published medal times,
+  which the game displays: matching the bronze time scores 1.0, matching the
+  gold time scores 2.0, times between them fall on a straight line, and
+  beating gold scores higher still. A lap slower than bronze scores below 1.0
+  and keeps improving the faster it gets, and ALWAYS outranks any run that
+  never finishes. A run that never finishes is scored on the distance the car
+  has driven (the odometer), capped strictly below every finished lap.
+  Standing still scores 0.
+
+  <!-- C4G_WINDOWS_INPUT:gamepad-kbm:end -->
+
+objective: |
+  Goal: complete the lap as fast as possible.
+
+  A finished lap is scored against the track's own published medal times,
+  which the game displays: matching the bronze time scores 1.0, matching the
+  gold time scores 2.0, times between them fall on a straight line, and
+  beating gold scores higher still. A lap slower than bronze scores below 1.0
+  and keeps improving the faster it gets, and ALWAYS outranks any run that
+  never finishes. A run that never finishes is scored on the distance the car
+  has driven (the odometer), capped strictly below every finished lap.
+  Standing still scores 0.
+
+episode_contract: |
+  Each episode starts on the configured task from a fresh game process.
+  The episode ends on the registered terminal condition, an explicit stop,
+  unexpected game exit, or the configured resource limits. Scores settle after play.
+
+runtime:
+  scenario: trackmania
+  tics_per_second: 10
+  # Approved host-only capture; scoring remains deferred until gameplay stops.
+  passive_score_interval_tics: 3
+  # 100 s of race time against a human reference lap of 34.32 s and an A03
+  # bronze of 28.61 s -- roughly three completed laps' worth.
+  max_tics: 1000
+  max_burst: 10
+  # MUST stay null: a finite value caps only the lang arm. This exact field
+  # was the legacy TrackMania bug (60, cutting 6/8 episodes at a median 273
+  # tics against 570-650 for a lap) that survived three weeks.
+  max_calls_per_ep:
+
+lifecycle:
+  terminal_detection: true
+scorer:
+  calibration_status: verified
+  calibrated_client_size: [1280, 720]
+  ocr:
+    input_size: [1280, 720]
+    min_conf: 0.3
+    device: gpu:0
+    enable_mkldnn: false
+  track:
+    name: "A03-Race"
+    gold_seconds: 19.84
+    silver_seconds: 22.29
+    bronze_seconds: 28.61
+    author_seconds: 18.75
+    track_length_m: 1521
+    human_reference_seconds: 34.32
+    human_reference_distance_m: 1467
+  finish_floor: 0.6
+  finish_confirm_frames: 2
+  phases:
+    race: {description: "the race clock is running"}
+    finished: {description: "the results screen after crossing the line"}
+  terminal_phases: [finished]
+  progress_region: distance
+  regions:
+    clock: {rect: [545, 668, 195, 52]}
+    distance: {rect: [1130, 650, 150, 42]}
+    finish_time: {rect: [66, 6, 170, 30]}
+    # Human lap and pause negative control, 2026-10-23: a stopped clock
+    # alone also occurs in the ESC menu. Require the actual finish overlay.
+    finish_clock: {rect: [525, 170, 230, 55]}
+    finish_banner: {rect: [0, 0, 1280, 260], pattern: 'FINISH'}
+    track: {rect: [1180, 8, 100, 36]}
+    menu_left: {rect: [0, 0, 1280, 720]}
+  window_setup:
+    size:
+    - 1280
+    - 720
+    mode: Windowed
+
+  score_phases:
+  - race
+  - finished
+startup:
+  golden_checkpoint: golden
+  # The race clock, e.g. "0:09.58", in the clock region: proof the recorded
+  # path landed in a running race rather than on a menu.
+  start_check:
+    pattern: '\d+\s*[:：]\s*\d{2}\s*[.．]\s*\d{2}'
+    rect: [545, 668, 195, 52]
+    track_identity: true
+  # closed_loop, MEASURED. The first working smoke (tm_smoke3) used open_loop
+  # and every click was a no-op: open_loop is auto_nav.run_pad_sequence, which
+  # replays PAD STATE only and never reads a step's `click`. Only the one ENTER
+  # landed (selecting the profile), the game sat on the main menu and
+  # start_check failed twice. The walk that proved the path (tm_walk4) called
+  # the click driver itself, so it could not show this -- a calibration taken
+  # off the production path. closed_loop is main's click path
+  # (_click_until_changed): click, wait the step's duration, retry if the
+  # screen did not change.
+  menu_skip_replay: closed_loop

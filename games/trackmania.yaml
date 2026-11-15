@@ -1,0 +1,103 @@
+# Source and migration limits: docs/GAME_INTEGRATION_20261020.zh.md
+name: TrackMania Nations Forever
+process: TmForever.exe
+platform: windows-kbm
+scorer:
+  kind: ocr
+  implementation: race
+description: 'TrackMania Nations Forever: a time-trial racing game. The car is driven from
+
+  a chase camera around a fixed track against the clock.
+
+  '
+auto_launch:
+  launch_path: G:/SteamLibrary/steamapps/common/TrackMania Nations Forever/TmForever.exe
+  launch_method: desktop_shell
+  window_wait_seconds: 180.0
+  # Native cold-start evidence: the globe has no menu during the old wait.
+  # See native_settle_03 in the 2026-10-23 TrackMania acceptance evidence.
+  settle_seconds: 60.0
+save_state:
+  restore_to: '%USERPROFILE%/Documents/TrackMania'
+  golden: snapshots/trackmania_golden.zip
+  wipe_before: false
+window:
+  size:
+  - 1280
+  - 720
+  toggle: ALT_ENTER
+# The race clock requires the calibrated timescale controller as well as
+# process suspension; suspension alone catches up the timer after resume.
+freeze:
+  method: speedhack
+  time_probe_rect: [545, 668, 195, 52]
+actions:
+  neutral:
+    description: Raw Xbox neutral state.
+  a:
+    description: Raw Xbox A face button.
+    buttons:
+    - A
+  dpad_up:
+    description: Raw Xbox D-pad up.
+    buttons:
+    - DPAD_UP
+  dpad_down:
+    description: Raw Xbox D-pad down.
+    buttons:
+    - DPAD_DOWN
+  dpad_left:
+    description: Raw Xbox D-pad left.
+    buttons:
+    - DPAD_LEFT
+  dpad_right:
+    description: Raw Xbox D-pad right.
+    buttons:
+    - DPAD_RIGHT
+menu_skip:
+- description: 'connect-online prompt (if shown): localized menu control'
+  click:
+  - 790
+  - 385
+  duration_seconds: 4.0
+- description: 'profile picker (if still shown): the one profile row'
+  click:
+  - 640
+  - 236
+  duration_seconds: 4.0
+- description: 'connect-online prompt (if raised by the profile): localized menu control'
+  click:
+  - 790
+  - 385
+  duration_seconds: 4.0
+- description: 'main menu: localized menu control'
+  click:
+  - 142
+  - 105
+  duration_seconds: 4.0
+- description: 'difficulty: localized menu control -> track grid A01..A05'
+  click:
+  - 115
+  - 105
+  duration_seconds: 4.0
+- description: 'track grid: select A03-Race (first click highlights)'
+  click:
+  - 800
+  - 297
+  duration_seconds: 2.0
+- description: 'track grid: confirm A03-Race -> loads, shows localized menu control'
+  click:
+  - 800
+  - 297
+  duration_seconds: 8.0
+- description: 'controls screen: any key -> opponent dialog (A03 bronze 0:28.61)'
+  buttons:
+  - KEY[ENTER]
+  duration_seconds: 4.0
+- description: 'opponent dialog: localized menu control (no ghost) -> fly-over -> the race starts'
+  click:
+  - 630
+  - 445
+  duration_seconds: 15.0
+# Fail closed if the required x86 timescale controller is unavailable.
+use_speedhack: true

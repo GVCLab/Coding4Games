@@ -1,0 +1,207 @@
+title: NBA 2K25 - offline Blacktop Embiid versus Maxey, 100-second points evaluation
+engine: windows
+driver_game: nba_2k25
+gameplay: 'NBA 2K25 offline Blacktop 1v1. Control Joel Embiid against CPU Tyrese Maxey.
+
+  The episode begins at 0-0 with the possession clock at 40. The first validated
+
+  gameplay observation stays frozen at tic 0; no opening gameplay delay is required.
+
+  The host resumes the game only for the requested action tics and freezes it again
+
+  between actions. Read possession before choosing offense or defense.
+
+
+  Controller guide (game-default Xbox controller preset; context-sensitive):
+
+
+  | Input token | Gameplay meaning | Menu / contextual meaning |
+
+  |-------------|------------------|---------------------------|
+
+  | `NEUTRAL` | Release every control. | Wait without selecting anything. |
+
+  | `LS[x,y]` | Move the controlled player; combine with `RT[1]` to sprint. Axis convention: +x right,
+  -x left, +y up, -y down. | Navigate menus when a stick is accepted. |
+
+  | `RS[x,y]` | Offense: Pro Stick dribble, shooting, and passing. Hold up for a Go-To Shot; for Rhythm
+  Shooting, move down to start the shot and then up at the set point. Defense: hold for hands up, move
+  and release for a contest, or use a lateral direction for a defensive cutoff. Axis convention: +x right,
+  -x left, +y up, -y down. | Avoid in menus unless an on-screen prompt requests it. |
+
+  | `LT[v]` | Offense: post up, protect the ball, or hard stop. Defense: intense defense. | Analog left
+  trigger. |
+
+  | `RT[v]` | Sprint on offense or defense. | Analog right trigger. |
+
+  | `A` | Tap to pass; hold for skip pass. There is no teammate to pass to in this 1v1. | Confirm/select;
+  on defense, switch to the player closest to the ball; there is no second defender in this 1v1. |
+
+  | `B` | Tap for bounce pass; double-tap for flashy pass; hold for get-open pass; these pass actions
+  have no teammate target in this 1v1. | Back/cancel in many menus; on defense, hold to take charge or
+  double-tap to flop. |
+
+  | `X` | Hold/release to shoot; tap for pump fake or hop gather; double-tap for spin gather. | On defense,
+  tap to steal or hold for intentional foul. |
+
+  | `Y` | Tap for lob pass; double-tap for alley-oop; hold to lead a teammate to the basket; these pass
+  actions have no teammate target in this 1v1. | On defense, block or rebound. |
+
+  | `LB` | Call a play or hold for pick controls; there is no teammate to screen in this 1v1. | On defense,
+  call/hold a double team; there is no second defender in this 1v1. |
+
+  | `RB` | Icon pass; there is no teammate target in this 1v1. | On defense, icon swap; there is no second
+  defender in this 1v1. |
+
+  | `LS` | Left-stick click; not needed for this scored task unless a matching prompt appears. | Context-sensitive.
+  |
+
+  | `RS` | Right-stick click; not needed for this scored task unless a matching prompt appears. | Context-sensitive.
+  |
+
+  | `DPAD_UP` | Show the gameplay HUD. | Navigate up in menus. |
+
+  | `DPAD_DOWN` | Open substitutions. | Navigate down in menus. |
+
+  | `DPAD_LEFT` | Open offensive or defensive strategy. | Navigate left in menus. |
+
+  | `DPAD_RIGHT` | Open offensive or defensive game plan. | Navigate right in menus. |
+
+  | `START` | Pause the game; avoid during scored play. | Menu button / confirm where shown. |
+
+  | `BACK` | Call timeout on offense or intentional foul on defense; avoid unless required. | View/back
+  where shown. |
+
+
+  The benchmark assumes the unmodified default Xbox preset and no custom
+
+  controller remapping. Physical keyboard and numeric-keypad bindings are not
+
+  part of the action interface.
+
+
+  The bottom HUD shows opponent points in the left red field and own points in
+
+  the adjacent blue field. The yellow number farther right is the possession clock.
+
+  Startup uses recorded keyboard notice confirmations followed by recorded gamepad menus.
+
+  '
+objective: Score points and prevent CPU scoring. Each own point gives +15 and each opponent point gives
+  -5. No separate win/loss or result-screen reward is assigned.
+episode_contract: Cold-start the direct game executable, replay the recorded notice confirmations and
+  gamepad menus, verify the initial 0-0 HUD with possession clock 40, and keep the process frozen for
+  the player to take control. Run at 10 tics per second for at most 1000 tics. Explicit stop, game exit and infrastructure
+  failure also stop the episode. Settle the weighted point counters after play stops. This preserves the
+  recovered historical fixed-duration NBA contract; no intermediate match-ending detector is enabled.
+runtime:
+  scenario: nba_2k25
+  tics_per_second: 10
+  max_tics: 1000
+  max_burst: 1000
+  max_calls_per_ep: null
+startup:
+  no_save_cleanup: process_kill
+  menu_skip_replay: closed_loop
+  menu_skip_open_loop_tail: 3
+  menu_skip_ocr:
+    lang: ch
+    input_size:
+    - 1280
+    - 800
+    min_conf: 0.4
+    device: gpu:0
+    enable_mkldnn: false
+  start_check:
+    timeout_seconds: 180
+    image_templates:
+    - path: games/assets/nba_2k25/initial_hud.jpg
+      rect:
+      - 235
+      - 1128
+      - 70
+      - 44
+      max_mean_abs_error: 8.0
+    - path: games/assets/nba_2k25/initial_hud.jpg
+      rect:
+      - 375
+      - 1128
+      - 75
+      - 44
+      max_mean_abs_error: 8.0
+    - path: games/assets/nba_2k25/initial_hud.jpg
+      rect:
+      - 660
+      - 1128
+      - 85
+      - 44
+      max_mean_abs_error: 8.0
+    - path: games/assets/nba_2k25/initial_hud.jpg
+      rect:
+      - 550
+      - 1128
+      - 90
+      - 44
+      max_mean_abs_error: 8.0
+lifecycle:
+  terminal_detection: false
+scorer:
+  settlement: final_frame
+  calibrated_client_size:
+  - 1920
+  - 1200
+  ocr:
+    lang: ch
+    input_size:
+    - 1280
+    - 800
+    min_conf: 0.4
+    device: gpu:0
+    enable_mkldnn: false
+  phases:
+    gameplay:
+      pattern: (?s)(?=.*对方)(?=.*本方)
+      required_regions:
+      - points_for
+      - points_against
+  score_phases:
+  - gameplay
+  terminal_phases: []
+  regions:
+    points_for:
+      rect:
+      - 370
+      - 1125
+      - 85
+      - 55
+      kind: number
+      baseline: 0
+    points_against:
+      rect:
+      - 230
+      - 1125
+      - 85
+      - 55
+      kind: number
+      baseline: 0
+  weights:
+    points_for: 15
+    points_against: -5
+  hud_labels:
+    opponent:
+      rect:
+      - 30
+      - 1125
+      - 100
+      - 55
+    own:
+      rect:
+      - 545
+      - 1125
+      - 110
+      - 55
+  hud_digit_guard:
+    inset:
+    - 4
+    - 4
+    max_height: 36

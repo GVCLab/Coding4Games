@@ -1,0 +1,284 @@
+# Balatro (real Windows game) — poker-deckbuilder benchmark scenario.
+# Capability axis: combinatorial optimisation + resource management + long
+# horizon planning, i.e. the symbolic/planning corner the arena-survival
+# (brotato) and fighting (kof98) scenarios do not reach.
+#
+# Every formal episode is an unseeded serial cold start from the same golden
+# profile. Fairness comes from the same task and tic budget, not seed splits.
+#
+# ACTION INTERFACE: runtime-selected raw physical controls. The default policy
+# surface is XInput from games/balatro.yaml; verified keyboard/mouse runs expose
+# only generic KEY/CLICK controls. Neither surface provides card-, menu-, or
+# shop-semantic action aliases.
+
+title: "Balatro (Windows real game)"
+engine: windows
+driver_game: balatro
+
+gameplay: |
+  Balatro: a poker-themed deckbuilder. A round shows a BLIND with a chip
+  target ("Score at least N"). You hold up to 8 cards and may select up to 5
+  at once. The HUD previews the selected poker hand and its chips x mult
+  before you commit. You have limited Hands and Discards per round; clearing
+  the blind before hands run out wins the round and pays money. Between
+  rounds you choose or skip a blind, collect the payout, and visit a shop.
+  Three blinds make one Ante; the run ends on GAME OVER when a blind is not
+  cleared in time.
+  The supplied stepped interface uses the selected physical input mode. No action token
+  directly selects a numbered card, accepts a blind, buys an item, or leaves
+  the shop. Use `NEUTRAL` while animations finish; scoring
+  a hand can take several seconds.
+  The host owns episode initialization. Request another episode through the
+  provided lifecycle tools rather than using in-game restart buttons.
+  In stepped mode the game is frozen between actions; animations consume
+  gameplay time.
+  Score counts PROGRESS FROM THE START: +1000 per Ante beyond the first,
+  +300 per Round beyond the first, +1 per chip in the current round.
+  The host scores the latest readable gameplay HUD at episode end, looking
+  backward past unreadable or menu frames. Earlier round chips are not summed.
+  Money is not scored. A run that starts and does nothing scores 0.
+
+  <!-- C4G_WINDOWS_INPUT:gamepad:begin -->
+  Controller guide (game-default controller preset; context-sensitive):
+  Game-default preset: Balatro's unmodified default Xbox controller layout; no
+  custom remapping is assumed.
+
+  | Input token | Gameplay meaning | Menu / contextual meaning |
+  |-------------|------------------|---------------------------|
+  | `neutral` | Release all controls; let scoring and deal animations finish. | Wait without moving the focus. |
+  | `LS[x,y]` | Move the controller focus between cards and table controls. | Navigate menus like the D-pad. |
+  | `RS[x,y]` | Move the virtual pointer when the current screen accepts axis-cursor input. | Prefer focus navigation unless a pointer is visibly active. |
+  | `LT[v]` | Hold to preview the deck while a hand is live. | May act as a screen-specific trigger only when a glyph is shown. |
+  | `RT[v]` | Tilt a focused card; this is not needed to complete a run. | Use only when the current screen explicitly shows an RT action. |
+  | `a` | Xbox A selects/deselects a focused card or activates a focused control. | Confirm the focused choice. |
+  | `b` | Xbox B deselects a focused hand card. | Cancel, close, or go back. |
+  | `x` | Xbox X plays the selected hand when Play Hand is enabled. | Activates a screen-specific primary button when its X glyph is shown. |
+  | `y` | Xbox Y discards the selected cards when Discard is enabled. | Skips a blind or activates a secondary Y-labelled choice when shown. |
+  | `lb` | No fixed table action. | Move to the previous tab or option page where tabs exist. |
+  | `rb` | No fixed table action. | Move to the next tab or option page where tabs exist. |
+  | `ls` | Avoid during scored play; the run does not require a left-stick-click action. | Use only when an on-screen LS glyph appears. |
+  | `rs` | Avoid during scored play; the run does not require a right-stick-click action. | Use only when an on-screen RS glyph appears. |
+  | `dpad_up` | Move focus up. | Move focus up. |
+  | `dpad_down` | Move focus down. | Move focus down. |
+  | `dpad_left` | Move focus left. | Move focus left or select the previous option. |
+  | `dpad_right` | Move focus right. | Move focus right or select the next option. |
+  | `start` | Open or close the pause/options overlay where available. | Start/confirm only on screens that explicitly show it. |
+  | `back` | Avoid during scored play; the run does not require the View/Back action. | Use only when a View/Back glyph is shown. |
+  | `guide` | Opens the platform guide rather than a game action; avoid it. | Avoid it because it can cover the captured game window. |
+  <!-- C4G_WINDOWS_INPUT:gamepad:end -->
+
+  <!-- C4G_WINDOWS_INPUT:gamepad-kbm:begin -->
+  Keyboard/mouse guide (game-default PC preset; context-sensitive):
+  Game-default preset: Balatro's unmodified default PC keyboard/mouse layout;
+  no custom remapping is assumed. Mouse control is sufficient for the scored
+  task, so do not guess keyboard shortcuts when a visible target can be clicked.
+
+  | Input token | Gameplay meaning | Menu / contextual meaning |
+  |-------------|------------------|---------------------------|
+  | `NEUTRAL` | Release all controls; let scoring and deal animations finish. | Wait without moving or clicking. |
+  | `MOVE[x,y]` | Hover a card to inspect its details without selecting it. | Hover a visible control to inspect its details. |
+  | `CLICK[x,y]` | Select or deselect a card; activate Play Hand or Discard when enabled. | Activate visible blind, reward, shop, buy, next-round, skip, or exit controls. |
+  | `KEY[<key>]` | Use a physical key only when the current UI or known default PC binding makes its meaning unambiguous. | Prefer clicking visible controls; do not infer hidden focus or shortcuts. |
+  | `DRAG[x1,y1,x2,y2]` | Reorder movable hand cards or Jokers within their area. | Not every card area is draggable; inspect the resulting order. |
+
+  Sorting by rank or suit changes display order, not the poker value of a
+  chosen hand. Inspect card and Joker descriptions and Run Info when rules
+  are uncertain. Dragging does not itself play a hand. Use the visible Play
+  Hand or Discard button and check the result. Do not assume mod hotkeys
+  are available in the unmodified game.
+  <!-- C4G_WINDOWS_INPUT:gamepad-kbm:end -->
+
+objective: |
+  Goal: survive as deep into the antes as possible.
+  Score = 1000 x (Ante-1) + 300 x (Round-1) + chips scored.
+  Bands (small budget): reaching Ante 2+ = strong; clearing 1-2 rounds =
+  mediocre; failing the first Small Blind = failing (but chips scored still
+  separate a policy that played real hands from one that did nothing).
+
+episode_contract: |
+  Every episode cold-starts the game, performs the registered no-save cleanup, replays the
+  recorded menu path, verifies a fresh Ante 1 blind-selection screen, and then
+  gives control to the policy. Blind selection, poker hands, shops, and round
+  transitions are all part of the episode. The host ends gameplay on the
+  registered GAME OVER screen; never dismiss it or restart. Stalls and unchanged
+  screens are not terminal. An episode can also end by explicit stop, program exit, a configured resource
+  limit, operator interruption, or infrastructure failure. The game closes
+  after every episode and the next episode repeats the complete cold-start path.
+
+runtime:
+  scenario: balatro
+  tics_per_second: 10
+  # No default per-episode cap; all episodes share the remaining run budget.
+  # An explicit shorter trial cap remains available to the caller.
+  max_tics: 1000
+  max_burst: null
+  max_calls_per_ep: null
+
+lifecycle:
+  terminal_detection: true
+
+scorer:
+  # WINDOWED at a fixed size, forced before launch (see game_settings.apply).
+  # Fullscreen is not reproducible: its render size is the machine's monitor
+  # resolution divided by its DPI scaling, so every calibrated pixel in the
+  # OCR regions means something different on a different box.
+  # 1280x720 windowed fits on ANY display (720 + titlebar < 768), which is
+  # what makes "clone the repo and run it" actually work.
+  # 1600x900 with the game marked DPI-AWARE (game_settings.apply writes the
+  # per-user compatibility flag before launch). Under DPI virtualisation a
+  # 1280x720 request became a 1228x690 SURFACE, and reading calibrated rects
+  # off it meant upscaling interpolated pixels — which is what stopped the
+  # blind screen's small "Select" label from being recognised. At true pixels
+  # 1600x900 both fits any 1080p screen and reads sharper than the 1536x864
+  # the coordinates were measured in.
+  window_setup: {mode: Windowed, size: [1600, 900], exe: Balatro.exe}
+  # Frames are conformed to this space, so OCR rects stay in the geometry they
+  # were measured in regardless of the live size.
+  calibrated_client_size: [1536, 864]
+  ocr: {input_size: [1536, 864], min_conf: 0.4, device: "gpu:0", lang: "ch"}
+  # DECLARATION ORDER = PRIORITY. GAME OVER keeps the run HUD visible behind
+  # it, so the terminal banner must be matched before any in-run phase.
+  # "Score at least" is NOT usable as the play anchor: the blind-SELECTION
+  # screen shows it three times (once per offered blind), so it matched both
+  # screens. The table's own controls ("Play Hand" / "Sort Hand" / "PEEK
+  # DECK") appear only while a hand is live, so anchor on those instead.
+  phases:
+    # Deck statistics overlap the HUD; never inherit the previous play phase.
+    deck_view:    {pattern: 'Full\s*Deck|Base\s*Cards'}
+    # GAME OVER fades IN over the run HUD, and its title glyph is the LAST
+    # thing to become legible: measured over a recorded death (2026-08-03),
+    # frames 790-794 showed the panel's statistics rows clearly while
+    # the localized game-over title was still too faint to recognise (frame
+    # 794 read only a broken first character). Title-only anchoring surrendered those 5
+    # frames to whichever in-run rule matched the panel's own text, and the
+    # panel's localized reroll-count row matched `shop`. The extra anchors below are the
+    # panel's unique rows/buttons, all readable from the first fade-in frame
+    # and NONE of which occur anywhere outside the game-over panel in the
+    # 845-frame session. Terminal detection now fires at 790 instead of 795.
+    # This matters because the panel is dismissable: a policy blindly
+    # pressing confirm can clear it between act boundaries, and the episode
+    # would then run to max_tics on a results page.
+    gameover:     {any: ["GAME OVER", "游戏结束", "负于", "开始新的一局", "主菜单", "种子"]}
+    # Cash Out sits BEFORE play: the payout panel overlays a board that
+    # still shows the table, so the unambiguous banner has to win first.
+    cash_out:     {any: ["Cash Out", "兑现", "领取奖金"]}
+    blind_select: {any: ["Choose your", "选择你的", "next Blind", "下一个盲注", "Up the Ante", "提高底注", "Skip", "跳过盲注"]}
+    # There is deliberately NO `shop` phase. It scored nothing (scoring reads
+    # `regions`), its rebase role is redundant (Balatro always passes through
+    # blind selection before the next round, and blind_select legalises the
+    # round_score reset), and its keywords were a hazard: localized reroll text matched
+    # the game-over panel's reroll-count row and stole 4 frames from the
+    # terminal screen. A shop screen now classifies as None, which is
+    # harmless — the shop is not where progress is measured.
+    # The Chinese play-hand label also names the persistent left-HUD hands counter,
+    # including blind selection and the shop. Localized sort-hand / suit/rank controls
+    # exist only while a hand is actually live, matching the original English
+    # Play Hand / Sort Hand / PEEK intent without that false positive.
+    # Localized poker HAND NAMES were also listed here (high card/pair/.../royal flush) on the
+    # theory that the hand preview only shows while cards are selected. They
+    # are removed: the game-over panel's localized most-played-hand row (high card, 4) made
+    # high-card text match the terminal screen, and that text alone was firing 124 of
+    # the 179 `play` frames. Hand names never contributed to the score —
+    # scoring reads `regions`, not phase keywords — so this costs nothing.
+    # The persistent localized left-HUD words (score/hands/discards, present on 829/845
+    # frames) are deliberately NOT used as a substitute: they also read on
+    # the blind-select→table transition, where the round counter momentarily
+    # shows 0, which would replace `round`'s declared baseline of 1 with 0
+    # and pay a phantom +300 when it climbs back (measured: 37 -> 337).
+    play:         {any: ["Play Hand", "Sort Hand", "PEEK", "理牌", "点数", "花色", "查看牌堆"]}
+  # The scorer's phase vocabulary defaults to brotato's names. Every one of
+  # these has to be declared or it fails SILENTLY:
+  #   terminal_phases  defaults to ["death"]            -> episode never ends
+  #   score_phases     defaults to ["combat"]           -> nothing ever scores
+  #   rebase_phases    defaults to ["levelup","shop"]   -> spendable resets
+  #                                                        counted as losses
+  terminal_phases: [gameover]
+  # Score animations can hide all phase labels for a few seconds; tolerate
+  # those transition frames before declaring the HUD lost.
+  miss_limit: 30
+  # The host settles from the latest complete HUD.
+  settlement: latest_valid_frame
+  snapshot_phases: [play, cash_out, blind_select]
+  # Where the HUD is live and gains accrue. The chip total keeps its value
+  # while the scoring animation plays (phase reads as None there), so
+  # sampling in `play` alone catches every climb.
+  score_phases: [play, cash_out]
+  # Where a `spendable` counter is expected to drop without it meaning loss:
+  # round_score restarts each round, and blind selection is the screen every
+  # round transition must pass through, so it is the only rebase gate needed.
+  # NOTE on the if/elif in OcrScorer.delta: a phase listed in BOTH
+  # score_phases and rebase_phases can never open the rebase gate, because
+  # the score branch is taken first and the `elif` is unreachable. `shop` and
+  # `cash_out` used to be in both lists, so their rebase membership was
+  # already dead code — blind_select was doing the work all along.
+  rebase_phases: [blind_select]
+  # Coordinates measured with PaddleOCR over live 1536x864 frames
+  # (2026-07-25), not eyeballed. Ante prints as "1/8" — usually two separate
+  # OCR boxes ("1", "8"), but on the dimmed GAME OVER screen they merge into
+  # one "18" box whose centre sits at x~238. The ante rect is therefore cut
+  # at x<235: it keeps the numerator (centre x~223) and excludes BOTH the
+  # denominator and the merged read (which otherwise scored ante=18).
+  # round_score is the ONLY dense signal: ante/round do not move at all
+  # inside a losing round, so without it a policy that played real hands and
+  # one that pressed nothing both scored exactly 0 (observed live). It resets
+  # to 0 at the start of each round, which is precisely the `spendable`
+  # legacy delta contract. Snapshot settlement uses only the selected readout.
+  regions:
+    # Reads the ante NUMERATOR of "Ante N/8". A bare rect could not
+    # survive rescaling: at native resolution OCR splits the value into
+    # "1" and "8" boxes, but a rescaled frame merges them into one
+    # "1/8" box whose centre fell outside the tight numerator rect, so
+    # ante silently read None on any machine that was not pixel-identical
+    # to the calibration box. Pattern-within-rect takes the leftmost
+    # match inside the left HUD panel, which handles both splittings and
+    # still excludes "8/8" (hands) and "44/52" (deck) elsewhere on screen.
+    # baseline 1: a run STARTS at ante 1 / round 1, so counting from 0 paid
+    # 1300 points for merely existing. Measured, that constant was ~90% of
+    # every historical score. A ruler whose signal is swamped by its own
+    # offset cannot separate policies; counting from the starting state makes
+    # a fresh run score 0 and the difference visible.
+    # Ante prints as "1/8" and OCR merges it three different ways depending
+    # on how much the frame was rescaled: "1" + "8" as separate boxes, "1/8"
+    # as one box, or — when a smaller capture is upscaled to the calibrated
+    # size, which is now the normal case — the slash is swallowed and it
+    # reads "18". Taking that literally scored ante=18 on a fresh run and
+    # failed start_check's `ante: 1`, which escalates to full_restart. The
+    # numerator is a single digit for any run this bench reaches, so match
+    # one digit and treat whatever follows as the denominator, present or not.
+    # Require the OCR box to start in the calibrated numerator area. If OCR
+    # misses the orange numerator and sees only the white denominator, that
+    # frame is unreadable; a denominator alone must never become Ante 8.
+    # The left-edge guard also admits merged "1/8" or "18" boxes.
+    ante:        {pattern: '^(\d)\s*/?\s*\d?$', rect: [188, 742, 140, 92],
+                  match_left_max: 235,
+                  label: {pattern: 'Ante|底注', rect: [190, 735, 100, 40]},
+                  kind: number, max_jump: 1, max_increment: 1, baseline: 1}
+    # Sequential counters reject persistent OCR jumps, not just one-frame spikes.
+    round:       {rect: [308, 758, 62, 62], kind: number, max_jump: 1, max_increment: 1, baseline: 1,
+                  label: {pattern: 'Round|回合', rect: [300, 735, 90, 40]}}
+    # baseline 0 so the FIRST reading already scores: without it the first
+    # adopted value is silently taken as the baseline, and a round that
+    # scored 16 chips paid nothing (observed live).
+    round_score: {rect: [190, 310, 215, 65], kind: number, spendable: true,
+                  label: {pattern: 'Round\s*score|回合分数|回合得分', rect: [60, 310, 105, 70]},
+                  max_jump: 400, baseline: 0}
+  # Money is deliberately NOT scored. It is not progress: a policy can hold
+  # dollars by never spending them, so paying for the balance rewards
+  # hoarding rather than playing, and money already shows up indirectly
+  # (it buys the shop items that clear later blinds). Progress = how deep
+  # the run got (ante, round) plus how well the current round is going
+  # (chips scored).
+  weights: {ante: 1000, round: 300, round_score: 1}
+
+startup:
+  # Host-owned, versioned preferences; contains no personal saves or unlocks.
+  settings_template: balatro-v1
+  # No golden snapshot: game_settings.clear_balatro_saved_run removes only the
+  # in-progress run before launch, and start_check proves a fresh Ante 1 start.
+  # 'Choose your' is unique to blind selection; 'Score at least' also reads
+  # on the New Run page, so it cannot tell "the run started" from "we never
+  # left the menu".
+  # The blind selector becomes visible before the controller load lock clears.
+  # Replay the recorded 10.05-second tail before checking the start frame.
+  start_check: {pattern: 'Choose your|选择你的', regions: {ante: 1}}
+  menu_skip_replay: open_loop

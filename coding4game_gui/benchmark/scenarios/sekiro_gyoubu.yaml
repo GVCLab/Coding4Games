@@ -1,0 +1,232 @@
+title: "Sekiro: Shadows Die Twice - Gyoubu Masataka Oniwa"
+engine: windows
+driver_game: sekiro_gyoubu
+
+gameplay: |
+  Sekiro: Shadows Die Twice is a third-person sword-combat action game. This
+  benchmark starts the unmodified boss rematch with Gyoubu Masataka Oniwa,
+  selected through the Sculptor's Idol rematch menu, at the validated
+  controllable combat frame, with the boss HUD visible and the
+  game frozen before gameplay tic 0. Defeat both of Gyoubu's lives through
+  closed-loop visual tracking, camera or lock-on control, spacing, deflection,
+  evasion, offense, healing, and recovery after knockdown. This is a raw-control
+  scenario with no semantic combat macros.
+
+  <!-- C4G_WINDOWS_INPUT:gamepad:begin -->
+  Controller guide (game-default controller preset; context-sensitive):
+  Game-default preset: Sekiro's unmodified Xbox controller layout; no custom
+  remapping is assumed. The fixed golden loadout has Gouging Top selected,
+  Healing Gourd available, and an equipped Combat Art.
+
+  | Input token | Gameplay meaning | Menu / contextual meaning |
+  |-------------|------------------|---------------------------|
+  | `neutral` | Release every control; stop movement, guard, attacks, and held item use. | Wait without changing selection. |
+  | `LS[x,y]` | Move Wolf; combine a direction with B to dodge or sprint and use it to maintain spacing around Gyoubu. | Move menu selection where analog navigation is accepted. |
+  | `RS[x,y]` | Rotate the camera; while locked on, change combat framing or the selected target. | Move a preview camera where supported. |
+  | `LT[v]` | Use the grappling hook only while a valid grapple indicator is visible. | No benchmark-critical menu binding. |
+  | `RT[v]` | Use the selected Gouging Top prosthetic tool, consuming one Spirit Emblem. | No benchmark-critical menu binding. |
+  | `a` | Jump; combine with movement to evade or reposition. | Confirm the highlighted choice. |
+  | `b` | Tap to step-dodge; hold while moving to sprint. | Cancel or go back. |
+  | `x` | Interact or hold to collect loot only when a prompt exists; it is not the sword attack. | Confirm only where the UI explicitly shows X. |
+  | `y` | Cycle among the occupied prosthetic slots. | Use only where a Y prompt is shown. |
+  | `lb` | Tap to deflect; hold to guard. LB plus RB invokes the equipped Combat Art. | Switch tabs only where the UI shows LB. |
+  | `rb` | Attack with the katana. LB plus RB invokes the equipped Combat Art. | Switch tabs only where the UI shows RB. |
+  | `ls` | Toggle crouch while normal movement is available. | No benchmark-critical menu binding. |
+  | `rs` | Reset the camera or toggle lock-on when Gyoubu is targetable. | No benchmark-critical menu binding. |
+  | `dpad_up` | Use the selected Healing Gourd. | Move selection up. |
+  | `dpad_down` | Eavesdrop or touch a remnant only when its prompt exists. | Move selection down. |
+  | `dpad_left` | Cycle the selected quick item backward. | Move selection left. |
+  | `dpad_right` | Cycle the selected quick item forward. | Move selection right. |
+  | `start` | Open or close the pause menu; avoid during active combat. | Open or close the pause menu. |
+  | `back` | Toggle the Remnant menu or stop Remnant recording; avoid during scored combat. | Use only for the Remnant interface. |
+  | `guide` | Open the platform guide rather than a game action; avoid it. | Avoid it because it can cover the captured game window. |
+  <!-- C4G_WINDOWS_INPUT:gamepad:end -->
+
+  <!-- C4G_WINDOWS_INPUT:gamepad-kbm:begin -->
+  Keyboard/mouse guide (game-default PC preset; context-sensitive):
+  Game-default preset: Sekiro's unmodified PC keyboard/mouse layout; no custom
+  remapping is assumed. Keyboard input changes visible prompts to PC labels.
+
+  | Input token | Gameplay meaning | Context / boundary |
+  |-------------|------------------|--------------------|
+  | `KEY[W]`, `KEY[A]`, `KEY[S]`, `KEY[D]` | Move Wolf forward, left, backward, or right relative to the current camera; combine two keys for diagonal movement. | Movement can be blocked by scenery. Multiple keys in one action are held together. |
+  | `KEY[SHIFT]` | Step-dodge; hold with movement to sprint. | A standalone press dodges without supplying a direction. |
+  | `KEY[SPACE]` | Jump; combine with movement to evade or reposition. | Use only when jumping is safe. |
+  | `KEY[Q]` | Toggle crouch. | Crouching is normally unnecessary during this encounter. |
+  | `CLICK[x,y]` | Perform one katana attack. | Use a point inside the gameplay viewport and outside visible menu controls. In menus it selects the pointed item. |
+  | `RCLICK[x,y]` | Perform one deflect pulse. | The structured click releases immediately and cannot hold guard. It cannot be combined with left click, so the equipped Combat Art is unavailable through stepped KBM. |
+  | `MCLICK[x,y]` | Reset the camera or toggle lock-on when Gyoubu is targetable. | Use a point inside the gameplay viewport; verify the reticle or camera tracking before retrying. |
+  | `KEY[X]`, `KEY[C]` | Cycle the selected quick item forward or backward. | The resulting item depends on the fixed inventory; confirm the visible quick-item icon. |
+  | `KEY[Z]` | Cycle the selected prosthetic tool. | Confirm the visible prosthetic icon before using it. |
+  | `KEY[CTRL]` | Use the selected prosthetic tool, consuming its resource where applicable. | The fixed start selects Gouging Top. |
+  | `KEY[F]` | Use the grappling hook only when a valid grapple indicator is visible. | It has no useful effect without a valid grapple target. |
+  | `KEY[E]` | Interact or collect loot when an E prompt exists. | It is not a combat attack. |
+  | `KEY[R]` | Use the selected quick item, initially the Healing Gourd. | It can fail when charges are empty or Wolf cannot act; confirm the health and charge change. |
+  | `KEY[V]` | Eavesdrop or touch a Remnant only when its prompt exists. | Avoid during ordinary scored combat. |
+  | `KEY[G]` | Toggle the Remnant menu or stop Remnant recording. | Avoid during scored combat. |
+  | `KEY[ESC]` | Open or close the pause menu. | It must be the only control in its action; avoid during active combat. |
+  | `NEUTRAL` | Release keyboard and mouse inputs and advance game time. | The stepped game remains frozen between actions. |
+
+  Other exposed physical keys and pointer operations retain the shared tool
+  syntax; do not assume an additional binding. Absolute pointer movement is not
+  mouse-relative camera input, so stepped KBM cannot freely rotate the camera.
+  Lock-on camera tracking remains available through `MCLICK[x,y]`.
+  <!-- C4G_WINDOWS_INPUT:gamepad-kbm:end -->
+
+objective: |
+  Defeat Gyoubu Masataka Oniwa across both lives without resurrecting. Score is
+  continuous from 0 to 100: each confirmed completed life contributes 50
+  points, and confirmed vitality depletion within the current life contributes
+  continuously within that 50-point segment. A health-bar refill alone never
+  confirms a completed life. Only the calibrated final victory state awards
+  exactly 100. Confirmed defeat, timeout, unexpected exit, or resource-limit
+  exhaustion keep progress already earned.
+
+episode_contract: |
+  Every episode kills residual Sekiro state, restores the dedicated immutable
+  Gyoubu golden save, directly launches sekiro.exe, replays the recorded
+  title-to-fight path, verifies the first controllable full-health combat frame
+  while frozen, and then gives control to the selected input treatment. The
+  fixed state uses the game's unmodified boss rematch at default difficulty with
+  Demon Bell inactive and no custom input remapping. It has Vitality 20, Attack
+  Power 14, Healing Gourd 10, Gouging Top selected, 18/18 Spirit Emblems with
+  681 stored, three resurrection nodes, and 12% current resurrective power.
+  Resurrection is forbidden even though the fixed save contains resurrection
+  nodes. When the native resurrection-choice screen appears, the host treats it
+  as a registered terminal loss and terminates the episode before another
+  gameplay action; do not issue any resurrection input. When Wolf dies without a
+  resurrection choice, stop gameplay input and issue only neutral while the
+  scorer confirms final defeat. Confirmed final victory, confirmed defeat
+  (including a resurrection-choice terminal), unexpected exit, timeout,
+  operator interruption, or a configured resource limit ends the episode. The
+  game is closed after every episode and the complete serial cold-start path
+  repeats.
+
+runtime:
+  scenario: sekiro_gyoubu
+  tics_per_second: 10
+  max_tics: 4100
+  max_burst: 4
+  max_calls_per_ep: 820
+
+startup:
+  golden_checkpoint: account_compat_20261107
+  preserve_player_save: true
+  focus_alt_key: false
+  menu_skip_replay: closed_loop
+  # The recorded load wait can end while the loading screen is still visible.
+  # Observe the idol prompt before X, then require the opened idol menu.
+  menu_skip_ocr:
+    rect: [80, 140, 1180, 820]
+    input_size: [1180, 820]
+    min_conf: 0.5
+    device: gpu:0
+    text_detection_model_name: PP-OCRv6_small_det
+    text_recognition_model_name: PP-OCRv6_small_rec
+  start_check: {kind: scorer}
+
+lifecycle:
+  terminal_detection: true
+  terminal_scan_tics: 2
+  stepped_terminal_sampling: during_action_v1
+
+scorer:
+  kind: image
+  implementation: sekiro_boss
+  calibrated_client_size: [1920, 1080]
+  window_setup: {size: [1920, 1080], position: [0, 0]}
+  total_lives: 2
+  scale: 100
+  start_screen:
+    require_boss_health: true
+    regions:
+      - name: boss_name
+        frac: [0.057292, 0.125, 0.103704, 0.142593]
+        bgr_min: [150, 150, 150]
+        bgr_max: [255, 255, 255]
+        min_ink_ratio: 0.04
+      - name: player_full_health
+        frac: [0.338542, 0.364583, 0.906481, 0.914815]
+        bgr_min: [30, 45, 100]
+        bgr_max: [65, 80, 150]
+        min_ink_ratio: 0.9
+  hud_screen:
+    regions:
+      - name: boss_name
+        frac: [0.057292, 0.125, 0.103704, 0.142593]
+        bgr_min: [150, 150, 150]
+        bgr_max: [255, 255, 255]
+        min_ink_ratio: 0.04
+  boss_health:
+    bar_frac: [0.0625, 0.270833, 0.087963, 0.09537]
+    bgr_min: [10, 15, 60]
+    bgr_max: [60, 70, 130]
+    column_fill_ratio: 0.6
+    smooth_columns: 5
+    smooth_required_ratio: 0.6
+    max_prefix_gap: 3
+    min_visible_fill: 0.03
+    full_fill_threshold: 0.98
+    confirm_tolerance: 0.04
+    confirm_frames: 2
+  phase_signatures:
+    - name: life_2
+      completed_lives: 1
+      confirm_frames: 2
+      signature:
+        regions:
+          - name: remaining_deathblow_node
+            frac: [0.0625, 0.073958, 0.048148, 0.072222]
+            bgr_min: [0, 0, 140]
+            bgr_max: [110, 130, 255]
+            min_ink_ratio: 0.3
+          - name: spent_deathblow_node
+            frac: [0.082292, 0.094271, 0.048148, 0.072222]
+            bgr_min: [0, 0, 140]
+            bgr_max: [110, 130, 255]
+            max_ink_ratio: 0.05
+  resurrection_screen:
+    require_death_shape: kanji
+    regions:
+      - name: die_choice
+        frac: [0.354167, 0.484375, 0.916667, 0.962963]
+        bgr_min: [150, 150, 150]
+        bgr_max: [255, 255, 255]
+        min_ink_ratio: 0.025
+        max_mean_luma: 100
+      - name: resurrect_choice
+        frac: [0.5625, 0.682292, 0.916667, 0.962963]
+        bgr_min: [150, 150, 150]
+        bgr_max: [255, 255, 255]
+        min_ink_ratio: 0.025
+        max_mean_luma: 100
+  victory_screen:
+    version: victory_shapes_v2
+    confirm_frames: 2
+    shape_template: assets/sekiro_gyoubu_victory_v2.npz
+    shape_regions:
+      - name: kanji
+        frac: [0.45, 0.54, 0.225, 0.55]
+        min_correlation: 0.75
+        min_contrast: 1.0
+      - name: text
+        frac: [0.345, 0.655, 0.57, 0.62]
+        min_correlation: 0.75
+        min_contrast: 1.0
+  defeat_screen:
+    version: death_shapes_v2
+    confirm_frames: 2
+    shape_template: assets/sekiro_gyoubu_death_v2.npz
+    shape_regions:
+      - name: kanji
+        frac: [0.415, 0.59, 0.30, 0.58]
+        min_correlation: 0.85
+        min_contrast: 1.0
+      - name: death
+        frac: [0.438, 0.562, 0.605, 0.665]
+        min_correlation: 0.70
+        min_contrast: 1.0
+  phases:
+    victory: {}
+    defeat: {}
+  terminal_phases: [victory, defeat, resurrection]

@@ -1,0 +1,1 @@
+return {["tutorial_complete"]=true,["language"]="en-us",["WINDOW"]={["screenmode"]="Windowed",["vsync"]=1,["selected_display"]=1,["display_names"]={[1]="[NONE]"},["DISPLAYS"]={[1]={["name"]="[NONE]",["screen_res"]={["w"]=1600,["h"]=900}}}},["GRAPHICS"]={["texture_scaling"]=2,["shadows"]="On",["crt"]=0,["bloom"]=0}}

@@ -1,0 +1,175 @@
+# Riders Republic fixed-duration trick-score scenario. Score calibration uses
+# the human session recorded under out/scorer_calibration/riders_republic/
+# 20260919_164117; frame 000268 is a labeled 1200-point positive sample.
+
+title: "Riders Republic — timed freestyle trick score"
+engine: windows
+driver_game: riders_republic
+
+gameplay: |
+  Play freestyle in Zen Mode for the entire fixed 1000-tic (100-second)
+  gameplay window. Your sole objective is to earn the highest possible
+  game-awarded trick score before time expires. Any available sport is valid:
+  choose equipment that suits the visible terrain and scoring opportunities.
+  Each episode keeps the game's naturally selected Zen Mode starting location;
+  the same cold-start procedure applies to every model. Adapt to the visible
+  terrain rather than assuming that a previous episode's location repeats.
+  If the episode begins on foot, use `rb` to equip the currently selected gear,
+  or use `dpad_up` to open the circular Sports selector. In that radial wheel,
+  point `LS` toward the desired sport slice, release it, and press `a` to
+  confirm. Do not spend the episode changing sports unless a switch provides a
+  clear scoring advantage.
+
+  Seek useful slopes, drops, ramps, bowls, quarter-pipes, rails, ledges, and
+  airtime that fit the current equipment. Perform game-recognized jumps, spins,
+  flips, grabs, grinds, manuals, and combinations, and land them successfully so
+  the game adds the points to the upper-left score. Vary tricks because repeated
+  identical tricks do not build a combo. Keep attempting scoring tricks for the
+  full time window. Do not leave Zen Mode or open platform overlays.
+
+  <!-- C4G_WINDOWS_INPUT:gamepad:begin -->
+  Controller guide (game-default controller preset; context-sensitive):
+  Game-default preset: Racer, using the current post-Season-8 Xbox mapping; no
+  custom remapping is assumed. Do not use Trickster or Steep-preset inputs:
+  Racer uses the face buttons for jump preparation and air rotation, while the
+  right stick remains the camera.
+
+  | Input token | Gameplay meaning | Menu / contextual meaning |
+  |-------------|------------------|---------------------------|
+  | `neutral` | Release all controls and let the rider continue under game physics. | Wait without moving the current selection. |
+  | `LS[x,y]` | Steer the current ground sport; positive y is forward. During a jump, combine a direction with a trigger for a sport-specific trick, then center it before landing. | Navigate a focused menu or point toward a radial-wheel slice. |
+  | `RS[x,y]` | Move the camera in Racer. It is not the spin/flip control in this preset. | Move the focused view where supported. |
+  | `LT[v]` | Brake on the ground; during a jump, hold with an `LS` direction for the left sport-specific trick set. | Follow an LT glyph only. |
+  | `RT[v]` | Accelerate on the ground; during a jump, hold with an `LS` direction for the right sport-specific trick set. | Follow an RT glyph only. |
+  | `a` | Racer down-direction face input: preload a jump/rotation, then pair with a second face input in the air. | Confirm/interact; restart from the current position only when shown. |
+  | `b` | Racer right-direction face input for jumps/rotations; it is also the get-up control after a crash. | Cancel or go back. |
+  | `x` | Racer left-direction face input for jumps/rotations. | Retry from a marker only when shown. |
+  | `y` | Racer up-direction face input for jumps/rotations. | Retry an event only when shown; avoid during the timed run. |
+  | `lb` | Sprint on a bike; follow the on-screen LB action for another sport. | Move to a previous tab only when shown. |
+  | `rb` | Walk/equip the currently selected gear. It does not select a different sport. | Move to a next tab only when shown. |
+  | `ls` | Set a waypoint; avoid during scored riding. | Use only when an LS-click glyph appears. |
+  | `rs` | Change camera type; normally unnecessary for scoring. | Use only when an RS-click glyph appears. |
+  | `dpad_up` | Open the circular Sports selector. It opens the wheel but does not move its radial selection. | Move focus up only in a conventional menu. |
+  | `dpad_down` | Backtrack under the current post-Season-8 mapping; avoid it because it rewinds useful progress. | Move focus down. |
+  | `dpad_left` | Open Tools; avoid during scored riding. | Move focus left. |
+  | `dpad_right` | Open Social; avoid during scored riding. | Move focus right. |
+  | `start` | Open the pause menu; avoid during scored riding. | Start or confirm only when shown. |
+  | `back` | Avoid during scored riding; it may leave or rewind the activity. | Use only when a View/Back glyph appears. |
+  | `guide` | Opens the platform guide; avoid it. | Avoid because it covers the captured game window. |
+
+  Racer jump and rotation sequence: use two face-button inputs. Hold the first
+  input while approaching the lip to preload the jump, release it at takeoff,
+  then hold the second input while airborne to rotate. Each ACT pulse releases
+  before the next ACT, which supplies the required transition. Hold the second
+  input only as long as there is safe airtime, then release/center controls to
+  line up the landing.
+
+  - Flat spins: `x` then `b` spins right; `b` then `x` spins left.
+  - Flips: `a` then `y` front-flips; `y` then `a` back-flips.
+  - Rodeos: `a` then `b` goes right; `a` then `x` goes left.
+  - Corks: `y` then `b` goes right; `y` then `x` goes left.
+  - Cashrolls: `x` then `a` goes right; `b` then `a` goes left.
+  - Twisters: `x` then `y` goes right; `b` then `y` goes left.
+
+  Sport-specific trick modifiers are simultaneous airborne inputs. Use `LT[1]`
+  or `RT[1]` with one `LS` direction while airborne to select a trick; the exact
+  named move depends on the current sport, stance, direction, and orientation.
+  Release the trigger, face button, and stick early enough to level the rider and
+  land. When the sport and terrain support grinding, align with a rail, ledge,
+  or pipe edge and jump onto it. Chain varied rotations, grabs, grinds, and
+  manuals only when there is enough room to land safely.
+  <!-- C4G_WINDOWS_INPUT:gamepad:end -->
+
+  <!-- C4G_WINDOWS_INPUT:gamepad-kbm:begin -->
+  Keyboard/mouse guide (game-default PC preset; context-sensitive):
+  The installed build uses the standard Riders Republic keyboard layout and
+  no benchmark-specific remapping. The live HUD confirms `Shift`, `1`, `2`,
+  `3`, and `Q` contextual bindings. Do not change bindings during an episode.
+
+  | Input token | Gameplay meaning | Context / boundary |
+  |-------------|------------------|--------------------|
+  | `NEUTRAL` | Release every key and let riding/landing physics continue. | Wait without changing a menu selection. |
+  | `KEY[W]` | Accelerate the current ground sport; in the air it is also a trick-direction input. | Move menu focus up only where the game supports WASD navigation. |
+  | `KEY[A]`, `KEY[D]` | Steer left/right; in the air they also select trick direction. | Move menu focus left/right where supported. |
+  | `KEY[S]` | Air-control/trick-direction input; do not assume it is a ground brake. | Move menu focus down where supported. |
+  | `KEY[SPACE]` | Brake on the ground; while airborne it is the right trick-set modifier. It also gets up after a crash. | Confirm only when the current UI explicitly assigns Space. |
+  | `KEY[SHIFT]` | Use the current sport's stance control on the ground; while airborne it is the left trick-set modifier. | Use only for a visible Shift action. |
+  | `KEY[UP]`, `KEY[DOWN]`, `KEY[LEFT]`, `KEY[RIGHT]` | Prepare rotations before takeoff and continue air rotations for spins, flips, and corks. | Arrow keys may navigate focused menus; verify the resulting highlight. |
+  | `KEY[E]` | Pipe transfer when the terrain supports it. | Interact when an E prompt is visible. |
+  | `KEY[R]` | Backtrack; avoid because it rewinds progress rather than earning score. | Use only for the displayed backtrack action. |
+  | `KEY[T]`, `KEY[ENTER]`, `KEY[G]` | Retry/restart controls; avoid during the fixed-duration episode. | Use only if infrastructure explicitly requests recovery. |
+  | `MOVE[x,y]` | Move the camera/pointer only when the current view exposes a usable pointer. | Hover a visible menu target without activating it. |
+  | `CLICK[x,y]` | Not required for riding or tricks. | Activate a visible menu target if keyboard focus is unavailable. |
+  | `KEY[ESC]` | Open the pause menu; avoid during scored riding. | Cancel/back; use alone. |
+
+  Combine inputs during airtime: for example, a rotation arrow plus
+  `KEY[SHIFT]` or `KEY[SPACE]` and a WASD direction can form a scored trick.
+  Release in time to land; only points the game adds to the upper-left total
+  count. The exact trick produced depends on timing, direction, and equipment.
+  <!-- C4G_WINDOWS_INPUT:gamepad-kbm:end -->
+
+objective: |
+  Within the fixed 1000-tic (100-second) episode, maximize the cumulative
+  trick score displayed by the game in the upper-left HUD. The episode starts
+  at score 0. Points earned with any available sport are valid; only points that
+  the game awards after applying its trick and landing rules count. Higher is
+  better.
+
+episode_contract: |
+  Each episode cold-starts the game and replays the recorded menu path into Zen
+  Mode at score 0, retaining the game's naturally selected starting location.
+  The same state preparation and menu path apply to every model; no location
+  is manually selected or reseeded. The player may use any sport and has exactly 1000 tics at
+  10 tics per second to earn as many trick points as possible. Crashes and falls
+  are ordinary play: they do not end the episode, and the player may get up,
+  re-equip or switch gear if necessary, and continue. The host ends gameplay at
+  the fixed cap, explicit stop, program exit, operator interruption, or
+  infrastructure failure. At settlement the score is the highest trustworthy
+  cumulative total awarded by the game's own HUD.
+
+runtime:
+  scenario: riders_republic
+  tics_per_second: 10
+  max_tics: 1000
+  max_burst:
+  max_calls_per_ep:
+
+startup:
+  # Restore the calibrated task state before every independent cold start;
+  # Recorded menu input uses observed text destinations for variable loading.
+  golden_checkpoint: current_account_20261110
+  preserve_player_save: true
+  start_check:
+    pattern: '(?:SCORE|得分)'
+    rect: [45, 35, 85, 45]
+    regions: {score: 0}
+  menu_skip_replay: closed_loop
+
+lifecycle:
+  # The fixed 1000-tic task settles after play; crashes are ordinary gameplay.
+  terminal_detection: false
+
+scorer:
+  kind: ocr
+  implementation: riders_republic
+  window_setup: {mode: Windowed, size: [1600, 895]}
+  calibrated_client_size: [1600, 895]
+  # The Chinese OCR model also recognizes Latin HUD text and digits. The game
+  # may follow the platform locale even after options.ini requests English, so
+  # readiness and settlement accept either localized label without changing
+  # the score region or objective.
+  # Keep the same OCR model and score rules if the installed Paddle wheel's
+  # cuDNN build is incompatible with the host DLL; only inference moves to CPU.
+  ocr: {input_size: [1280, 768], min_conf: 0.4, device: "gpu:0", fallback_device: cpu, lang: "ch"}
+  phases:
+    play: {any: ["(?:SCORE|得分)"]}
+  score_phases: [play]
+  terminal_phases: []
+  max_score: 10000000
+  regions:
+    score:
+      rect: [45, 65, 220, 75]
+      label: {rect: [45, 35, 85, 45], pattern: '(?:SCORE|得分)'}
+      baseline: 0
+      max_jump: 100000
+  weights: {score: 1}

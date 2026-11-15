@@ -1,0 +1,11 @@
+{
+  "schema": 1,
+  "architecture": "x86",
+  "compiler": "Zig0.13.0 and .NET Framework4 csc",
+  "sha256": {
+    "owned_ime_context.c": "ba5736e21be12cdd37b8a5a03fe4f12218bca9b3f7ac8f389115926a1130ad48",
+    "OwnedImeController.cs": "e0f6dd8a5876a72d2bf69b37507721b25948000de75c06c0f54831e0c2c0c732",
+    "OwnedImeController.exe": "595218551273f75306ab2e5d3b80fb0fb7cc909993d484059eeeff5a8026b225",
+    "owned_ime_context32.dll": "6d80f2cc6aec1b8c355be16099eec6d75042f9a464e945744bf1ca73158cb4b8"
+  }
+}

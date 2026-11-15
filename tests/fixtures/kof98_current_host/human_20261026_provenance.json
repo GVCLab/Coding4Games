@@ -1,0 +1,32 @@
+[
+  {
+    "file": "human_both_low_27.png",
+    "source": "out\\game_acceptance\\sweep_20261026\\kof98_human_01\\frames\\001430.png",
+    "sha256": "8ca72a71eac2b009f1905c982482d301546ab22ddbf81784485c7b7fdfe66082",
+    "source_frame": 1430
+  },
+  {
+    "file": "human_win_25.png",
+    "source": "out\\game_acceptance\\sweep_20261026\\kof98_human_01\\frames\\001500.png",
+    "sha256": "3485fb60976cb05e3fdf0ee4c7ad55c5d141fc0c150fdc66e31ae71919492d75",
+    "source_frame": 1500
+  },
+  {
+    "file": "human_loss_26.png",
+    "source": "out\\game_acceptance\\sweep_20261026\\kof98_human_01\\frames\\000910.png",
+    "sha256": "e46eb69b5ea147d86c8d2185c28307a20108afdbdf34adfca3570ec0333f3fa0",
+    "source_frame": 910
+  },
+  {
+    "file": "human_ko_overlay.png",
+    "source": "out\\game_acceptance\\sweep_20261026\\kof98_human_01\\frames\\001480.png",
+    "sha256": "4978f7cb5c6a93564810f66ba7356ff62a67d578f03a5d71fc375edb01d5ddba",
+    "source_frame": 1480
+  },
+  {
+    "file": "human_team_select.png",
+    "source": "out\\game_acceptance\\sweep_20261026\\kof98_human_01\\frames\\002300.png",
+    "sha256": "0cd9dae78787c71be4d4e9070ff0f38fcc4d26089d1465bd20303ced5bc9d407",
+    "source_frame": 2300
+  }
+]

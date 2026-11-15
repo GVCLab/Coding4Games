@@ -1,0 +1,60 @@
+{
+  "source": "Human 1-1 recording, 2026-10-25, human_01",
+  "native_frame_size": [
+    1280,
+    720
+  ],
+  "results_oracle": "Three gem stamps, no yarn, grade A; then native transition to 1-2",
+  "labels": {
+    "gem0.png": [
+      520,
+      [
+        0,
+        0
+      ]
+    ],
+    "gem1.png": [
+      550,
+      [
+        1,
+        0
+      ]
+    ],
+    "gem2.png": [
+      590,
+      [
+        2,
+        0
+      ]
+    ],
+    "gem3_exitopen.png": [
+      606,
+      [
+        3,
+        0
+      ]
+    ],
+    "curtain.png": [
+      620,
+      null
+    ],
+    "results_a.png": [
+      636,
+      null
+    ],
+    "next_level.png": [
+      757,
+      [
+        0,
+        0
+      ]
+    ],
+    "cloud_not_yarn.png": [
+      577,
+      [
+        1,
+        0
+      ]
+    ]
+  }
+}

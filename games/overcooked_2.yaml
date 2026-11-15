@@ -1,0 +1,98 @@
+name: Overcooked! 2
+process: Overcooked2.exe
+platform: windows-kbm
+screenshot_backend: printwindow
+# Calibrated with gamepad-kbm: clock_speedhack_v1. Process suspension alone
+# allows Unity to catch up on resume; retain both clock freeze and hard pause.
+use_speedhack: true
+description: |
+  Overcooked! 2 single-player cooking. One controller switches between two chefs.
+  Use the registered scenario's game-default controller guide.
+scorer:
+  kind: ocr
+  implementation: overcooked_2
+auto_launch:
+  launch_path: 'G:/SteamLibrary/steamapps/common/Overcooked! 2/Overcooked2.exe'
+  window_wait_seconds: 180.0
+  settle_seconds: 60.0
+save_state:
+  restore_to: 'C:/Users/15694/AppData/LocalLow/Team17/Overcooked2/76561199470060039'
+  wipe_before: false
+# Record against the approved checkpoint; never invent navigation timings.
+menu_skip:
+- description: Recorded neutral wait
+  duration_seconds: 17.229745300021023
+  pad: 1
+- description: Recorded keyboard hold
+  duration_seconds: 0.015586900000926107
+  pad: 1
+  buttons:
+  - KEY[SPACE]
+- description: Recorded neutral wait
+  duration_seconds: 6.721961599949282
+  pad: 1
+- description: Recorded keyboard hold
+  duration_seconds: 0.16998200002126396
+  pad: 1
+  buttons:
+  - KEY[DOWN]
+- description: Recorded neutral wait
+  duration_seconds: 0.8560064000193961
+  pad: 1
+- description: Recorded keyboard hold
+  duration_seconds: 0.1564725000062026
+  pad: 1
+  buttons:
+  - KEY[DOWN]
+- description: Recorded neutral wait
+  duration_seconds: 0.763068399974145
+  pad: 1
+- description: Recorded keyboard hold
+  duration_seconds: 0.14141490001929924
+  pad: 1
+  buttons:
+  - KEY[SPACE]
+- description: Recorded neutral wait
+  duration_seconds: 1.2752695999806747
+  pad: 1
+- description: Recorded keyboard hold
+  duration_seconds: 0.10886640002718195
+  pad: 1
+  buttons:
+  - KEY[SPACE]
+- description: Recorded neutral wait
+  duration_seconds: 9.260995799966622
+  pad: 1
+- description: Recorded keyboard hold
+  duration_seconds: 0.15499390003969893
+  pad: 1
+  buttons:
+  - KEY[SPACE]
+- description: Recorded neutral wait
+  duration_seconds: 7.994258599996101
+  pad: 1
+- description: Recorded keyboard hold
+  duration_seconds: 1.4325920999981463
+  pad: 1
+  buttons:
+  - KEY[SPACE]
+- description: Recorded neutral wait
+  duration_seconds: 1.3104639999801293
+  pad: 1
+actions:
+  neutral: {description: 'Raw Xbox neutral state.'}
+  a: {description: 'Raw Xbox A button.', buttons: [A]}
+  b: {description: 'Raw Xbox B button.', buttons: [B]}
+  x: {description: 'Raw Xbox X button.', buttons: [X]}
+  y: {description: 'Raw Xbox Y button.', buttons: [Y]}
+  lb: {description: 'Raw Xbox left shoulder.', buttons: [LB]}
+  rb: {description: 'Raw Xbox right shoulder.', buttons: [RB]}
+  ls: {description: 'Raw Xbox left-stick click.', buttons: [LS]}
+  rs: {description: 'Raw Xbox right-stick click.', buttons: [RS]}
+  dpad_up: {description: 'Raw Xbox D-pad up.', buttons: [DPAD_UP]}
+  dpad_down: {description: 'Raw Xbox D-pad down.', buttons: [DPAD_DOWN]}
+  dpad_left: {description: 'Raw Xbox D-pad left.', buttons: [DPAD_LEFT]}
+  dpad_right: {description: 'Raw Xbox D-pad right.', buttons: [DPAD_RIGHT]}
+  start: {description: 'Raw Xbox Start button.', buttons: [START]}
+  back: {description: 'Raw Xbox Back button.', buttons: [BACK]}
+  guide: {description: 'Raw Xbox Guide button.', buttons: [GUIDE]}

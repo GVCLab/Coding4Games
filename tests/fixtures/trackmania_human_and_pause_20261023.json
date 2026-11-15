@@ -1,0 +1,2819 @@
+{
+  "source": {
+    "human": "Native human A03-Race lap recorded on 2026-10-23, frames 0..400; desktop frames 401..2177 excluded.",
+    "pause": "Stationary no-driving ESC negative control, pause_probe_01, 2026-10-23.",
+    "evidence_root": "F:\\C4G\\game_acceptance\\trackmania_20261023_01\\human_01",
+    "ocr": "Unchanged production gpu:0 OCR; per-region text from review_03, final finish confirmation and all 13 registered sampling phases.",
+    "supplemental_sampling_ocr": "Both finish regions eagerly read from native frames 321..331 so recorded-text replay can exercise every observation phase; source PNG hashes saved in review_03/sampling_overlay_texts.json."
+  },
+  "human": {
+    "texts": [
+      {
+        "clock": "0:03.31",
+        "distance": "0m",
+        "track": "A03-Race Nade",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:03.41",
+        "distance": "0m",
+        "track": "A03-Race Nade",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:03.51",
+        "distance": "0m",
+        "track": "A03-Race Nade",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:03.61",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:03.72",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:03.81",
+        "distance": "0m",
+        "track": "A03-Race Nade",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:03.92",
+        "distance": "0m",
+        "track": "A03-Race Nada",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:04.02",
+        "distance": "0m",
+        "track": "A03-Race Nade",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:04.1 12",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:04.22",
+        "distance": "0m",
+        "track": "A03-Race Nada",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:04.22",
+        "distance": "0m",
+        "track": "A03-Race Nada",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:04.42",
+        "distance": "0m",
+        "track": "A03-Race Nade",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:04.52",
+        "distance": "0m",
+        "track": "A03-Race Nade",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:04.62",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:04.7 72",
+        "distance": "0m",
+        "track": "A03-Race Nada",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:04.82",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:04.91",
+        "distance": "0m",
+        "track": "A03-Race Nada",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:05.02",
+        "distance": "0m",
+        "track": "A03-Race Nada",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:05.1 12",
+        "distance": "0m",
+        "track": "A03-Race Nada",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:05.22",
+        "distance": "0m",
+        "track": "A03-Race Nada",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:05.4 .42",
+        "distance": "0m",
+        "track": "A03-Race Nada",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:05.52",
+        "distance": "0m",
+        "track": "A03-Race Nada",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:05.62",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:05.72",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:05.82",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:05.92",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:06.02",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:06. 12",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:06.22",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:06.32",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:06.4 .42",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:06.62",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:06.72",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:06.82",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:06.92",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:07.02",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:07.22",
+        "distance": "0m",
+        "track": "A03-Race Nada",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:07.31",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:07.42",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:07.51",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:07.62",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:07.68",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:07.82",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:07.91",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:08.02",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:08. 12",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:08.22",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:08.32",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:08.4 .42",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:08.52",
+        "distance": "0m",
+        "track": "A03-Race",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:08.62",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:08.7 71",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:08.82",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:08.92",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:09.02",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:09. 12",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:09.22",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:09.32",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:09.4 1.42",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:09.52",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:09.62",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:09.7 72",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:09.82",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:09.92",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": ""
+      },
+      {
+        "clock": "10.02 0:",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:10.1 .11",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": ""
+      },
+      {
+        "clock": "10.22 0:1",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:10.32",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": "",
+        "finish_clock": "Mania Un i"
+      },
+      {
+        "clock": "0:10.42",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": "",
+        "finish_clock": "Mania Un i"
+      },
+      {
+        "clock": "0:10.52",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": "",
+        "finish_clock": "Mania Un i"
+      },
+      {
+        "clock": ":10.62 0:1",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:10.7 .72",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": ""
+      },
+      {
+        "clock": "10.82 0:1",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": ""
+      },
+      {
+        "clock": "10.92 0:1",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:11.02",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": "",
+        "finish_clock": "Mania Un i"
+      },
+      {
+        "clock": "0:11,1 .12",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:11.22",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": "",
+        "finish_clock": "Mania Un i"
+      },
+      {
+        "clock": "0:11:32",
+        "distance": "0m",
+        "track": "A03-Race Nada",
+        "finish_time": "",
+        "finish_clock": "Mania Un i"
+      },
+      {
+        "clock": "0:11:42",
+        "distance": "0 m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": "Mania Un i"
+      },
+      {
+        "clock": "0:11.52",
+        "distance": "0 m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": "Mania Un i"
+      },
+      {
+        "clock": "0:11,62",
+        "distance": "",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": "Mania Uni"
+      },
+      {
+        "clock": "",
+        "distance": "",
+        "track": "A03-Race",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:11.82",
+        "distance": "M",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": "lanía Un"
+      },
+      {
+        "clock": "0:11,91",
+        "distance": "3m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": "aníaUn START START"
+      },
+      {
+        "clock": "0:12.02",
+        "distance": "5m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": "START START"
+      },
+      {
+        "clock": "0:12.1 12",
+        "distance": "6m",
+        "track": "A03-Race",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:12.22",
+        "distance": "",
+        "track": "A03-Race Naroo",
+        "finish_time": "",
+        "finish_clock": "008080"
+      },
+      {
+        "clock": "0:12.32",
+        "distance": "9 m",
+        "track": "A03-Race N-",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:12.42",
+        "distance": "11m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:12.52",
+        "distance": "13 m",
+        "track": "A03-Race",
+        "finish_time": "10",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:12.62",
+        "distance": "15m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:12.72",
+        "distance": "17m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:12.82",
+        "distance": "20m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:12.92",
+        "distance": "23m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:13.02",
+        "distance": "25m",
+        "track": "A03-Race Nadre",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:13.22",
+        "distance": "31m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:13.32",
+        "distance": "34m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:13.42",
+        "distance": "37m",
+        "track": "A03-Race Nadao",
+        "finish_time": "",
+        "finish_clock": "E"
+      },
+      {
+        "clock": "0:13.52",
+        "distance": "40m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:13.62",
+        "distance": "43m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:13.72",
+        "distance": "46m",
+        "track": "A03-Race Nadao",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:13.91",
+        "distance": "52m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:14.02",
+        "distance": "56m",
+        "track": "A03-Race Nadae",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:14.1 .12",
+        "distance": "60m",
+        "track": "A03-Race",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:14.22",
+        "distance": "64m",
+        "track": "A03-Race Nadee",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:14.42",
+        "distance": "72m 44",
+        "track": "A03-Race Nadae",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:14.52",
+        "distance": "76m",
+        "track": "A03-Race Nadre",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:14.62",
+        "distance": "80m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": "."
+      },
+      {
+        "clock": "0:14.82",
+        "distance": "88m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": "“小"
+      },
+      {
+        "clock": "0:14.92",
+        "distance": "93m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:15.02",
+        "distance": "97m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:15.12",
+        "distance": "102m",
+        "track": "A03-Race Nad",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:15.22",
+        "distance": "106m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:15.32",
+        "distance": "111m",
+        "track": "A03-Race ad",
+        "finish_time": "",
+        "finish_clock": ":"
+      },
+      {
+        "clock": "0:15.42",
+        "distance": "6m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:15.52",
+        "distance": "121m",
+        "track": "A03-Race Nad",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:15.62",
+        "distance": "126m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:15.72",
+        "distance": "131m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:15.82",
+        "distance": "136m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:15.92",
+        "distance": "141m",
+        "track": "A03-Race Nad",
+        "finish_time": "l",
+        "finish_clock": "\" - - ."
+      },
+      {
+        "clock": "0:16.01",
+        "distance": "146m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": "I"
+      },
+      {
+        "clock": "0:16.1 .12",
+        "distance": "152m",
+        "track": "A03-Race Nad",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:16.22",
+        "distance": "158 m",
+        "track": "A03-Race Nad",
+        "finish_time": "",
+        "finish_clock": "mmb"
+      },
+      {
+        "clock": "0:16.32",
+        "distance": "164m",
+        "track": "A03-Race Nade",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:16.42",
+        "distance": "170m",
+        "track": "A03-Race Nadre",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:16.52",
+        "distance": "176m",
+        "track": "A03-Race Nadro",
+        "finish_time": "",
+        "finish_clock": "7"
+      },
+      {
+        "clock": "0:16.62",
+        "distance": "182 m",
+        "track": "A03-Race Nadro",
+        "finish_time": "",
+        "finish_clock": "i"
+      },
+      {
+        "clock": "0:16.72",
+        "distance": "188 m",
+        "track": "A03-Race 小",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:16.82",
+        "distance": "195m",
+        "track": "",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:16.92",
+        "distance": "201m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": "1"
+      },
+      {
+        "clock": "0:17.02",
+        "distance": "208 m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:17.1 12",
+        "distance": "215m",
+        "track": "A03-Race Nadro",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:17.22",
+        "distance": "221m",
+        "track": "A03-Race Nadro",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:17.32",
+        "distance": "228 m",
+        "track": "A03-Race Nade",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:17.42",
+        "distance": "235m",
+        "track": "A03-Race Nada",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:17.52",
+        "distance": "242 m",
+        "track": "Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:17.62",
+        "distance": "250 m",
+        "track": "",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:17.72",
+        "distance": "257m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:17.82",
+        "distance": "264m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:17.92",
+        "distance": "271m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:18.02",
+        "distance": "279m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:18. 12",
+        "distance": "286 m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:18.22",
+        "distance": "294m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:18.32",
+        "distance": "301m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:18.42",
+        "distance": "309m",
+        "track": "A03-Race Nad",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:18.52",
+        "distance": "317m",
+        "track": "A03-Race Nad",
+        "finish_time": "à",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:18.62",
+        "distance": "324m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:18.7 .72",
+        "distance": "331m",
+        "track": "A03-Race",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:18.82",
+        "distance": "338m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:18.92",
+        "distance": "344m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": "T"
+      },
+      {
+        "clock": "19.02 0:1",
+        "distance": "350 m",
+        "track": "A03-Race",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:19.1 12",
+        "distance": "355m",
+        "track": "A03-Race Nad",
+        "finish_time": "w"
+      },
+      {
+        "clock": "0:19.32",
+        "distance": "366 m",
+        "track": "A03-Race Nad",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:19.42",
+        "distance": "372 m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": "wwwwmeeom"
+      },
+      {
+        "clock": "0:19.52",
+        "distance": "377m",
+        "track": "A03-Race adre",
+        "finish_time": "",
+        "finish_clock": "10000"
+      },
+      {
+        "clock": "0:19.7 .72",
+        "distance": "388 m",
+        "track": "A03-Race N",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:19.82",
+        "distance": "394m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:19.91",
+        "distance": "399 m",
+        "track": "A03-Race Nadre",
+        "finish_time": "",
+        "finish_clock": "10u1"
+      },
+      {
+        "clock": "0:20.02",
+        "distance": "406m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:20.1 12",
+        "distance": "411m",
+        "track": "A03-Race Nadre",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:20.22",
+        "distance": "417m",
+        "track": "A03-Race Nadro",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:20.32",
+        "distance": "423 m",
+        "track": "A03-Race Nadre",
+        "finish_time": "",
+        "finish_clock": "美"
+      },
+      {
+        "clock": "0:20.42",
+        "distance": "430m",
+        "track": "A03-Race Nadro",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:20.52",
+        "distance": "436m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": "0"
+      },
+      {
+        "clock": "0:20.62",
+        "distance": "442m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": "1"
+      },
+      {
+        "clock": "0:20.7 .72",
+        "distance": "448 m",
+        "track": "A03-Race",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:20.82",
+        "distance": "455m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:20.92",
+        "distance": "461m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:21.12",
+        "distance": "474m",
+        "track": "A03-Race Nadro",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:21.22",
+        "distance": "481m",
+        "track": "A03-Race Nadre",
+        "finish_time": "",
+        "finish_clock": "1-"
+      },
+      {
+        "clock": "0:21.32",
+        "distance": "487m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": "L"
+      },
+      {
+        "clock": "0:21.42",
+        "distance": "494m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:21.52",
+        "distance": "501m",
+        "track": "A03-Race Nad",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:21.62",
+        "distance": "507m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": "00 NADEO"
+      },
+      {
+        "clock": "0:21.72",
+        "distance": "514m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": "ADEC U VRAINEA"
+      },
+      {
+        "clock": "0:21.82",
+        "distance": "521m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": "CHECKPOINTCHECKP"
+      },
+      {
+        "clock": "0:21.92",
+        "distance": "528 m",
+        "track": "A03-Race",
+        "finish_time": "CHECH X",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:22.02",
+        "distance": "529 m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:22.1 12",
+        "distance": "529 m",
+        "track": "A03-Race",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:22.22",
+        "distance": "529 m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": "0:2"
+      },
+      {
+        "clock": "0:22.32",
+        "distance": "529 m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:22.42",
+        "distance": "529 m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:22.52",
+        "distance": "529 m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": "Wealgu"
+      },
+      {
+        "clock": "0:22.72",
+        "distance": "529 m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": "0:21.94"
+      },
+      {
+        "clock": "0:22.82",
+        "distance": "529 m",
+        "track": "A03-Race Nadee",
+        "finish_time": "",
+        "finish_clock": "0:21.94"
+      },
+      {
+        "clock": "0:22.92",
+        "distance": "529 m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:23.02",
+        "distance": "608 m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": "0:2 1.94"
+      },
+      {
+        "clock": "0:23. 12",
+        "distance": "615m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": "0:2 1.94"
+      },
+      {
+        "clock": "0:23.22",
+        "distance": "622 m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": "021.94"
+      },
+      {
+        "clock": "0:23.32",
+        "distance": "629 m",
+        "track": "A03-Race Nade",
+        "finish_time": "",
+        "finish_clock": "0:21.94"
+      },
+      {
+        "clock": "0:23.42",
+        "distance": "635 m",
+        "track": "A03-Race Nade",
+        "finish_time": "",
+        "finish_clock": "0:21.94"
+      },
+      {
+        "clock": "0:23.62",
+        "distance": "648 m",
+        "track": "A03-Race",
+        "finish_time": "1",
+        "finish_clock": "0:2 .94 1"
+      },
+      {
+        "clock": "0:23.72",
+        "distance": "654m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": "0:2 1.94"
+      },
+      {
+        "clock": "0:23.82",
+        "distance": "660 m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": "1.94"
+      },
+      {
+        "clock": "0:23.92",
+        "distance": "666 m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": "021.94 "
+      },
+      {
+        "clock": "0:24.02",
+        "distance": "671m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:24.1 12",
+        "distance": "677m",
+        "track": "A03-Race",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:24.22",
+        "distance": "682 m",
+        "track": "A03-Race Ahd",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:24.32",
+        "distance": "687m",
+        "track": "A03-Race ad",
+        "finish_time": "",
+        "finish_clock": "1"
+      },
+      {
+        "clock": "0:24.42",
+        "distance": "691m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:24.52",
+        "distance": "696 m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:24.62",
+        "distance": "700 m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:24.7 .72",
+        "distance": "704m",
+        "track": "A03-Race Alad",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:24.82",
+        "distance": "708 m",
+        "track": "A03-Race Nad",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:24.92",
+        "distance": "711m",
+        "track": "A03-Race ad",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:25.02",
+        "distance": "715m",
+        "track": "A03-Race ad",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:25.1 .12",
+        "distance": "719m",
+        "track": "A03-Race",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:25.22",
+        "distance": "722 m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:25.32",
+        "distance": "726m",
+        "track": "A03-Race",
+        "finish_time": "1",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:25.42",
+        "distance": "730m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:25.52",
+        "distance": "734m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:25.62",
+        "distance": "739m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": "1"
+      },
+      {
+        "clock": "0:25.72",
+        "distance": "743 m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:25.82",
+        "distance": "747m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:25.92",
+        "distance": "752m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:26.02",
+        "distance": "756 m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:26.1 6.12",
+        "distance": "761m",
+        "track": "A03-Race",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:26.22",
+        "distance": "765m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": "E"
+      },
+      {
+        "clock": "0:26.32",
+        "distance": "770m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": "4 E"
+      },
+      {
+        "clock": "0:26.42",
+        "distance": "775m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": "E"
+      },
+      {
+        "clock": "0:26.52",
+        "distance": "780 m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:26.62",
+        "distance": "785m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:26.72",
+        "distance": "790m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:26.82",
+        "distance": "795m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:26.92",
+        "distance": "801m",
+        "track": "A03-Race Nad",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:27.02",
+        "distance": "806 m",
+        "track": "A03-Race Nad",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:27.1 12",
+        "distance": "812m",
+        "track": "A03-Race Nade",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:27.32",
+        "distance": "824m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": "T"
+      },
+      {
+        "clock": "0:27.42",
+        "distance": "830 m",
+        "track": "A03-Race N",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:27.52",
+        "distance": "836 m",
+        "track": "A03-Race Nadao",
+        "finish_time": "",
+        "finish_clock": "L"
+      },
+      {
+        "clock": "0:27.62",
+        "distance": "842 m",
+        "track": "A03-Race Nade",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:27.72",
+        "distance": "848 m",
+        "track": "A03-Race Nadre",
+        "finish_time": "",
+        "finish_clock": "1"
+      },
+      {
+        "clock": "0:27.82",
+        "distance": "855m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:27.92",
+        "distance": "861m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:28.02",
+        "distance": "868 m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:28.1 12",
+        "distance": "875 m",
+        "track": "A03-Race Nadeo",
+        "finish_time": "W"
+      },
+      {
+        "clock": "0:28.22",
+        "distance": "882 m",
+        "track": "A03-Race Nada",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:28.32",
+        "distance": "889 m",
+        "track": "A03-Race Nade",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:28.52",
+        "distance": "903 m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:28.62",
+        "distance": "910m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": "4"
+      },
+      {
+        "clock": "0:28.7 .72",
+        "distance": "917m",
+        "track": "A03-Race",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:28.82",
+        "distance": "924m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:28.92",
+        "distance": "932 m",
+        "track": "A03-Race Nadro",
+        "finish_time": "X",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:29.02",
+        "distance": "939m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": "1\""
+      },
+      {
+        "clock": "0:29.1 .12",
+        "distance": "947m",
+        "track": "A03-Race",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:29.22",
+        "distance": "954m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": "r F"
+      },
+      {
+        "clock": "0:29.32",
+        "distance": "962 m",
+        "track": "A03-Race",
+        "finish_time": "7 11",
+        "finish_clock": "F"
+      },
+      {
+        "clock": "0:29.42",
+        "distance": "970 m",
+        "track": "1E A03-Race",
+        "finish_time": "è",
+        "finish_clock": "1"
+      },
+      {
+        "clock": "0:29.52",
+        "distance": "977m",
+        "track": "",
+        "finish_time": "",
+        "finish_clock": "F"
+      },
+      {
+        "clock": "0:29.62",
+        "distance": "985 m",
+        "track": "",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:29.7 .72",
+        "distance": "993m",
+        "track": "",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:29.82",
+        "distance": "1001m",
+        "track": "A03-Race Nad",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:29.92",
+        "distance": "1008m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": "1"
+      },
+      {
+        "clock": "0:30.02",
+        "distance": "1015m",
+        "track": "A03-Race Nad",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:30.1 .12",
+        "distance": "1022m",
+        "track": "A03-Race Nad",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:30.22",
+        "distance": "1028 m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": "1"
+      },
+      {
+        "clock": "0:30.32",
+        "distance": "1035m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": "7"
+      },
+      {
+        "clock": "0:30.42",
+        "distance": "1041m",
+        "track": "",
+        "finish_time": "",
+        "finish_clock": "山"
+      },
+      {
+        "clock": "0:30.52",
+        "distance": "1047m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:30.62",
+        "distance": "1053 m",
+        "track": "-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:30.7 .72",
+        "distance": "1059m",
+        "track": "ace A03",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:30.82",
+        "distance": "1066 m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:30.92",
+        "distance": "1072m",
+        "track": "A03-R3",
+        "finish_time": "",
+        "finish_clock": "1"
+      },
+      {
+        "clock": "0:31.02",
+        "distance": "1078m",
+        "track": "A03",
+        "finish_time": "",
+        "finish_clock": "1"
+      },
+      {
+        "clock": "0:31.1 12",
+        "distance": "1083m",
+        "track": "ace",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:31.22",
+        "distance": "1089m",
+        "track": "A03-Race Nad",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:31.32",
+        "distance": "1094m",
+        "track": "A03-Race 5",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:3 1.42",
+        "distance": "1099m",
+        "track": "A03-Race",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:31.62",
+        "distance": "1109m",
+        "track": "A03-Race Nad",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:31.72",
+        "distance": "1114m",
+        "track": "A03-Race Nad",
+        "finish_time": "",
+        "finish_clock": "一"
+      },
+      {
+        "clock": "0:31.82",
+        "distance": "1118m",
+        "track": "A03-Race Nad",
+        "finish_time": "",
+        "finish_clock": " "
+      },
+      {
+        "clock": "ST 0:31.92",
+        "distance": "1123m",
+        "track": "A03-Race Nad",
+        "finish_time": "",
+        "finish_clock": "二"
+      },
+      {
+        "clock": "0:32.02",
+        "distance": "1128m",
+        "track": "A03-Race Nad",
+        "finish_time": "",
+        "finish_clock": "1:"
+      },
+      {
+        "clock": "0:32.1 12",
+        "distance": "1132m",
+        "track": "A03-Race",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:32.22",
+        "distance": "1137m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:32.32",
+        "distance": "1142m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:32.42",
+        "distance": "1148m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": "1."
+      },
+      {
+        "clock": "0:32.52",
+        "distance": "1153m",
+        "track": "A03-Race Nad",
+        "finish_time": "",
+        "finish_clock": "一"
+      },
+      {
+        "clock": "0:32.7 .72",
+        "distance": "1164m",
+        "track": "A03-Race",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:32.82",
+        "distance": "1169m",
+        "track": "A03-Race Nad",
+        "finish_time": "",
+        "finish_clock": "t."
+      },
+      {
+        "clock": "0:32.92",
+        "distance": "1175m",
+        "track": "A03-R ace",
+        "finish_time": "",
+        "finish_clock": "1"
+      },
+      {
+        "clock": "0:33.02",
+        "distance": "1181m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:33.1 .12",
+        "distance": "1186m",
+        "track": "A03-Race",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:33.22",
+        "distance": "1192m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:33.32",
+        "distance": "1198m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:33.32",
+        "distance": "1198m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:33.52",
+        "distance": "1210m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:33.62",
+        "distance": "1216m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:33.72",
+        "distance": "1222m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": "1"
+      },
+      {
+        "clock": "0:33.82",
+        "distance": "1228 m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": "1"
+      },
+      {
+        "clock": "0:33.92",
+        "distance": "1235m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:34.02",
+        "distance": "1241m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:34.22",
+        "distance": "1254m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:34.32",
+        "distance": "1260 m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:34.42",
+        "distance": "1267m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:34.52",
+        "distance": "1274m",
+        "track": "A03-Race Nad",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:34.62",
+        "distance": "",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:34.7 72",
+        "distance": "1287m",
+        "track": "A03-Race",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:34.82",
+        "distance": "1293m",
+        "track": "A03-Race Nad",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:34.92",
+        "distance": "800m",
+        "track": "A03-Race Nad",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:35.02",
+        "distance": "1307m",
+        "track": "A03-Race Nad",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:35.12",
+        "distance": "BEIE!",
+        "track": "A03-Race Nad",
+        "finish_time": "",
+        "finish_clock": "1"
+      },
+      {
+        "clock": "0:35.22",
+        "distance": "1320m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:35.32",
+        "distance": "1327m",
+        "track": "A03-Race Nad",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:35.42",
+        "distance": "1333m",
+        "track": "A03-Race Nad",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:35.52",
+        "distance": "1340m",
+        "track": "A03-Race Nad",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:35.62",
+        "distance": "1347m",
+        "track": "A03-Race Nadao",
+        "finish_time": "",
+        "finish_clock": "北"
+      },
+      {
+        "clock": "0:35.72",
+        "distance": "1354m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:35.82",
+        "distance": "1360 m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:35.92",
+        "distance": "1367m",
+        "track": "A03-Race Nadao",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:36.02",
+        "distance": "1373m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:36.12",
+        "distance": "1380 m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": "中"
+      },
+      {
+        "clock": "0:36.22",
+        "distance": "1387m",
+        "track": "A03-Race Nbdao",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:36.42",
+        "distance": "1400m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:36.52",
+        "distance": "1407m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:36.62",
+        "distance": "1414m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:36.72",
+        "distance": "1421m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:36.82",
+        "distance": "1428m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:36.92",
+        "distance": "1436m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": "电电"
+      },
+      {
+        "clock": "0:37.1 12",
+        "distance": "1450m",
+        "track": "",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:37.22",
+        "distance": "1458 m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": ""
+      },
+      {
+        "clock": "0:37.26",
+        "distance": "1460 m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": "0:37.26",
+        "finish_banner": "A03-Race FINISH Nadeo ISH 0:37.26"
+      },
+      {
+        "clock": "0:37.26",
+        "distance": "1460 m",
+        "track": "A03-Race",
+        "finish_time": "",
+        "finish_clock": "0:37.26",
+        "finish_banner": "A03-Race FINISH Nadeo ISH 0:37.26"
+      },
+      {
+        "clock": "0:37.26",
+        "distance": "1460 m",
+        "track": "",
+        "finish_time": "",
+        "finish_clock": "0:37.26",
+        "finish_banner": "A03-Race FINISH Nadeo ISH 0:37.26"
+      },
+      {
+        "clock": "0:37.26",
+        "distance": "1460 m",
+        "track": "A03-Race",
+        "finish_time": "NN",
+        "finish_clock": "0:37.26",
+        "finish_banner": "FINISH FINISH A03-Race Nadeo FINISH NISH 0:37.26"
+      },
+      {
+        "clock": "0:37.26",
+        "distance": "1460 m",
+        "track": "A03-Race",
+        "finish_time": "r",
+        "finish_clock": "0:37.26",
+        "finish_banner": "FINISH A03-Race FINISH FINIS Nadeo FINISH NISH 0:37.26"
+      },
+      {
+        "clock": "0:37.26",
+        "distance": "1460 m",
+        "track": "A03-Race Nadae",
+        "finish_time": "è",
+        "finish_clock": "0:37.26",
+        "finish_banner": "A03-Race FINISH Nadeo FINISH FINIS FINISH INISH 0:37.26"
+      },
+      {
+        "clock": "0:37.26",
+        "distance": "1460 m",
+        "track": "A03-Race Nadao",
+        "finish_time": "",
+        "finish_clock": "0:37.26",
+        "finish_banner": "A03-Race Nadeo FINISH FINISH FINISH FINISH 0:37.26 FINISH"
+      },
+      {
+        "clock": "0:37.26",
+        "distance": "1460 m",
+        "track": "A03-Race Nadae",
+        "finish_time": "",
+        "finish_clock": "0:37.26",
+        "finish_banner": "A03-Race Nadeo n FINISH FINISH FINISH FINISH 0:37.26 FINISH"
+      },
+      {
+        "clock": "0:37.26",
+        "distance": "1460 m",
+        "track": "A03-Race",
+        "finish_time": "I _ I",
+        "finish_clock": "0:37.26",
+        "finish_banner": "A03-Race Nadeo FINISH FINISH FINISH FINISH 0:37.26 FINISH"
+      },
+      {
+        "clock": "0:37.26",
+        "distance": "1461m",
+        "track": "A03-Race",
+        "finish_time": "_",
+        "finish_clock": "0:37.26",
+        "finish_banner": "A03-Race Nadeo FINISH FINISH FINISH FINISH 0:37.26 INISH"
+      },
+      {
+        "clock": "0:37.26",
+        "distance": "1461m",
+        "track": "",
+        "finish_time": "",
+        "finish_clock": "FIN 0:37.26",
+        "finish_banner": "A03-Race FINISH FINISH FINISH FINISH NISH"
+      },
+      {
+        "clock": "0:37.26",
+        "distance": "1461m",
+        "track": "",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:37.26",
+        "distance": "1461m",
+        "track": "",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:37.26",
+        "distance": "1461m",
+        "track": "",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:37.26",
+        "distance": "1461m",
+        "track": "",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:37.26",
+        "distance": "1461m",
+        "track": "",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:37.26",
+        "distance": "1461m",
+        "track": "",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:37.26",
+        "distance": "1461m",
+        "track": "",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:37.26",
+        "distance": "1461m",
+        "track": "A03-Race",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:37.26",
+        "distance": "1461m",
+        "track": "",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:37.26",
+        "distance": "1461m",
+        "track": "A03-Race",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:37.26",
+        "distance": "1461m",
+        "track": "A03-Race",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:37.26",
+        "distance": "1461m",
+        "track": "",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:37.26",
+        "distance": "1461m",
+        "track": "A03-F",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:37.26",
+        "distance": "1461m",
+        "track": "Race A03-",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:37.26",
+        "distance": "1461m",
+        "track": "A03-",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:37.26",
+        "distance": "1461m",
+        "track": "A03- Race",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:37.26",
+        "distance": "1461m",
+        "track": "A03-",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:37.26",
+        "distance": "1461m",
+        "track": "A03-",
+        "finish_time": ""
+      },
+      {
+        "clock": "0:37.26",
+        "distance": "1461m",
+        "track": "A03-",
+        "finish_time": ""
+      },
+      {
+        "clock": "",
+        "distance": "",
+        "track": "",
+        "finish_time": ""
+      },
+      {
+        "clock": "",
+        "distance": "",
+        "track": "",
+        "finish_time": ""
+      },
+      {
+        "clock": "",
+        "distance": "",
+        "track": "",
+        "finish_time": "",
+        "menu_left": "TrackMania 新纪录诞生了！ 确定 FINISH FINISH"
+      },
+      {
+        "clock": "",
+        "distance": "",
+        "track": "",
+        "finish_time": "",
+        "menu_left": "TrackMania 新纪录诞生了！ 确定 FINISH FINISH"
+      },
+      {
+        "clock": "",
+        "distance": "",
+        "track": "",
+        "finish_time": "",
+        "menu_left": "TrackMania 新纪录诞生了！ 确定 FINISH FINISH"
+      },
+      {
+        "clock": "",
+        "distance": "",
+        "track": "",
+        "finish_time": "",
+        "menu_left": "TrackMania 新纪录诞生了！ 确定 FINISH FINISH"
+      },
+      {
+        "clock": "",
+        "distance": "",
+        "track": "",
+        "finish_time": "",
+        "menu_left": "TrackMania 新纪录诞生了！ 确定 FINISH FINISH"
+      },
+      {
+        "clock": "",
+        "distance": "",
+        "track": "",
+        "finish_time": "",
+        "menu_left": "TrackMania 新纪录诞生了！ 确定 FINISH FINISH"
+      },
+      {
+        "clock": "",
+        "distance": "",
+        "track": "",
+        "finish_time": "",
+        "menu_left": "TrackMania 新纪录诞生了！ 确定 FINISH FINISH"
+      },
+      {
+        "clock": "",
+        "distance": "",
+        "track": "",
+        "finish_time": "",
+        "menu_left": "TrackMania 新纪录诞生了！ 确定 FINISH FINISH"
+      },
+      {
+        "clock": "",
+        "distance": "",
+        "track": "",
+        "finish_time": "",
+        "menu_left": "TrackMania 新纪录诞生了！ 确定 FINISH FINISH"
+      },
+      {
+        "clock": "",
+        "distance": "",
+        "track": "",
+        "finish_time": "",
+        "menu_left": "TrackMania 新纪录诞生了！ 确定 FINISH FINISH"
+      },
+      {
+        "clock": "",
+        "distance": "",
+        "track": "",
+        "finish_time": "",
+        "menu_left": "TrackMania 新纪录诞生了！ 确定 FINISH FINISH"
+      },
+      {
+        "clock": "",
+        "distance": "",
+        "track": "",
+        "finish_time": "",
+        "menu_left": "TrackMania 新纪录诞生了！ 确定 FINISH FINISH"
+      },
+      {
+        "clock": "",
+        "distance": "",
+        "track": "",
+        "finish_time": "",
+        "menu_left": "TrackMania 新纪录诞生了！ 确定 FINISH FINISH"
+      },
+      {
+        "clock": "",
+        "distance": "",
+        "track": "",
+        "finish_time": "",
+        "menu_left": "TrackMania 新纪录诞生了！ 确定 FINISH FINISH"
+      },
+      {
+        "clock": "",
+        "distance": "",
+        "track": "",
+        "finish_time": "",
+        "menu_left": "TrackMania 新纪录诞生了！ 确定 FINISH FINISH"
+      },
+      {
+        "clock": "",
+        "distance": "",
+        "track": "",
+        "finish_time": "",
+        "menu_left": "TrackMania 新纪录诞生了！ 确定 FINISH FINISH"
+      },
+      {
+        "clock": "",
+        "distance": "",
+        "track": "",
+        "finish_time": "",
+        "menu_left": "TrackMania 新纪录诞生了！ 确定 FINISH FINISH"
+      },
+      {
+        "clock": "",
+        "distance": "",
+        "track": "",
+        "finish_time": "",
+        "menu_left": "TrackMania 新纪录诞生了！ 确定 FINISH FINISH"
+      },
+      {
+        "clock": "",
+        "distance": "",
+        "track": "",
+        "finish_time": "",
+        "menu_left": "TrackMania 新纪录诞生了！ 确定 FINISH FINISH"
+      },
+      {
+        "clock": "",
+        "distance": "",
+        "track": "",
+        "finish_time": "",
+        "menu_left": "TrackMania 新纪录诞生了！ 确定 FINISH FINISH"
+      },
+      {
+        "clock": "",
+        "distance": "",
+        "track": "",
+        "finish_time": "",
+        "menu_left": "TrackMania 新纪录诞生了！ 确定 FINISH FINISH"
+      },
+      {
+        "clock": "",
+        "distance": "",
+        "track": "",
+        "finish_time": "",
+        "menu_left": "TrackMania 新纪录诞生了！ 确定 FINISH FINISH"
+      },
+      {
+        "clock": "",
+        "distance": "",
+        "track": "",
+        "finish_time": "",
+        "menu_left": "TrackMania 新纪录诞生了！ 确定 FINISH FINISH"
+      },
+      {
+        "clock": "",
+        "distance": "",
+        "track": "",
+        "finish_time": "",
+        "menu_left": "TrackMania 新纪录诞生了！ 确定 FINISH FINISH"
+      },
+      {
+        "clock": "",
+        "distance": "",
+        "track": "",
+        "finish_time": "",
+        "menu_left": "TrackMania 新纪录诞生了！ 确定 FINISH FINISH"
+      },
+      {
+        "clock": "",
+        "distance": "",
+        "track": "",
+        "finish_time": "",
+        "menu_left": "TrackMania 新纪录诞生了！ 确定 FINISH FINISH"
+      },
+      {
+        "clock": "",
+        "distance": "",
+        "track": "",
+        "finish_time": "",
+        "menu_left": "TrackMania 新纪录诞生了！ 确定 FINISH FINISH"
+      },
+      {
+        "clock": "",
+        "distance": "",
+        "track": "",
+        "finish_time": "",
+        "menu_left": "TrackMania 新纪录诞生了！ 确定 FINISH FINISH"
+      },
+      {
+        "clock": "",
+        "distance": "",
+        "track": "",
+        "finish_time": "",
+        "menu_left": "TrackMania 新纪录诞生了！ 确定 FINISH FINISH"
+      },
+      {
+        "clock": "",
+        "distance": "",
+        "track": "",
+        "finish_time": "",
+        "menu_left": "TrackMania 新纪录诞生了！ 确定 FINISH FINISH"
+      },
+      {
+        "clock": "",
+        "distance": "",
+        "track": "",
+        "finish_time": "",
+        "menu_left": "TrackMania 新纪录诞生了！ 确定 FINISH FINISH"
+      },
+      {
+        "clock": "",
+        "distance": "",
+        "track": "",
+        "finish_time": "",
+        "menu_left": "TrackMania 新纪录诞生了！ 确定 FINISH FINISH"
+      },
+      {
+        "clock": "",
+        "distance": "",
+        "track": "",
+        "finish_time": "",
+        "menu_left": "TrackMania 新纪录诞生了！ 确定 FINISH FINISH"
+      },
+      {
+        "clock": "",
+        "distance": "",
+        "track": "",
+        "finish_time": "",
+        "menu_left": "TrackMania 新纪录诞生了！ 确定 FINISH FINISH"
+      },
+      {
+        "clock": "",
+        "distance": "",
+        "track": "",
+        "finish_time": "",
+        "menu_left": "TrackMania 新纪录诞生了！ 确定 FINISH FINISH"
+      },
+      {
+        "clock": "",
+        "distance": "",
+        "track": "",
+        "finish_time": "11",
+        "menu_left": ""
+      },
+      {
+        "clock": "",
+        "distance": "",
+        "track": "",
+        "finish_time": "",
+        "menu_left": ""
+      },
+      {
+        "clock": "",
+        "distance": "",
+        "track": "",
+        "finish_time": "",
+        "menu_left": ""
+      },
+      {
+        "clock": "",
+        "distance": "",
+        "track": "",
+        "finish_time": "",
+        "menu_left": ""
+      },
+      {
+        "clock": "",
+        "distance": "",
+        "track": "",
+        "finish_time": "",
+        "menu_left": ""
+      },
+      {
+        "clock": "",
+        "distance": "",
+        "track": "",
+        "finish_time": "",
+        "menu_left": "1"
+      },
+      {
+        "clock": "",
+        "distance": "",
+        "track": "",
+        "finish_time": "",
+        "menu_left": "Tra"
+      },
+      {
+        "clock": "",
+        "distance": "",
+        "track": "",
+        "finish_time": "",
+        "menu_left": "FMTM"
+      },
+      {
+        "clock": "",
+        "distance": "",
+        "track": "",
+        "finish_time": "",
+        "menu_left": "TATN 一"
+      },
+      {
+        "clock": "",
+        "distance": "",
+        "track": "",
+        "finish_time": "",
+        "menu_left": "E"
+      },
+      {
+        "clock": "",
+        "distance": "",
+        "track": "",
+        "finish_time": "",
+        "menu_left": "TrackMania MATATO 1"
+      },
+      {
+        "clock": "",
+        "distance": "",
+        "track": "",
+        "finish_time": "",
+        "menu_left": "TrackMania 1 Subaaaaan TRTETOTS 1"
+      },
+      {
+        "clock": "",
+        "distance": "",
+        "track": "",
+        "finish_time": "",
+        "menu_left": "TrackMania 1 Snhan amn T"
+      }
+    ],
+    "first_terminal_frame": 323,
+    "score": 0.9071390230810521
+  },
+  "pause": {
+    "texts": [
+      {
+        "clock": "0:04. 18",
+        "distance": "0m",
+        "track": "A03-Race Nada",
+        "finish_time": "22381"
+      },
+      {
+        "clock": "0:05.20",
+        "distance": "0m",
+        "track": "A03-Race Nada",
+        "finish_time": "22381"
+      },
+      {
+        "clock": "0:06.27",
+        "distance": "0m",
+        "track": "A03-Race Nada",
+        "finish_time": "22381"
+      },
+      {
+        "clock": "0:07.26",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": "22381"
+      },
+      {
+        "clock": "0:08. 14",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": "22381"
+      },
+      {
+        "clock": "0:09.22",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": "22381"
+      },
+      {
+        "clock": ":10.23 0:",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": "22381"
+      },
+      {
+        "clock": "0:11.21",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": "22381",
+        "finish_clock": "Mania Un i"
+      },
+      {
+        "clock": "0:12.21",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": "22381",
+        "finish_clock": "Mania Un i"
+      },
+      {
+        "clock": "0:13.1 19",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": "22381"
+      },
+      {
+        "clock": "0:14.1 15",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": "22381"
+      },
+      {
+        "clock": "0:15.24",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": "22381",
+        "finish_clock": "Mania Un i"
+      },
+      {
+        "clock": "0:15.34",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": "22381",
+        "finish_clock": "Mania Un i"
+      },
+      {
+        "clock": "0:15.35",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": "22381",
+        "finish_clock": "Mania Un i"
+      },
+      {
+        "clock": "0:15.35",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": "22381",
+        "finish_clock": "Mania Un i"
+      },
+      {
+        "clock": "0:15.35",
+        "distance": "0m",
+        "track": "A03-Race Nad-",
+        "finish_time": "22381",
+        "finish_clock": "Mania Un i"
+      }
+    ],
+    "first_terminal_frame": null,
+    "score": 0.0
+  }
+}

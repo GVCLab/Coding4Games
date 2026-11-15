@@ -1,0 +1,157 @@
+# Forza Horizon 5 route-distance task. The user confirmed the updated menu path
+# starts at 1500 M on 2026-09-13, supported by scorer-session startup readouts.
+# Historical 726 M evidence describes the previous destination.
+# PaddleOCR can merge the map-pin icon into metre text (726M -> 1726M).
+# Unit-aware parsing preserves 1000 M at the KM/M boundary.
+# Frames are 2560x1536 dxcam captures while OCR runs at 1280x768.
+
+title: "Forza Horizon 5 (Windows real game) — route distance"
+engine: windows
+driver_game: forza_horizon_5
+
+gameplay: |
+  Forza Horizon 5: an open-world arcade racing game set in Mexico. The player
+  drives a car around a persistent open world (the "Horizon Festival") and can
+  either free-roam or enter events — road races, dirt and cross-country races,
+  street scenes, and timed challenges such as speed traps, speed zones and
+  danger signs. There is no fail state while free-roaming: a crash costs speed
+  and time, and the car is placed back on the road.
+
+  <!-- C4G_WINDOWS_INPUT:gamepad:begin -->
+  The right trigger is the throttle and the left
+  trigger is the brake; the left stick steers. These are parameterized analog
+  states: for example, hold `RT[0.7]` or `LS[-0.2,0.8]` for the requested tic
+  count. Menus use D-pad tokens to move the selection, `A` to confirm, and `B`
+  to cancel; no semantic or fixed-direction actions are added to the YAML.
+
+  Controller guide (game-default controller preset; context-sensitive):
+  Game-default preset: Forza Horizon 5's standard Xbox controller profile; no
+  custom remapping is assumed, and no custom controller profile is selected.
+  If the profile changes, this guide is no longer valid and the benchmark
+  configuration must be fixed.
+
+  | Input token | Gameplay meaning | Menu / contextual meaning |
+  |-------------|------------------|---------------------------|
+  | `neutral` | Release steering, throttle, and brake; the car coasts according to physics. | Wait without changing selection. |
+  | `LS[x,y]` | Steer with the x axis; use sustained partial values for smooth corrections. | Navigate menu focus. |
+  | `RS[x,y]` | Look around the car; down looks behind. | Move camera or preview where supported. |
+  | `LT[v]` | Analog brake; at very low speed it also selects reverse. | Acts as a screen-specific tab/zoom control only when shown. |
+  | `RT[v]` | Analog throttle; partial values provide partial acceleration. | Acts as a screen-specific tab/zoom control only when shown. |
+  | `a` | Xbox A applies the handbrake on the configured standard layout. | Confirm the focused choice. |
+  | `b` | Shift up when manual shifting is enabled; with automatic shifting it has no required driving role. | Cancel or go back. |
+  | `x` | Shift down when manual shifting is enabled; with automatic shifting it has no required driving role. | Use only when an X-labelled choice is visible. |
+  | `y` | Rewind recent driving when rewind is available. | Use only when a Y-labelled choice is visible. |
+  | `lb` | Clutch only when manual-with-clutch is enabled; otherwise no required driving role. | Previous tab where the UI shows LB. |
+  | `rb` | Switch camera view. | Next tab where the UI shows RB. |
+  | `ls` | Avoid during route driving; the task does not depend on a left-stick-click action. | Use only when the live controller profile or an LS glyph assigns an action. |
+  | `rs` | Sound the horn on the standard layout. | Use another contextual action only when an RS glyph identifies it. |
+  | `dpad_up` | Enter Photo Mode on the standard layout; avoid during distance driving. | Move focus up. |
+  | `dpad_down` | Activate ANNA or the configured telemetry alternative. | Move focus down. |
+  | `dpad_left` | Activate Forza LINK/quick chat. | Move focus left. |
+  | `dpad_right` | Cycle radio stations. | Move focus right. |
+  | `start` | Pause the game. | Open or close the pause menu. |
+  | `back` | Open the map on the standard automatic-shifting layout; some manual layouts unmap it. | Return only when the UI shows View/Back. |
+  | `guide` | Opens the platform guide rather than a game action; avoid it. | Avoid it because it can cover the captured game window. |
+
+  <!-- C4G_WINDOWS_INPUT:gamepad:end -->
+  <!-- C4G_WINDOWS_INPUT:gamepad-kbm:begin -->
+  Keyboard/mouse guide (calibrated benchmark preset; context-sensitive):
+  This benchmark uses the game-provided WASD-driving preset with no custom
+  remapping. Do not inspect or change bindings during a benchmark episode.
+  The arrow keys control the camera in this preset and are not driving inputs.
+
+  | Input token | Gameplay meaning | Context / boundary |
+  |-------------|------------------|--------------------|
+  | `KEY[W]`, `KEY[S]` | Throttle and brake/reverse. | Use `W` for forward route progress and `S` for braking or reversing. |
+  | `KEY[A]`, `KEY[D]` | Steer left and right. | Combine with `W` for sustained driving. |
+  | `KEY[UP]`, `KEY[DOWN]` | Look forward and backward. | Camera controls only; never use them as throttle or brake. |
+  | `KEY[LEFT]`, `KEY[RIGHT]` | Look left and right. | Camera controls only; never use them as steering. |
+  | `KEY[SPACE]` | Handbrake. | Distinct from ordinary braking. |
+  | `KEY[E]`, `KEY[Q]` | Shift up/down. | Relevant when manual shifting is enabled. |
+  | `KEY[SHIFT]` | Clutch. | Relevant when manual-with-clutch is enabled. |
+  | `KEY[R]` | Rewind when available. | Follow the current on-screen confirmation; do not assume one press completes it. |
+  | `KEY[TAB]` | Switch camera. | Verify the resulting view before reusing visual targets. |
+  | `KEY[M]` | Open map. | Do not change the task destination. |
+  | `KEY[ESC]` | Open the pause menu while driving. | Back/cancel from menus or the map; use alone and observe the resulting screen. |
+  | `KEY[ENTER]` | Activate the current contextual prompt. | Check the displayed prompt first. |
+  | `KEY[H]` | Sound the horn. | Not required for route progress. |
+  | `NEUTRAL` | Release inputs; the car can coast while time advances. | Release is not a brake. |
+
+  Confirm control effectiveness from actual driving evidence before saving or
+  evaluating a program: a short `KEY[W]` pulse must increase speed, move the
+  vehicle, or change the route distance. A menu or HUD transition alone is not
+  evidence of motion. If speed and position remain unchanged, diagnose focus,
+  menu state, or input delivery; do not switch to an arrow-driving assumption.
+  Combine `W` with `A` or `D` when steering is needed.
+  Keyboard holds are digital inputs, not selectable analog throttle values.
+  Only keys exposed by the shared protocol are available in stepped mode;
+  an in-game binding does not add a new tool action.
+  <!-- C4G_WINDOWS_INPUT:gamepad-kbm:end -->
+
+  Driving requires continuous control while game time advances. In stepped
+  mode the host freezes the world between actions.
+
+objective: |
+  Drive toward the active destination indicated by the route and waypoint HUD.
+  The starting HUD distance is 1.5 KM, scored as a 1500-metre baseline.
+  Score is 1500 minus the latest readable HUD distance converted to metres.
+  KM readouts retain their displayed precision without interpolation; M
+  readouts, including 1000 M at the unit boundary, are read directly.
+  Progress adds points and driving farther away removes points. Reaching the destination awards
+  the exact maximum score of 1500. Higher is better; 0 is the start.
+
+episode_contract: |
+  Each episode cold-starts Forza and replays the recorded menu path to the
+  parked start displaying 1.5 KM. A visible distance of 5 metres or less
+  immediately counts as arrival. Arrival also counts when the last trustworthy
+  distance was at most 50 metres and the destination HUD then remains missing
+  for two consecutive scorer observations. A temporarily hidden distance HUD
+  outside that armed near-target state keeps the last trustworthy score and
+  never creates reward. The host ends gameplay on this registered arrival
+  condition. Stalls and unchanged screens are not terminal. An episode
+  can also end by explicit stop, program exit, a configured resource limit,
+  operator interruption, or infrastructure failure.
+
+runtime:
+  scenario: forza_horizon_5
+  tics_per_second: 10
+  # Episodes share the run budget unless the caller requests a shorter trial.
+  max_tics: 1000
+  max_burst: null
+  max_calls_per_ep: null
+
+startup:
+  # Resolve "golden" through the driver save_state block and restore it before
+  # every cold start.
+  golden_checkpoint: golden
+  start_check:
+    pattern: '^\d+(?:[.,]\d+)?\s*(?:KM|M)$'
+    rect: [160, 1020, 220, 130]
+    regions: {distance: 1500}
+  menu_skip_replay: open_loop
+
+lifecycle:
+  terminal_detection: true
+
+scorer:
+  calibrated_client_size: [2560, 1536]
+  distance:
+    rect: [160, 1020, 220, 130]
+    # Exclude the map pin before OCR, retaining native frame coordinates.
+    # Calibrated on 20260913_231331 frames, including 000007/000008 (11.5KM
+    # misreads without masking). The text begins to the right of the pin.
+    text_rect: [236, 1058, 114, 58]
+    baseline_m: 1500
+    max_m: 50000
+    # Match the entire number; metre icon correction is unit-aware.
+    pattern: '(?<![\d.,])(?P<value>\d+(?:[.,]\d+)?)\s*(?P<unit>KM|M)\b'
+  # The game removes the waypoint inside its arrival radius instead of showing
+  # a stable 0 M.  The supplied fe6a89ed recording shows 44, 42, ~39, and 37 M
+  # on consecutive 10 Hz frames, followed by persistent waypoint removal.
+  # Confirmation protects against one-frame OCR misses and ordinary far-away
+  # HUD occlusion.
+  arrival:
+    threshold_m: 50
+    success_threshold_m: 5
+    confirm_missing_observations: 2
+  ocr: {input_size: [1280, 768], min_conf: 0.4, device: "gpu:0", lang: "ch"}

@@ -1,0 +1,16 @@
+[
+  {
+    "fixture": "loading.png",
+    "source": "out\\game_acceptance\\sweep_20261026\\palworld_visual_navigation\\03_pad0.png",
+    "source_sha256": "4d56ca78dc42d9d4f5fd88168f8ccb566df85ca7125e8e4193efa1082093bb63",
+    "transform": "Area downsample from native 2560x1440 to 640x360; whole-frame brightness guard only",
+    "native_luma": 5.7855414496527775
+  },
+  {
+    "fixture": "rendered.png",
+    "source": "out\\game_acceptance\\sweep_20261026\\palworld_visual_navigation\\04_pad0.png",
+    "source_sha256": "c83d48e991b47fb9e9a1061a5ae8ec22cc6ed00074623092a052bf49577441d1",
+    "transform": "Area downsample from native 2560x1440 to 640x360; whole-frame brightness guard only",
+    "native_luma": 102.74723036024305
+  }
+]

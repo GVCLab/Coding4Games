@@ -1,0 +1,214 @@
+# Source and migration limits: docs/GAME_INTEGRATION_20261020.zh.md
+name: BattleBlock Theater
+process: BattleBlockTheater.exe
+platform: windows-kbm
+screenshot_backend: dxcam
+ime_context_mode: disabled
+scorer:
+  kind: image
+  implementation: bbt_progress
+description: 'BattleBlock Theater: a 2D side-scrolling platformer. You run and jump
+
+  across platforms to reach each level''s exit, avoiding hazards (spikes,
+
+  water, saws) and collecting green gems and gold along the way. Movement
+
+  is left/right; jump (hold longer to jump higher), headbutt-attack, and
+
+  grab / push objects. A level''s exit only opens once enough gems have been
+
+  collected. Menus are navigated with the direction keys and confirmed or
+
+  cancelled with the confirm / cancel actions.
+
+  '
+auto_launch:
+  launch_path: G:/SteamLibrary/steamapps/common/BattleBlock Theater/BattleBlockTheater.exe
+  window_wait_seconds: 180.0
+  # Operator selected a 30-second preparation wait on 2026-10-25.
+  settle_seconds: 30.0
+save_state:
+  # This host's checkpoint was generated through the game's native recovery.
+  # Saves are account-bound; the preserved source golden belongs to another
+  # account and is rejected by this installation. See the diagnosis document.
+  # Steam currently reports ActiveUser=0 despite its existing logged-on session.
+  # Keep this game's Steam Cloud disabled for checkpoint restoration.
+  restore_to: 'D:/App/STEAM/userdata/1509794311/238460'
+  golden: snapshots/battleblock_current_account_golden.zip
+window:
+  size:
+  - 1280
+  - 720
+  toggle: ALT_ENTER
+actions:
+  neutral:
+    description: Raw Xbox neutral state.
+  a:
+    description: Raw Xbox A face button.
+    buttons:
+    - A
+  b:
+    description: Raw Xbox B face button.
+    buttons:
+    - B
+  x:
+    description: Raw Xbox X face button.
+    buttons:
+    - X
+  y:
+    description: Raw Xbox Y face button.
+    buttons:
+    - Y
+  lb:
+    description: Raw Xbox left shoulder button.
+    buttons:
+    - LB
+  rb:
+    description: Raw Xbox right shoulder button.
+    buttons:
+    - RB
+  ls:
+    description: Raw Xbox left-stick click.
+    buttons:
+    - LS
+  rs:
+    description: Raw Xbox right-stick click.
+    buttons:
+    - RS
+  dpad_up:
+    description: Raw Xbox D-pad up.
+    buttons:
+    - DPAD_UP
+  dpad_down:
+    description: Raw Xbox D-pad down.
+    buttons:
+    - DPAD_DOWN
+  dpad_left:
+    description: Raw Xbox D-pad left.
+    buttons:
+    - DPAD_LEFT
+  dpad_right:
+    description: Raw Xbox D-pad right.
+    buttons:
+    - DPAD_RIGHT
+  start:
+    description: Raw Xbox Start button.
+    buttons:
+    - START
+  back:
+    description: Raw Xbox Back button.
+    buttons:
+    - BACK
+  guide:
+    description: Raw Xbox Guide button.
+    buttons:
+    - GUIDE
+# Recorded start and evidence: docs/games/battleblock/README.md
+menu_skip:
+- description: 'recorded: ENTER'
+  buttons:
+  - KEY[ENTER]
+  duration_seconds: 0.1
+- description: 'recorded: wait'
+  duration_seconds: 0.7
+- description: 'recorded: ENTER'
+  buttons:
+  - KEY[ENTER]
+  duration_seconds: 0.1
+- description: 'recorded: wait'
+  buttons: []
+  duration_seconds: 1.0640675999457017
+- description: 'recorded: ENTER'
+  buttons:
+  - KEY[ENTER]
+  duration_seconds: 0.1
+- description: 'recorded: wait'
+  buttons: []
+  duration_seconds: 0.6401925999671221
+- description: 'recorded: ENTER'
+  buttons:
+  - KEY[ENTER]
+  duration_seconds: 0.1
+- description: 'recorded: wait'
+  buttons: []
+  duration_seconds: 1.0242647000122815
+- description: 'recorded: ENTER'
+  buttons:
+  - KEY[ENTER]
+  duration_seconds: 0.1
+- description: 'recorded: wait'
+  buttons: []
+  duration_seconds: 0.2134574999799952
+- description: 'recorded: ENTER'
+  buttons:
+  - KEY[ENTER]
+  duration_seconds: 0.1
+- description: 'recorded: wait'
+  buttons: []
+  duration_seconds: 0.2042737000156194
+- description: 'recorded: ENTER'
+  buttons:
+  - KEY[ENTER]
+  duration_seconds: 0.1
+- description: 'recorded: wait'
+  buttons: []
+  duration_seconds: 0.360162099939771
+- description: 'recorded: ENTER'
+  buttons:
+  - KEY[ENTER]
+  duration_seconds: 0.10378740006126463
+- description: 'recorded: wait'
+  buttons: []
+  duration_seconds: 10.424130199942738
+- description: 'recorded: RIGHT'
+  buttons:
+  - KEY[RIGHT]
+  duration_seconds: 2.820729000028223
+- description: 'recorded: wait'
+  buttons: []
+  duration_seconds: 0.5788965999381617
+- description: 'recorded: RIGHT'
+  buttons:
+  - KEY[RIGHT]
+  duration_seconds: 3.2879289000993595
+- description: 'recorded: wait'
+  buttons: []
+  duration_seconds: 0.5643563999328762
+- description: 'recorded: RIGHT'
+  buttons:
+  - KEY[RIGHT]
+  duration_seconds: 0.07593539997469634
+- description: 'recorded: wait'
+  buttons: []
+  duration_seconds: 0.41661450010724366
+- description: 'recorded: CTRL'
+  buttons:
+  - KEY[CTRL]
+  duration_seconds: 0.16332029993645847
+- description: 'recorded: wait'
+  buttons: []
+  duration_seconds: 6.903970399987884
+- description: 'recorded: RIGHT'
+  buttons:
+  - KEY[RIGHT]
+  duration_seconds: 0.9136748000746593
+- description: 'recorded: wait'
+  buttons: []
+  duration_seconds: 0.4062386999139562
+- description: 'calibrated: RIGHT at the 1-1 doorway'
+  buttons:
+  - KEY[RIGHT]
+  duration_seconds: 0.10000029997900128
+- description: 'recorded: wait'
+  buttons: []
+  duration_seconds: 0.4062386999139562
+- description: 'recorded: CTRL'
+  buttons:
+  - KEY[CTRL]
+  duration_seconds: 0.11978810001164675
+- description: 'recorded: wait'
+  buttons: []
+  duration_seconds: 8.074404899962246
+# Match the original x86 clock-control path and retain the shared OS freeze.
+# Current host resources are verified as PE32; startup must fail if attachment fails.
+use_speedhack: true

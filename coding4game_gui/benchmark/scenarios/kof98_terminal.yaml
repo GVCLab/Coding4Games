@@ -1,0 +1,134 @@
+# Fixed CPU VS task. Native registration uses image scoring and first-round KO detection.
+# Historical human screenshots keep their original calibration in tests/fixtures/kof98_terminal/.
+# Current-host HUD geometry: full_01/02_after_menu_skip.png, Steam build 8170224.
+
+title: "King of Fighters '98 UMFE (Windows real game) — CPU VS, terminal-detected"
+engine: windows
+driver_game: kof98
+
+gameplay: |
+  A 2D versus fighting game. You control the LEFT-side (1P) fighter; the
+  RIGHT-side fighter is CPU-controlled. Your health bar is top-LEFT, the
+  opponent's is top-RIGHT; a round timer is in the centre. Controls use the
+  raw protocol: `LS[x,y]` moves, and a direction can be combined with an
+  attack in one action (e.g. `LS[1,0],a`).
+  In stepped mode the game is frozen between actions. An episode ends when the
+  round is decided or when the budget runs out.
+  This is Ultimate Match Final Edition. Arcade move-list A/B/C/D labels are
+  attack names, not PC keyboard letters or Xbox button names. Translate a
+  character's move list through the current control layout. Toward and away
+  are relative to the opponent and change when fighters switch sides.
+
+  Controller guide (game-default controller preset; context-sensitive):
+  Game-default preset: KOF '98 UMFE's default Xbox face-button layout; no custom
+  remapping is assumed.
+
+  | Input token | Gameplay meaning | Menu / contextual meaning |
+  |-------------|------------------|---------------------------|
+  | `neutral` | Release direction and attacks; stand without blocking. | Wait without changing selection. |
+  | `LS[x,y]` | Move left/right, crouch with down, jump with up, and block by holding away from the opponent. | Navigate menu focus. |
+  | `RS[x,y]` | Avoid during the scored match; movement and blocking use the left stick. | Use only if an on-screen prompt assigns the right stick. |
+  | `LT[v]` | Do not rely on a trigger macro during the scored match. | Use only when a visible LT prompt assigns an action. |
+  | `RT[v]` | Do not rely on a trigger macro during the scored match. | Use only when a visible RT prompt assigns an action. |
+  | `a` | Xbox A is light kick on the default layout. | Confirm the focused menu choice. |
+  | `b` | Xbox B is heavy kick on the default layout. | Cancel or go back where supported. |
+  | `x` | Xbox X is light punch on the default layout. | Use only when an X-labelled choice is shown. |
+  | `y` | Xbox Y is heavy punch on the default layout. | Use only when a Y-labelled choice is shown. |
+  | `lb` | Do not rely on a specific multi-button macro during the scored match. | Previous tab only when an LB glyph is shown. |
+  | `rb` | Do not rely on a specific multi-button macro during the scored match. | Next tab only when an RB glyph is shown. |
+  | `ls` | Avoid during the scored match; the task does not require a left-stick-click action. | Use only if an LS glyph appears. |
+  | `rs` | Avoid during the scored match; the task does not require a right-stick-click action. | Use only if an RS glyph appears. |
+  | `dpad_up` | Jump; diagonals jump toward or away from the opponent. | Move focus up. |
+  | `dpad_down` | Crouch; down-away crouch-blocks. | Move focus down. |
+  | `dpad_left` | Move left; whether this approaches or blocks depends on which side the fighter occupies. | Move focus left. |
+  | `dpad_right` | Move right; whether this approaches or blocks depends on which side the fighter occupies. | Move focus right. |
+  | `start` | Pause the match; avoid during scored combat. | Confirm/start on screens that explicitly request Start. |
+  | `back` | Avoid during the scored match; the task does not require the View/Back action. | Use only when a View/Back glyph is shown. |
+  | `guide` | Opens the platform guide rather than a game action; avoid it. | Avoid it because it can cover the captured game window. |
+
+objective: |
+  Score is in [0, 1] and is read from one frame: the last frame of the episode
+  on which both health bars are readable.
+
+  own and opp are that frame's two health bars, each as a fraction of a full
+  bar.
+
+  A round is decided when a health bar reaches zero, or when the round timer
+  reaches zero. On a decided round:
+
+      score = (1 + own - opp) / 2
+
+  If the episode ends with the round undecided:
+
+      score = (1 - opp) * elapsed / 2
+
+  elapsed is the fraction of the round timer that has run at that frame.
+
+episode_contract: |
+  Every episode cold-starts the game and replays the recorded menu path into
+  the fixed CPU-versus match before giving control to the policy. The episode
+  ends when the round is decided, on unexpected game exit, at the episode tic
+  limit, or on global tic-budget exhaustion. The game
+  closes after every episode and the next episode repeats the complete
+  cold-start path.
+
+# HUD positions are measured on full_01/02_after_menu_skip.png at 854x480.
+# The original human fixtures retain their original calibration separately.
+# Scores settle once from the latest readable frame, using the objective above.
+runtime:
+  scenario: kof98_terminal
+  tics_per_second: 10
+  max_tics: 10000
+  # Keep the first-round ending observable between frozen action frames.
+  max_action_tics: 5
+  max_burst: 5
+  max_calls_per_ep: null
+lifecycle:
+  terminal_detection: true
+scorer:
+  kind: image
+  implementation: kof98_terminal
+  settlement: latest_valid_frame
+  calibrated_client_size: [854, 480]
+  ko:
+    epsilon: 0.0145
+    live_min: 0.5
+    full_bar: 1.0
+    drain_seconds: 1.2
+    drain_min_frames: 2
+    drain_live_max: 0.2174
+  clock:
+    band_frac: [0.033541667, 0.102291667]
+    tens_frac: [0.477868852, 0.490749415]
+    ones_frac: [0.500117096, 0.512997658]
+    reject: 0.15
+    min_ink: 6.0
+    round_seconds: 60
+  health:
+    fill_color: green
+    p1_frac: [0.121896956, 0.445081967, 0.079375, 0.102291667]
+    p2_frac: [0.544613583, 0.868969555, 0.079375, 0.102291667]
+    timer_frac: [0.468501171, 0.5235363, 0.025208333, 0.110625]
+    timer_min_yellow: 30
+    round_reset_jump: 0.2
+    scale: 1.0
+  combat:
+    above_bright_min: 116.0
+    above_strip_frac: 0.035
+  terminal:
+    blue_min: 0.2
+    white_bot_min: 0.25
+    bottom_frac: 0.78
+    consecutive_hits: 2
+startup:
+  # Native match progress is process-local; no saved checkpoint is restored.
+  no_save_cleanup: process_kill
+  menu_skip_replay: open_loop
+  # The fixed 11-second tail reached GO once and 87% health on the next start.
+  # Replace only that tail with the shared frozen, one-tic readiness pulses.
+  menu_skip_preserve_tail: false
+  start_check:
+    regions:
+      own_health_percent: 100
+      opponent_health_percent: 100
+      round_clock: 59

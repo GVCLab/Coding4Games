@@ -1,0 +1,4 @@
+interface:
+  display_name: "Add New Windows Game"
+  short_description: "Add and validate Windows game benchmarks"
+  default_prompt: "Use $add-new-game to add a Windows game benchmark while asking me only for irreducibly manual inputs."

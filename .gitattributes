@@ -1,0 +1,3 @@
+# The native IME build manifest records byte hashes of these sources.
+coding4game_gui/benchmark/windows/drivers/windows_xinput/native_ime/*.c text eol=lf
+coding4game_gui/benchmark/windows/drivers/windows_xinput/native_ime/*.cs text eol=lf

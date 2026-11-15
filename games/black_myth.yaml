@@ -1,0 +1,245 @@
+# Black Myth: Wukong — Souls-like 3D action RPG.
+#
+# Default Xbox controller layout, cross-checked against:
+#   - https://blackmythwukong.wiki.fextralife.com/Controls
+#   - https://primagames.com/tips/black-myth-wukong-complete-controls-for-pc-controller
+#
+# Note: triggers (LT/RT) are NOT plain buttons in this codebase — they must be
+# driven via the `left_trigger` / `right_trigger` float fields, not by listing
+# 'LT' / 'RT' inside `buttons`. Modifier combos like RT + face button are
+# expressed by setting `right_trigger: 1.0` AND `buttons: [<face>]` together.
+
+name: BlackMythWukong
+process: b1-Win64-Shipping.exe
+
+scorer:
+  kind: image
+  implementation: black_myth
+
+# Launch the Shipping executable directly.  The top-level b1.exe bootstrap
+# asks Steam to start the game with a custom "b1" parameter, which opens an
+# interactive confirmation dialog and breaks unattended cold starts.
+auto_launch:
+  launch_path: "E:/SteamLibrary/steamapps/common/BlackMythWukong/b1/Binaries/Win64/b1-Win64-Shipping.exe"
+  window_wait_seconds: 180.0
+  settle_seconds: 60.0
+
+# MANUAL GATE: record the exact title-screen -> fixed boss encounter path
+# after creating the golden save. The Continue loading wait below was
+# calibrated separately; all recorded input holds remain unchanged.
+#   python scripts/record_pad_to_yaml.py --game black_myth --section menu_skip
+menu_skip:
+  - description: 'recorded: pad1 [A] held 0.09s'
+    buttons:
+      - A
+    pad: 1
+    duration_seconds: 0.09
+  - description: wait 3.88s
+    pad: 1
+    duration_seconds: 3.88
+  - description: 'recorded: pad1 [A] held 0.05s'
+    buttons:
+      - A
+    pad: 1
+    duration_seconds: 0.05
+  # A native cold start was still loading after 22.41s; the RT prompt was
+  # visible by 52.5s. Leave loading margin before the recorded RT press.
+  - description: wait 60.00s (calibrated Continue loading wait)
+    pad: 1
+    duration_seconds: 60.0
+  - description: 'recorded: pad1 RT held 0.05s'
+    right_trigger: 1.0
+    pad: 1
+    duration_seconds: 0.05
+  - description: wait 4.22s
+    pad: 1
+    duration_seconds: 4.22
+  - description: 'recorded: pad1 [DPAD_DOWN] held 0.12s'
+    buttons:
+      - DPAD_DOWN
+    pad: 1
+    duration_seconds: 0.12
+  - description: wait 0.17s
+    pad: 1
+    duration_seconds: 0.17
+  - description: 'recorded: pad1 [DPAD_DOWN] held 0.11s'
+    buttons:
+      - DPAD_DOWN
+    pad: 1
+    duration_seconds: 0.11
+  - description: wait 0.16s
+    pad: 1
+    duration_seconds: 0.16
+  - description: 'recorded: pad1 [DPAD_DOWN] held 0.11s'
+    buttons:
+      - DPAD_DOWN
+    pad: 1
+    duration_seconds: 0.11
+  - description: wait 0.14s
+    pad: 1
+    duration_seconds: 0.14
+  - description: 'recorded: pad1 [DPAD_DOWN] held 0.11s'
+    buttons:
+      - DPAD_DOWN
+    pad: 1
+    duration_seconds: 0.11
+  - description: wait 0.16s
+    pad: 1
+    duration_seconds: 0.16
+  - description: 'recorded: pad1 [DPAD_DOWN] held 0.12s'
+    buttons:
+      - DPAD_DOWN
+    pad: 1
+    duration_seconds: 0.12
+  - description: wait 0.16s
+    pad: 1
+    duration_seconds: 0.16
+  - description: 'recorded: pad1 [DPAD_DOWN] held 0.12s'
+    buttons:
+      - DPAD_DOWN
+    pad: 1
+    duration_seconds: 0.12
+  - description: wait 0.19s
+    pad: 1
+    duration_seconds: 0.19
+  - description: 'recorded: pad1 [DPAD_DOWN] held 0.09s'
+    buttons:
+      - DPAD_DOWN
+    pad: 1
+    duration_seconds: 0.09
+  - description: wait 1.50s
+    pad: 1
+    duration_seconds: 1.5
+  - description: 'recorded: pad1 [A] held 0.09s'
+    buttons:
+      - A
+    pad: 1
+    duration_seconds: 0.09
+  - description: wait 0.28s
+    pad: 1
+    duration_seconds: 0.28
+  - description: 'recorded: pad1 [A] held 0.09s'
+    buttons:
+      - A
+    pad: 1
+    duration_seconds: 0.09
+  - description: wait 1.98s
+    pad: 1
+    duration_seconds: 1.98
+  - description: 'recorded: pad1 [DPAD_DOWN] held 0.12s'
+    buttons:
+      - DPAD_DOWN
+    pad: 1
+    duration_seconds: 0.12
+  - description: wait 0.12s
+    pad: 1
+    duration_seconds: 0.12
+  - description: 'recorded: pad1 [DPAD_DOWN] held 0.11s'
+    buttons:
+      - DPAD_DOWN
+    pad: 1
+    duration_seconds: 0.11
+  - description: wait 0.11s
+    pad: 1
+    duration_seconds: 0.11
+  - description: 'recorded: pad1 [DPAD_DOWN] held 0.11s'
+    buttons:
+      - DPAD_DOWN
+    pad: 1
+    duration_seconds: 0.11
+  - description: wait 0.11s
+    pad: 1
+    duration_seconds: 0.11
+  - description: 'recorded: pad1 [DPAD_DOWN] held 0.09s'
+    buttons:
+      - DPAD_DOWN
+    pad: 1
+    duration_seconds: 0.09
+  - description: wait 0.12s
+    pad: 1
+    duration_seconds: 0.12
+  - description: 'recorded: pad1 [DPAD_DOWN] held 0.09s'
+    buttons:
+      - DPAD_DOWN
+    pad: 1
+    duration_seconds: 0.09
+  - description: wait 0.14s
+    pad: 1
+    duration_seconds: 0.14
+  - description: 'recorded: pad1 [DPAD_DOWN] held 0.09s'
+    buttons:
+      - DPAD_DOWN
+    pad: 1
+    duration_seconds: 0.09
+  - description: wait 0.12s
+    pad: 1
+    duration_seconds: 0.12
+  - description: 'recorded: pad1 [DPAD_DOWN] held 0.11s'
+    buttons:
+      - DPAD_DOWN
+    pad: 1
+    duration_seconds: 0.11
+  - description: wait 0.31s
+    pad: 1
+    duration_seconds: 0.31
+  - description: 'recorded: pad1 [DPAD_DOWN] held 0.11s'
+    buttons:
+      - DPAD_DOWN
+    pad: 1
+    duration_seconds: 0.11
+  - description: wait 1.23s
+    pad: 1
+    duration_seconds: 1.23
+  - description: 'recorded: pad1 [A] held 0.12s'
+    buttons:
+      - A
+    pad: 1
+    duration_seconds: 0.12
+  - description: wait 1.81s
+    pad: 1
+    duration_seconds: 1.81
+  - description: 'recorded: pad1 [Y] held 3.09s'
+    buttons:
+      - Y
+    pad: 1
+    duration_seconds: 3.09
+  - description: wait 20.52s (trailing — last input → SAVE)
+    pad: 1
+    duration_seconds: 20.52
+screenshot_backend: dxcam
+
+description: |
+  Black Myth: Wukong is a third-person action RPG inspired by Chinese
+  mythology and Journey to the West. You control the Destined One in
+  real-time staff combat, combining movement, camera control, lock-on,
+  dodges, light and heavy attacks, spells, and limited gourd healing.
+
+  This configuration starts from a fixed save immediately before a boss
+  encounter. The immediate goal is to defeat the visible boss. Observe its
+  attack animations, dodge or reposition to avoid damage, attack during
+  recovery windows, manage stamina and healing, and use available spells
+  when useful. The episode does not require exploration, equipment
+  management, menu navigation, or chapter progression.
+
+actions:
+  neutral: {description: 'Raw Xbox neutral state.'}
+  a: {description: 'Raw Xbox A face button.', buttons: [A]}
+  b: {description: 'Raw Xbox B face button.', buttons: [B]}
+  x: {description: 'Raw Xbox X face button.', buttons: [X]}
+  y: {description: 'Raw Xbox Y face button.', buttons: [Y]}
+  lb: {description: 'Raw Xbox left shoulder button.', buttons: [LB]}
+  rb: {description: 'Raw Xbox right shoulder button.', buttons: [RB]}
+  ls: {description: 'Raw Xbox left-stick click.', buttons: [LS]}
+  rs: {description: 'Raw Xbox right-stick click.', buttons: [RS]}
+  dpad_up: {description: 'Raw Xbox D-pad up.', buttons: [DPAD_UP]}
+  dpad_down: {description: 'Raw Xbox D-pad down.', buttons: [DPAD_DOWN]}
+  dpad_left: {description: 'Raw Xbox D-pad left.', buttons: [DPAD_LEFT]}
+  dpad_right: {description: 'Raw Xbox D-pad right.', buttons: [DPAD_RIGHT]}
+  start: {description: 'Raw Xbox Start button.', buttons: [START]}
+  back: {description: 'Raw Xbox Back button.', buttons: [BACK]}
+  guide: {description: 'Raw Xbox Guide button.', buttons: [GUIDE]}
+save_state:
+  # Steam account id differs between machines. The save loader resolves the
+  # single wildcard to the first account directory under SaveGames.
+  restore_to: 'E:/SteamLibrary/steamapps/common/BlackMythWukong/b1/Saved/SaveGames/*'
+  process_cmdline_contains: 'b1-Win64-Shipping'

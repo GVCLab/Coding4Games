@@ -1,0 +1,59 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+.venv/
+venv/
+
+# Run artifacts
+out/
+debug/
+codex-tmp/
+checkpoint/
+_vizdoom.ini
+_vizdoom/
+.pytest_cache/
+snapshots/save-import-backups/
+# Ignore untracked checkpoints and archive backups.
+snapshots/*.zip
+snapshots/*.rar
+# Build project-owned native helpers locally from their verified source recipe.
+coding4game_gui/benchmark/windows/drivers/windows_xinput/native_ime/*.exe
+coding4game_gui/benchmark/windows/drivers/windows_xinput/native_ime/*.dll
+coding4game_gui/benchmark/windows/drivers/windows_xinput/native_ime/*.lib
+coding4game_gui/benchmark/windows/drivers/windows_xinput/native_ime/*.pdb
+*.log
+*.bak
+*.bak.*
+
+# Large generated media (e.g. slide decks with embedded base64 images) — too big for git
+docs/benchmark-framings-slides.html
+
+# Third-party reference repos (kept locally, never committed)
+ref_repo/
+ref/
+
+# Editor
+.vscode/
+.idea/
+.DS_Store
+
+# Local Claude Code settings and workspace state
+/.claude/
+
+# Host provider configuration
+litellm.config.yaml
+launcher.local.json
+games.local.json
+runtime/
+dist/
+outputs/
+.env
+.env.*
+!.env.example
+auth.json
+credentials.json
+*.pem
+*.key
+bash.exe.stackdump

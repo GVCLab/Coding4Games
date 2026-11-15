@@ -1,0 +1,2 @@
+class WslTransportError(RuntimeError):
+    pass

@@ -1,0 +1,174 @@
+title: 'Kingdom Rush 5: Alliance (Windows real game) — The Heart of the Forest'
+engine: windows
+driver_game: kingdom_rush_alliance_heart_of_the_forest
+gameplay: |
+  Kingdom Rush 5: Alliance is a real-time tower-defense game.
+  This task starts at Stage 3, The Heart of the Forest, with 20 lives, 500 gold and 0/10 waves.
+  Build and upgrade towers, use the available heroes and abilities, and defend
+  the exit against the enemy waves. The visible wave control starts a wave.
+
+  <!-- C4G_WINDOWS_INPUT:gamepad:begin -->
+  Controller guide (game-default controller preset; context-sensitive):
+  Game-default preset: Kingdom Rush 5: Alliance's unmodified default Xbox
+  controller layout; no custom remapping is assumed.  Use a control only when
+  its visible glyph or the contextual meaning below applies.
+
+  | Input token | Gameplay meaning | Menu / contextual meaning |
+  |-------------|------------------|---------------------------|
+  | `neutral` | Release all controls; leave the pointer, panels, and wave state unchanged. | Wait without changing the focused item. |
+  | `LS[x,y]` | Move the on-screen game pointer; use it to focus a visible tower site. | Move the menu pointer/focus when the screen accepts the stick. |
+  | `RS[x,y]` | No fixed task mapping; use only when the game displays an RS prompt. | Use only when a visible RS glyph assigns it. |
+  | `LT[v]` | No fixed task mapping; use only when an on-screen prompt assigns the left trigger. | Use only when a visible LT glyph assigns it. |
+  | `RT[v]` | No fixed task mapping; use only when an on-screen prompt assigns the right trigger. | Use only when a visible RT glyph assigns it. |
+  | `a` | Select the visible pointer target; opens the construction wheel on a focused tower site, and a further selection confirms a tower choice. | Confirm the focused item. |
+  | `b` | Cancel a placement/targeting state or close a contextual panel; it cancels the tower wheel without spending gold. | Cancel or return to the previous menu. |
+  | `x` | Send the next wave early when the wave control is available; the HUD changes from `0/10` to `1/10`. Otherwise use only where an X prompt is visible. | Use the focused X-labelled contextual command when shown. |
+  | `y` | Open wave information when the in-game help prompt is available. | Use the focused Y-labelled contextual command when shown. |
+  | `lb` | No fixed task mapping; use only when an LB prompt is visible. | Previous tab/page where the UI shows LB. |
+  | `rb` | No fixed task mapping; use only when an RB prompt is visible. | Next tab/page where the UI shows RB. |
+  | `ls` | Click the left stick to toggle pointer mode when that contextual control is shown. | Activate the focused item only where the menu displays an LS glyph. |
+  | `rs` | No fixed task mapping; use only when an RS glyph appears. | Use only when an RS glyph appears. |
+  | `dpad_up` | Move a menu/panel selection up; in gameplay use only when a visible prompt assigns it. | Move focus up. |
+  | `dpad_down` | Move a menu/panel selection down; in gameplay use only when a visible prompt assigns it. | Move focus down. |
+  | `dpad_left` | Move a menu/panel selection left; in gameplay use only when a visible prompt assigns it. | Move focus left. |
+  | `dpad_right` | Move a menu/panel selection right; in gameplay use only when a visible prompt assigns it. | Move focus right. |
+  | `start` | Open the pause/options panel. A second `start` press may not close it; use `b` or select Continue to return to battle. | Open the pause/options panel; do not assume it toggles closed. |
+  | `back` | Close the current contextual panel when the game shows a Back prompt. | Return/cancel where the UI shows Back. |
+  | `guide` | Opens the platform guide rather than a game action; avoid it. | Avoid it because it can cover the captured game window. |
+  Hero movement and lower-left skill use are contextual: use a button only when
+  the matching on-screen glyph appears, then follow the visible target or
+  cancel state.  Do not infer a hidden face-button or `A+LS` binding.
+  <!-- C4G_WINDOWS_INPUT:gamepad:end -->
+
+  <!-- C4G_WINDOWS_INPUT:gamepad-kbm:begin -->
+  Keyboard/mouse guide (game-default PC preset; context-sensitive):
+  Game-default preset: Kingdom Rush 5: Alliance's unmodified default PC
+  keyboard/mouse layout; no custom remapping is assumed.  Coordinates below
+  are read directly from the current 1280x768 policy screenshot.  Keep a
+  pointer action as the sole control in its `ACT`.
+
+  | Input token | Gameplay meaning | Menu / contextual meaning |
+  |-------------|------------------|---------------------------|
+  | `NEUTRAL` | Release all keyboard and mouse controls; let combat advance. | Wait without moving or clicking. |
+  | `KEY[<key>]` | Hold a whitelisted physical key only when the visible UI or a known default binding gives it a clear meaning. | Prefer clicking visible controls instead of guessing focus or shortcuts. |
+  | `MOVE[x,y]` | Move to a screenshot pixel and hold the hover for the requested ACT tics; use it to inspect hover-dependent UI without clicking. | Hover a visible control without activating it. |
+  | `CLICK[x,y]` | Left-click a visible target at its screenshot pixel; use one click per ACT and read the next frame before acting again. | Activate the visible control at its screenshot pixel. |
+
+  Hero movement (observed in the installed build): identify the visible hero
+  in the current frame, issue one `CLICK[x,y]` on the hero body to select it,
+  then issue a separate `CLICK[x,y]` on a feasible battlefield position.  This
+  moves the hero without assuming a drag gesture.  Re-evaluate the screenshot
+  after each click; do not use fixed coordinates or invent a hero-specific
+  semantic action.
+
+  Active skills (observed in the installed build): after a wave starts, use a
+  lower-left skill card only when it is visible and available rather than
+  greyed out or cooling down.  Click the card, then if the UI enters a target
+  selection state issue one separate battlefield `CLICK[x,y]`.  `召唤援军`
+  is a battlefield placement skill; `箭矢风暴` is an area-target skill.  If a
+  red `X` cancel control appears, click that visible control to leave the
+  selection state without casting.  The third card's name and targeting logic
+  are not characterized here; do not guess them.  Always use the current
+  card highlight, cooldown, valid-target feedback, and visible effect to
+  decide whether and where to click.
+  <!-- C4G_WINDOWS_INPUT:gamepad-kbm:end -->
+objective: Complete all 10 waves of Stage 3, The Heart of the Forest, and reach the game's formal
+  victory screen.  A formal victory is the success condition and receives 90 + 10 * remaining_lives
+  / 20, so a victory with all 20 lives is 100 and a victory with 10 lives is 95.  A formal defeat is
+  a valid non-victory outcome.  Bounded development rollouts can also receive a diagnostic partial
+  score after a timeout or contained incomplete ending; those endings do not complete a
+  terminal-only final test.  The non-victory score uses the highest trustworthy wave HUD numerator
+  and surviving lives, is capped at 89, and therefore remains below the victory range.  The wave
+  numerator is a progress proxy for a wave entered or released, not proof that the wave was fully
+  cleared.  Infrastructure failure is invalid and is excluded from the valid-gameplay mean.
+episode_contract: |
+  Each episode begins at Stage 3 before wave 1, with 20 lives, 500 gold, and no towers built.
+  The wave control begins the battle. Victory and defeat are task-ending screens.
+  The episode may also stop on game exit, an explicit stop or the applicable resource limits.
+runtime:
+  scenario: kingdom_rush_alliance_heart_of_the_forest
+  tics_per_second: 10
+  max_tics:
+  terminal_only_final_tests: true
+  max_burst: 5
+  max_calls_per_ep:
+startup:
+  golden_checkpoint: golden
+  start_check:
+    pattern: 20\s*500
+    rect:
+    - 0
+    - 0
+    - 300
+    - 75
+    regions:
+      wave: 0
+    poll_tics: 10
+    timeout_seconds: 80
+  menu_skip_replay: closed_loop
+lifecycle:
+  terminal_detection: true
+scorer:
+  kind: ocr
+  implementation: kingdom_rush_alliance
+  calibrated_client_size:
+    - 2560
+    - 1440
+  window_setup:
+    size: [2560, 1440]
+    mode: Windowed
+  ocr:
+    input_size:
+    - 1280
+    - 720
+    min_conf: 0.8
+    device: gpu:0
+    lang: ch
+    text_detection_model_name: PP-OCRv6_small_det
+    text_recognition_model_name: PP-OCRv6_small_rec
+    enable_mkldnn: false
+    cpu_threads: 4
+  phases:
+    victory:
+      any:
+      - 胜利
+    defeat:
+      any:
+      - 失败
+      - 关卡失败
+      - DEFEAT
+      - GAME OVER
+    play:
+      pattern: \d+\s*/\s*10
+  score_phases:
+  - victory
+  terminal_phases:
+  - victory
+  - defeat
+  regions:
+    lives:
+      rect:
+      - 20
+      - 10
+      - 110
+      - 60
+      kind: number
+      recognition_rect: [60, 28, 50, 35]
+      trim_light_text: true
+    wave:
+      pattern: (\d+)\s*/\s*10
+      rect:
+      - 20
+      - 60
+      - 130
+      - 60
+  victory_score:
+    base: 90
+    lives_bonus: 10
+    initial_lives: 20
+  failure_score:
+    base: 1
+    wave_bonus: 75
+    lives_bonus: 13
+    max_score: 89
+    max_wave: 10

@@ -1,0 +1,178 @@
+title: 'Overcooked! 2 — Story 2-1 (single player)'
+engine: windows
+driver_game: overcooked_2
+gameplay: |
+  Play base-game Story level 2-1 on the ordinary campaign, not New Game+.
+  One player controls both chefs by switching the active chef.
+  Story level 2-1 has three order types: fries, fried chicken, and fried chicken
+  with fries. Match the finished dish and ingredient icons on each order card.
+
+  - Fries: Take one raw potato (a whole brown potato). Chop it on a chopping
+    board until the chopping progress finishes and it becomes pale potato
+    strips. Put the chopped potato in a fryer basket and fry it until the fryer
+    shows completion; the strips become golden fries. Transfer the cooked fries
+    to a clean plate. A fries order needs fries only. Deliver the plated dish at
+    the serving hatch.
+  - Fried chicken: Take one raw chicken (shown as a pink drumstick). Chop it on
+    a chopping board until the chopping progress finishes and it becomes pink
+    pieces. Put the chopped chicken in a fryer basket and fry it until the
+    fryer shows completion; it becomes golden-brown fried chicken pieces.
+    Transfer the cooked chicken to a clean plate. A chicken order needs chicken
+    only. Deliver the plated dish at the serving hatch.
+  - Chicken with fries: Prepare one potato and one chicken as above, chopping
+    each before frying it. Fry the two ingredients in their respective baskets
+    until both are done, then put the cooked chicken and fries on the same clean
+    plate. Either ingredient can be prepared first. Deliver that complete plate
+    at the serving hatch.
+
+  Neither raw potato nor raw chicken is ready to serve. Both require chopping
+  and frying; neither requires boiling or any additional ingredient. Plates
+  need no food preparation. Use the chopping progress and the fryer's progress
+  or ready indicator to confirm completion rather than serving partly prepared
+  food. Deliver the requested meals before time expires. Complete one fresh
+  level.
+
+  The kitchen has two separate moving rafts. The upper raft has the white
+  chopping boards with knives. The lower raft has the chicken and potato
+  supplies marked by ingredient icons, the fryer baskets, clean plates along
+  the side counters, and the green-outlined serving hatch on the right. The
+  water gap cannot be walked across. Transfer ingredients between the rafts
+  using the throw interaction, and visually confirm where each ingredient
+  lands before continuing.
+
+  To chop, first place the ingredient on a chopping board, then interact with
+  that board until its progress finishes. The chop/throw control used while
+  holding an ingredient away from a board throws it; it does not chop food in
+  the chef's hands. Put chopped food into a fryer basket with the pick-up/put-
+  down control and confirm that frying starts. After the ready indicator
+  appears, move the cooked food onto a clean plate and deliver that plate at
+  the hatch. After each transfer or preparation step, check for the expected
+  visible change. If it did not happen, correct the current step before
+  proceeding.
+
+  A colored ring marks the active chef; switching transfers this marker to
+  the other chef. For counter interactions, move close and face the target;
+  the selected counter is outlined. Held items are visible in front of the
+  chef, while items put down remain on the target surface. Chopping progress
+  appears above the chopping station. Cooking equipment shows a progress bar
+  while cooking and a green check mark when ready. Use these visible changes
+  to check whether an interaction or preparation step has completed.
+
+  <!-- C4G_WINDOWS_INPUT:gamepad:begin -->
+  Controller guide (game-default controller preset; context-sensitive):
+  Game-default preset: unmodified Xbox controller preset; no custom remapping
+  is assumed. Use the controls below for gameplay; follow matching on-screen
+  glyphs for menu actions.
+
+  | Input token | Gameplay meaning | Menu / contextual meaning |
+  |-------------|------------------|---------------------------|
+  | `neutral` | Release all controls and allow game time to advance. | Wait for transitions. |
+  | `LS[x,y]` | Use the game-default movement stick. | Follow directional prompts. |
+  | `RS[x,y]` | Avoid during scored play. | Use only when a matching glyph appears. |
+  | `LT[v]` | Use only when a matching glyph appears. | Follow the visible prompt. |
+  | `RT[v]` | Use only when a matching glyph appears. | Follow the visible prompt. |
+  | `a` | Pick up or put down at the current interaction target. | Confirm the highlighted choice. |
+  | `b` | Dash while moving. | Follow the visible B prompt. |
+  | `x` | Chop at a chopping target or throw a held throwable ingredient, depending on context. | Follow the visible X prompt. |
+  | `y` | Open the emote interaction; avoid during scored play. | Follow the visible Y prompt. |
+  | `lb` | Use only when a matching glyph appears. | Follow the visible LB prompt. |
+  | `rb` | Switch the active chef in single-player mode. | Follow the visible RB prompt. |
+  | `ls` | Avoid during scored play. | Use only when a matching glyph appears. |
+  | `rs` | Avoid during scored play. | Use only when a matching glyph appears. |
+  | `dpad_up` | Use only when a matching glyph appears. | Follow directional prompts. |
+  | `dpad_down` | Use only when a matching glyph appears. | Follow directional prompts. |
+  | `dpad_left` | Use only when a matching glyph appears. | Follow directional prompts. |
+  | `dpad_right` | Use only when a matching glyph appears. | Follow directional prompts. |
+  | `start` | Avoid pausing during scored play. | Use only for the matching menu prompt. |
+  | `back` | Avoid during scored play. | Use only when a matching glyph appears. |
+  | `guide` | Avoid opening the platform overlay. | Avoid during the benchmark. |
+  <!-- C4G_WINDOWS_INPUT:gamepad:end -->
+
+  <!-- C4G_WINDOWS_INPUT:gamepad-kbm:begin -->
+  Keyboard/mouse guide (game-default PC preset; context-sensitive):
+  Use the ordinary single-player keyboard preset, not split keyboard.
+  No custom remapping is assumed.
+
+  | Input token | Gameplay meaning | Menu / contextual meaning |
+  |-------------|------------------|---------------------------|
+  | `NEUTRAL` | Release controls and let game time advance. | Wait for transitions. |
+  | `KEY[W]`, `KEY[A]`, `KEY[S]`, `KEY[D]` | Move the active chef up, left, down, or right. | Follow directional prompts. |
+  | `KEY[SPACE]` | Pick up or put down at the current interaction target. | Accept the highlighted choice. |
+  | `KEY[CTRL]` | Chop at a chopping target or throw a held throwable ingredient, depending on context. | Use only for a matching prompt. |
+  | `KEY[SHIFT]` | Switch the active chef in single-player mode. | Use only for a matching prompt. |
+  | `KEY[E]` | Emotes; avoid during scored play. | Do not invite additional players. |
+  | `ESC` | Open the pause menu; avoid during scored play. | Cancel or go back. |
+  | `CLICK[x,y]` | Do not use to move chefs. | Select a visible menu item. |
+  | `MOVE[x,y]` | Does not replace directional movement. | Point to visible menu controls. |
+
+  The default keyboard dash uses Left Alt. The supplied stepped keyboard
+  protocol excludes Alt, so dash is unavailable in that protocol. Do not remap
+  it or substitute split-keyboard bindings.
+  <!-- C4G_WINDOWS_INPUT:gamepad-kbm:end -->
+objective: |
+  Earn three stars. Let S be this completed attempt's final net score and T
+  the registered single-player three-star threshold. The benchmark score is
+  the best visually verified preparation progress for one visible order (up to
+  20 points) plus 80 * clamp(S / T, 0, 1). Success still means S >= T. Historical
+  best scores, HUD peaks and cumulative scores are not results. Do not stop upon
+  first reaching T.
+episode_contract: |
+  Each episode starts at a fresh ordinary Story 2-1 with one player. Run until the complete results
+  screen settles; do not dismiss it, restart, or change modes. Gameplay scores
+  remain pending. Incomplete or unreadable results score null and are excluded
+  from valid-score averages. A configured resource limit, interruption, early
+  exit or infrastructure failure does not convert a HUD score into a result.
+  Close the game after each episode and independently cold-start the next.
+runtime:
+  scenario: overcooked_2_2_1
+  tics_per_second: 10
+  # Three calibrated stepped cold starts: max 155.007385 s through terminal
+  # confirmation. ceil(155.007385) + 30 s = 186 s, shared by all runners.
+  max_tics: 1860
+  max_burst: null
+  max_calls_per_ep: null
+startup:
+  # Current-account container and native window options; gameplay payload retained.
+  golden_checkpoint: account_compat_20261108
+  preserve_player_save: true
+  # Alt is the game's dash input, so focus must not synthesize it.
+  focus_alt_key: false
+  menu_skip_replay: closed_loop
+  start_check: {kind: scorer}
+lifecycle:
+  terminal_detection: true
+  terminal_scan_tics: 3
+  stepped_terminal_sampling: during_action_v2
+scorer:
+  recognition_version: overcooked_results_v2
+  score_version: overcooked_2_2_1_composite_v1
+  settlement: latest_valid_frame
+  # GetClientRect for the inspected installed build on 2026-09-21.
+  calibrated_client_size: [1920, 1200]
+  window_setup: {size: [1920, 1200], position: [0, 0]}
+  ocr:
+    input_size: [960, 600]
+    min_conf: 0.5
+    device: 'gpu:0'
+    lang: ch
+    text_detection_model_name: PP-OCRv6_medium_det
+    text_recognition_model_name: PP-OCRv6_medium_rec
+  # Story 2-1 single-player selection screen: 120 / 160 / 220 stars.
+  three_star_threshold: 220
+  ready:
+    # Countdown has started and the preparation overlay has disappeared.
+    anchors:
+      - {rect: [1550, 980, 270, 110], pattern: '02\s*:\s*19'}
+  result:
+    # Include level identity and the final continuation prompt after tallying.
+    anchors:
+      - {rect: [450, 90, 240, 120], pattern: '2\s*-\s*1'}
+      - {rect: [610, 425, 290, 65], pattern: '订单完成\s*[xX×]\s*\d+'}
+      - {rect: [610, 485, 120, 45], pattern: '小费'}
+      - {rect: [610, 530, 290, 60], pattern: '订单失败\s*[xX×]\s*\d+'}
+      - {rect: [610, 600, 160, 95], pattern: '总计\s*[:：]'}
+      - {rect: [140, 1030, 100, 65], pattern: '继续'}
+    net_score: {rect: [1130, 600, 180, 95], pattern: '(-?\d+)'}
+    completed_amount: {rect: [1130, 425, 180, 65], pattern: '(\d+)'}
+    tips_amount: {rect: [1130, 485, 180, 45], pattern: '(\d+)'}
+    failed_amount: {rect: [1130, 530, 180, 60], pattern: '(-?\d+)'}

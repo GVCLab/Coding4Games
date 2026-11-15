@@ -1,0 +1,10 @@
+{
+  "profile": "runtime/profile.json",
+  "model": "my-model",
+  "credentials": "litellm.config.yaml",
+  "output_root": "out/experiments",
+  "windows_input": "auto",
+  "tic_budget": 1200,
+  "wall_seconds": 300,
+  "token_limit": 30000
+}

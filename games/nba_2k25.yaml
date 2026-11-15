@@ -1,0 +1,232 @@
+name: NBA 2K25
+process: NBA2K25.exe
+description: 'Offline Blacktop 1v1: Joel Embiid versus Tyrese Maxey. Recorded notice confirmations and
+  gamepad startup; default Xbox gameplay controls.'
+actions:
+  neutral:
+    description: Raw Xbox neutral state.
+  a:
+    description: Raw Xbox A face button.
+    buttons:
+    - A
+  b:
+    description: Raw Xbox B face button.
+    buttons:
+    - B
+  x:
+    description: Raw Xbox X face button.
+    buttons:
+    - X
+  y:
+    description: Raw Xbox Y face button.
+    buttons:
+    - Y
+  lb:
+    description: Raw Xbox left shoulder button.
+    buttons:
+    - LB
+  rb:
+    description: Raw Xbox right shoulder button.
+    buttons:
+    - RB
+  ls:
+    description: Raw Xbox left-stick click.
+    buttons:
+    - LS
+  rs:
+    description: Raw Xbox right-stick click.
+    buttons:
+    - RS
+  dpad_up:
+    description: Raw Xbox D-pad up.
+    buttons:
+    - DPAD_UP
+  dpad_down:
+    description: Raw Xbox D-pad down.
+    buttons:
+    - DPAD_DOWN
+  dpad_left:
+    description: Raw Xbox D-pad left.
+    buttons:
+    - DPAD_LEFT
+  dpad_right:
+    description: Raw Xbox D-pad right.
+    buttons:
+    - DPAD_RIGHT
+  start:
+    description: Raw Xbox Start button.
+    buttons:
+    - START
+  back:
+    description: Raw Xbox Back button.
+    buttons:
+    - BACK
+menu_skip:
+- description: Recorded neutral wait
+  duration_seconds: 2.6099999999996726
+  pad: 1
+- description: Recorded keyboard hold
+  duration_seconds: 0.10900000000037835
+  pad: 1
+  buttons:
+  - KEY[2]
+  expect_absent: 没有插上手柄
+- description: Recorded neutral wait
+  duration_seconds: 3.0
+  pad: 1
+- description: Recorded keyboard hold
+  duration_seconds: 0.10999999999967258
+  pad: 1
+  buttons:
+  - KEY[2]
+  expect_absent: Easy Anti.Cheat
+- description: Recorded neutral wait
+  duration_seconds: 3.280999999999949
+  pad: 1
+  expect: 取消|辉煌生涯
+- description: Captured confirmation for the extra direct-launch offline notice.
+  duration_seconds: 0.10999999999967258
+  pad: 1
+  buttons:
+  - KEY[2]
+  expect_absent: 取消|purchase|Sharing|offline
+- description: Recorded neutral wait after the captured offline-notice confirmation.
+  duration_seconds: 3.280999999999949
+  pad: 1
+  expect: 快速比赛
+  expect_absent: 警告|取消|Easy Anti.Cheat
+- description: Archived gamepad input paced by the current recorded menu timeline.
+  duration_seconds: 0.09400000000005093
+  pad: 1
+  buttons:
+  - DPAD_RIGHT
+- description: Recorded neutral wait
+  duration_seconds: 1.125
+  pad: 1
+- description: Archived gamepad input paced by the current recorded menu timeline.
+  duration_seconds: 0.07800000000042928
+  pad: 1
+  buttons:
+  - DPAD_RIGHT
+- description: Recorded neutral wait
+  duration_seconds: 1.2179999999998472
+  pad: 1
+- description: Archived gamepad input paced by the current recorded menu timeline.
+  duration_seconds: 0.09400000000005093
+  pad: 1
+  buttons:
+  - DPAD_RIGHT
+  expect: 进入快速比赛
+- description: Recorded neutral wait
+  duration_seconds: 1.219000000000051
+  pad: 1
+- description: Archived gamepad input paced by the current recorded menu timeline.
+  duration_seconds: 0.125
+  pad: 1
+  buttons:
+  - A
+- description: Recorded neutral wait
+  duration_seconds: 1.8909999999996217
+  pad: 1
+- description: Archived gamepad input paced by the current recorded menu timeline.
+  duration_seconds: 0.18699999999989814
+  pad: 1
+  buttons:
+  - DPAD_DOWN
+- description: Recorded neutral wait
+  duration_seconds: 1.1410000000005311
+  pad: 1
+- description: Archived gamepad input paced by the current recorded menu timeline.
+  duration_seconds: 0.0929999999998472
+  pad: 1
+  buttons:
+  - DPAD_DOWN
+- description: Recorded neutral wait
+  duration_seconds: 1.2659999999996217
+  pad: 1
+- description: Archived gamepad input paced by the current recorded menu timeline.
+  duration_seconds: 0.09400000000005093
+  pad: 1
+  buttons:
+  - A
+- description: Recorded neutral wait
+  duration_seconds: 7.75
+  pad: 1
+- description: Archived gamepad input paced by the current recorded menu timeline.
+  duration_seconds: 0.09400000000005093
+  pad: 1
+  buttons:
+  - A
+- description: Calibrated wait before the recorded team-side selection input.
+  duration_seconds: 3.0
+  pad: 1
+- description: Archived recorded gamepad step 21
+  duration_seconds: 0.11
+  pad: 1
+  buttons:
+  - DPAD_LEFT
+- description: Archived recorded gamepad step 22
+  duration_seconds: 1.44
+  pad: 1
+- description: Archived recorded gamepad step 23
+  duration_seconds: 0.08
+  pad: 1
+  buttons:
+  - START
+- description: Archived recorded gamepad step 24
+  duration_seconds: 2.25
+  pad: 1
+- description: Archived recorded gamepad step 25
+  duration_seconds: 0.12
+  pad: 1
+  buttons:
+  - START
+- description: Archived recorded gamepad step 26
+  duration_seconds: 2.33
+  pad: 1
+- description: Archived recorded gamepad step 27
+  duration_seconds: 0.11
+  pad: 1
+  buttons:
+  - A
+- description: Archived recorded gamepad step 28
+  duration_seconds: 1.11
+  pad: 1
+- description: Archived recorded gamepad step 29
+  duration_seconds: 0.09
+  pad: 1
+  buttons:
+  - DPAD_DOWN
+- description: Archived recorded gamepad step 30
+  duration_seconds: 0.98
+  pad: 1
+- description: Archived recorded gamepad step 31
+  duration_seconds: 0.12
+  pad: 1
+  buttons:
+  - A
+- description: Archived recorded gamepad step 32
+  duration_seconds: 1.81
+  pad: 1
+- description: Archived recorded gamepad step 33
+  duration_seconds: 0.08
+  pad: 1
+  buttons:
+  - START
+- description: Archived recorded gamepad step 34
+  duration_seconds: 1.77
+  pad: 1
+- description: Archived recorded gamepad step 35
+  duration_seconds: 0.16
+  pad: 1
+  buttons:
+  - START
+auto_launch:
+  launch_path: F:/SteamLibrary/steamapps/common/NBA 2K25/NBA2K25.exe
+  window_wait_seconds: 180.0
+  settle_seconds: 60.0
+use_speedhack: false
+screenshot_backend: visible_client
+scorer:
+  kind: ocr
+  implementation: nba_2k25

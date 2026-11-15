@@ -1,0 +1,38 @@
+[
+  {
+    "file": "death_current_bright_center.png",
+    "source": "out\\sekiro_death_fix_20260919\\video_0291.png",
+    "source_kind": "native-resolution decoded lossy video",
+    "box": [
+      700,
+      300,
+      1200,
+      740
+    ],
+    "sha256": "bdbf14df2b75793beb3fd5ff6b6dc67557659412893e2d5bc09cad995d95b009"
+  },
+  {
+    "file": "death_current_dim_center.png",
+    "source": "out\\sekiro_death_fix_20260919\\video_0310.png",
+    "source_kind": "native-resolution decoded lossy video",
+    "box": [
+      700,
+      300,
+      1200,
+      740
+    ],
+    "sha256": "901282e5957adc6189d30cb7213b6316dac129ccbc41e3eac866d1e25eed20ab"
+  },
+  {
+    "file": "combat_current_center.png",
+    "source": "D:\\Coding4Games\\out\\scorer_calibration\\sekiro_gyoubu\\20260901_141908\\frames\\000600.png",
+    "source_kind": "native lossless historical frame",
+    "box": [
+      700,
+      300,
+      1200,
+      740
+    ],
+    "sha256": "0a3c1f34a6f9163d0364e00587b75f9ba6e3bc9c1d1b9736a4bdab7ffc0c0478"
+  }
+]

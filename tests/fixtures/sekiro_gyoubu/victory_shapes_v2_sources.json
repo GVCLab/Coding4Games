@@ -1,0 +1,22 @@
+{
+  "false_victory_352_center.png": {
+    "source": "D:\\Coding4Games_9_18_2\\Coding4Games-main\\out\\windows_bench\\20260919_174752_sekiro_gyoubu_direct-baseline_gpt-5.6-sol_input-gamepad\\score-settlement\\9076738e\\terminal_00.png",
+    "sha256": "e1a23f882342d250779e25075a6631325fd8ee07ec9838dfeb77091a44e29dbe",
+    "crop_xyxy": [
+      640,
+      200,
+      1280,
+      700
+    ]
+  },
+  "false_victory_354_center.png": {
+    "source": "D:\\Coding4Games_9_18_2\\Coding4Games-main\\out\\windows_bench\\20260919_174752_sekiro_gyoubu_direct-baseline_gpt-5.6-sol_input-gamepad\\score-settlement\\9076738e\\terminal_01.png",
+    "sha256": "4b9edd86454a0459490876676a783c41a9172ea3011d5cf0dac4fa69f0c917ed",
+    "crop_xyxy": [
+      640,
+      200,
+      1280,
+      700
+    ]
+  }
+}

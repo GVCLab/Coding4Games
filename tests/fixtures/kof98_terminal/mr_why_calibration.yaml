@@ -1,0 +1,56 @@
+# Historical capture geometry from 427147c2ef50f9f1d039281f446c78d68d436989.
+# Keep these parameters with the original human frames; current-host tests use the shipped scenario.
+scorer:
+  kind: image
+  implementation: kof98_terminal
+  settlement: latest_valid_frame
+  calibrated_client_size:
+  - 854
+  - 480
+  ko:
+    epsilon: 0.0145
+    live_min: 0.5
+    full_bar: 0.9964
+    drain_seconds: 1.2
+    drain_min_frames: 2
+    drain_live_max: 0.2174
+  clock:
+    band_frac:
+    - 0.0
+    - 0.0688
+    tens_frac:
+    - 0.4708
+    - 0.4848
+    ones_frac:
+    - 0.4942
+    - 0.5071
+    reject: 0.15
+    min_ink: 6.0
+    round_seconds: 60
+  health:
+    p1_frac:
+    - 0.116
+    - 0.4395
+    - 0.0437
+    - 0.069
+    p2_frac:
+    - 0.539
+    - 0.8645
+    - 0.0437
+    - 0.069
+    timer_frac:
+    - 0.468
+    - 0.527
+    - 0.038
+    - 0.108
+    timer_min_yellow: 30
+    round_reset_jump: 0.2
+    scale: 1.0
+  combat:
+    above_bright_min: 116.0
+    above_strip_frac: 0.035
+  terminal:
+    blue_min: 0.2
+    white_bot_min: 0.25
+    bottom_frac: 0.78
+    consecutive_hits: 2

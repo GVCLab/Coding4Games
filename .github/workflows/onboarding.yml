@@ -1,0 +1,41 @@
+name: Onboarding software checks
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  portable-setup:
+    runs-on: windows-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.11'
+          architecture: x64
+      - name: Install software-check dependencies
+        run: |
+          $packages = python -c @'
+          import tomllib
+          with open("pyproject.toml", "rb") as manifest:
+              project = tomllib.load(manifest)["project"]
+          dependencies = project["dependencies"]
+          bootstrap = [next(entry for entry in dependencies if entry.lower().startswith(name))
+                       for name in ("packaging", "pyyaml")]
+          print(*project["optional-dependencies"]["dev"], *bootstrap, sep="\n")
+          '@
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python -m pip install @packages
+      - name: Check portable configuration and release boundaries
+        run: python -B -m pytest -q tests/tools/test_onboarding.py tests/tools/test_source_release.py tests/tools/test_doctor.py tests/tools/test_dependency_manifests.py tests/test_setup_wsl2_runtime.py
+      - name: Inspect scenario scope without games or models
+        run: python -m coding4game_gui.doctor --list-games --json
+      - name: Preview the source release
+        run: python scripts/build_source_release.py

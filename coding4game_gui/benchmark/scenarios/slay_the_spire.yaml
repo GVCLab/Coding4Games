@@ -1,0 +1,172 @@
+# Slay the Spire (real Windows game) — roguelike deckbuilder benchmark.
+# Capability axis: long-horizon planning under uncertainty + deck/resource
+# construction. Complements balatro (single-run combinatorial scoring) by
+# adding branching route choice and irreversible build commitments across a
+# multi-hour run structure.
+#
+# Every formal episode is an unseeded serial cold start. Fairness comes from
+# the same task and tic budget, not seed splits.
+#
+# ACTION INTERFACE: raw XInput controls from games/slay_the_spire.yaml. The
+# policy receives physical buttons, sticks, triggers, and a neutral pad state
+# only; the benchmark provides no card-, map-, or shop-semantic aliases.
+#
+title: "Slay the Spire (Windows real game)"
+engine: windows
+driver_game: slay_the_spire
+
+gameplay: |
+  Slay the Spire: a roguelike deckbuilder. You climb a spire of three Acts.
+  Each Act is a branching map of floors; you pick a path through combat
+  rooms, elites, events, shops, campfires, and a Boss at the Act's end.
+  Combat is turn-based: you draw a hand from your deck, spend Energy to play
+  cards (attacks, skills, powers), then end the turn and the enemies act.
+  Winning a combat offers a card reward that is added to the deck for the
+  rest of the run, plus gold and sometimes a relic. HP does not refill
+  between fights; campfires let you rest (heal) or upgrade a card. The run
+  ends when HP reaches 0.
+  Character: Ironclad. Ascension 0.
+  <!-- C4G_WINDOWS_INPUT:gamepad:begin -->
+  The supplied stepped controller interface uses a focus/cursor model: the
+  policy must observe where focus starts and move it with the documented
+  physical inputs.
+  No action token directly selects a numbered card, a map node, a shop item,
+  or ends the turn. Use the neutral controller state while animations finish.
+  In stepped mode the game is frozen between actions; animations consume
+  gameplay time.
+  The host owns episode initialization. Request another episode through the
+  provided lifecycle tools rather than using in-game restart buttons.
+
+  Controller guide (game-default controller preset; context-sensitive):
+  Game-default preset: Slay the Spire's native default Xbox bindings; no custom
+  remapping is assumed. The restored golden snapshot preserves this default
+  preset rather than introducing a benchmark-specific mapping.
+
+  | Input token | Gameplay meaning | Menu / contextual meaning |
+  |-------------|------------------|---------------------------|
+  | `neutral` | Release all controls; wait for card and enemy animations. | Wait without moving focus. |
+  | `LS[x,y]` | Move focus among cards, enemies, piles, and buttons. | Navigate menu focus. |
+  | `RS[x,y]` | Move the inspection cursor among inspectable objects. | Scroll or inspect details where supported. |
+  | `LT[v]` | Open the draw pile while held/pressed. | Screen-specific only outside combat. |
+  | `RT[v]` | Open the discard pile while held/pressed. | Screen-specific only outside combat. |
+  | `a` | Xbox A selects the focused card, enemy, reward, or button. | Select/confirm the focused item. |
+  | `b` | Cancel card targeting or back out of the current choice. | Cancel or go back. |
+  | `x` | View the top panel or focused object details. | View contextual details where available. |
+  | `y` | Proceed/confirm; in combat it ends the turn, so do not press until card play is complete. | Proceed or confirm on transition screens. |
+  | `lb` | View the master deck; on multi-page screens move one page/tab left. | Previous page or tab. |
+  | `rb` | View the exhaust pile; on multi-page screens move one page/tab right. | Next page or tab. |
+  | `ls` | Peek at the current focused information where supported. | Screen-specific Peek action. |
+  | `rs` | Avoid during the run; the golden controller settings leave this control unused. | Use only when a visible RS prompt assigns it. |
+  | `dpad_up` | Move focus up. | Move focus up. |
+  | `dpad_down` | Move focus down. | Move focus down. |
+  | `dpad_left` | Move focus left. | Move focus left. |
+  | `dpad_right` | Move focus right. | Move focus right. |
+  | `start` | Open settings/pause; avoid during normal play. | Open or close settings. |
+  | `back` | Open the run map. | Return from the map or use the View/Back action shown by the UI. |
+  | `guide` | Opens the platform guide rather than a game action; avoid it. | Avoid it because it can cover the captured game window. |
+
+  <!-- C4G_WINDOWS_INPUT:gamepad:end -->
+  <!-- C4G_WINDOWS_INPUT:gamepad-kbm:begin -->
+  Keyboard/mouse guide (game keyboard shortcuts; context-sensitive):
+  No custom remapping is assumed. Check the visible hotkey labels and input
+  settings if a shortcut does not produce its expected result.
+
+  | Input token | Gameplay meaning | Context / boundary |
+  |-------------|------------------|--------------------|
+  | `KEY[1]` through `KEY[9]`, `KEY[0]` | Select a hand card using its displayed number. | Selection is not proof that the card was played; check targeting, energy and the resulting state. |
+  | `KEY[A]` | View the draw pile during combat. | Not a movement key. |
+  | `KEY[S]` | View the discard pile during combat. | Not a movement key. |
+  | `MOVE[x,y]` | Inspect a visible card, power or relic tooltip. | Use the current screen, not assumed card positions. |
+  | `CLICK[x,y]` | Activate a visible card, target or UI control. | Verify whether the current interaction selects, confirms or plays. |
+  | `NEUTRAL` | Allow pending animations to finish. | Does not end a turn by itself. |
+
+  Use visible controls for ending turns, leaving overlays, rewards, shops and
+  map selection; do not assume an unlisted shortcut. Card costs, target rules,
+  enemy intents, powers and relics can change what a valid action accomplishes.
+  Host episode initialization is separate from in-game Save & Quit or restart.
+  <!-- C4G_WINDOWS_INPUT:gamepad-kbm:end -->
+
+objective: |
+  Goal: climb as deep into the spire as possible before dying.
+  Score = the highest confirmed floor number shown in the top HUD. The fresh
+  run starts on Floor 1 and scores 1; reaching Floors 2 and 3 scores 2 and 3.
+  Only sequential floor increases count. HP, gold, and combat damage do not
+  contribute to score.
+
+episode_contract: |
+  Every episode cold-starts the game, replays the recorded menu path into a
+  fresh Ironclad run, verifies the fresh starting combat, and then gives
+  control to the policy. Map routing, combat, card rewards, shops, campfires,
+  and events are all part of the episode. The host ends gameplay on the
+  registered run-ending screen; never dismiss it or restart. Stalls and
+  unchanged screens are not terminal. An episode can also end by explicit stop, program exit, a
+  configured resource limit, operator interruption, or infrastructure failure.
+  The game closes after every episode and the next episode repeats the complete
+  cold-start path.
+
+runtime:
+  scenario: slay_the_spire
+  tics_per_second: 10
+  # Episodes share the run budget unless the caller requests a shorter trial.
+  max_tics: 1000
+  max_burst: null
+  max_calls_per_ep: null
+
+lifecycle:
+  terminal_detection: true
+
+scorer:
+  kind: ocr
+  implementation: ocr
+  # Floor 1 -> 2 -> 3 is calibrated from the 197-frame human session at
+  # out/scorer_calibration/slay_the_spire/20260814_145507.
+  # WINDOWED at a fixed size, forced before launch and re-forced on the live
+  # HWND (startup.enforce_live_window). Fullscreen is not reproducible: its
+  # render size is the machine's monitor resolution divided by its DPI
+  # scaling, so every calibrated pixel would mean something else on another
+  # box. StS already sets -Dsun.java2d.dpiaware=true in its config.json, so
+  # unlike Balatro it needs no per-game DPI compatibility flag.
+  # 1280x960 is what THIS install actually wrote to info.displayconfig (a
+  # 4:3 window, not the 16:9 that was assumed here first). game_settings
+  # .force_sts_settings rewrites that file to match, and
+  # startup.enforce_live_window re-forces the live client area, so the value
+  # below is authoritative in both places.
+  window_setup: {mode: Windowed, size: [1280, 960], exe: SlayTheSpire.exe}
+  # Frames are conformed to this space so OCR rects stay in the geometry they
+  # were measured in. MUST equal the size the regions below were measured at.
+  calibrated_client_size: [1280, 960]
+  ocr: {input_size: [1280, 960], min_conf: 0.4, device: "gpu:0", lang: "en"}
+  # DECLARATION ORDER = PRIORITY. The character name persists across combat,
+  # rewards, map, shops, and transitions; HP is a fallback because combat
+  # glow can temporarily turn "80/80" into "80>". One persistent run phase is
+  # less brittle than screen-specific keyword lists. Game-over stays first so
+  # a terminal overlay wins even if the underlying run HUD remains visible.
+  phases:
+    gameover:  {any: ["YOU DIED", "Score", "Ascend", "Abandon Run"]}
+    run:       {any: ["the Ironclad"], pattern: '\d+\s*/\s*\d+'}
+  terminal_phases: [gameover]
+  miss_limit: 30
+  score_phases: [run]
+  phase_rewards: {run: 1}
+  # Full-frame PaddleOCR reads Floors 2 and 3 at x=614..627 with confidence
+  # 0.87..1.00, but the thin Floor-1 glyph produces no text box. Pay the first
+  # recognized run phase once, then count strict sequential floor increases
+  # from baseline 1; accumulated reward therefore equals the current floor.
+  regions:
+    floor: {rect: [590, 0, 60, 45], kind: number, max_increment: 1, baseline: 1}
+    # Zero-weight health readout proves the HUD is still observable while the
+    # thin Floor-1 glyph is absent from OCR. HP changes never affect reward.
+    player_hp: {pattern: '^(\d+)\s*/\s*\d+$', rect: [160, 0, 110, 45], kind: number, baseline: 80}
+  weights: {floor: 1}
+
+startup:
+  # Restore snapshots/slay_the_spire_golden.zip before every episode. Its
+  # single top-level preferences/ directory replaces the installed game's
+  # complete preferences directory; the normal settings forcer then applies
+  # the benchmark's controller/English-OCR requirements before launch.
+  golden_checkpoint: golden
+  # Floor 1 itself is too thin for full-frame OCR, so readiness uses the
+  # measured full-HP top-HUD anchor after deterministic saved-run cleanup and
+  # the recorded menu path. Repeated cold starts still need live verification.
+  start_check: {pattern: '80\s*/\s*80', rect: [160, 0, 110, 45], regions: {player_hp: 80}}
+  menu_skip_replay: open_loop

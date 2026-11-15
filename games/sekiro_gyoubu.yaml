@@ -1,0 +1,148 @@
+# Sekiro: Shadows Die Twice - Gyoubu Masataka Oniwa boss rematch.
+#
+# This scenario-specific driver owns the recorded title-to-encounter path for
+# the dedicated Gyoubu golden save. Preserve the recording; never hand-write
+# or retime it without a new recorder session and Full auto-launch evidence.
+
+name: Sekiro - Gyoubu Masataka Oniwa
+process: sekiro.exe
+
+scorer:
+  kind: image
+  implementation: sekiro_boss
+
+auto_launch:
+  launch_path: "G:/SteamLibrary/steamapps/common/Sekiro/sekiro.exe"
+  window_wait_seconds: 180.0
+  settle_seconds: 60.0
+
+save_state:
+  restore_to: 'C:/Users/15694/AppData/Roaming/Sekiro/76561199470060039'
+  wipe_before: false
+
+menu_skip:
+  - description: 'recorded: pad1 [A] held 0.12s'
+    buttons: [A]
+    pad: 1
+    duration_seconds: 0.12
+  - description: wait 1.69s
+    pad: 1
+    duration_seconds: 1.69
+  - description: 'recorded: pad1 [A] held 0.14s'
+    buttons: [A]
+    pad: 1
+    duration_seconds: 0.14
+  - description: wait 7.47s
+    pad: 1
+    duration_seconds: 7.47
+  - description: 'recorded: pad1 [A] held 0.12s'
+    buttons: [A]
+    pad: 1
+    duration_seconds: 0.12
+  - description: wait 1.24s
+    pad: 1
+    duration_seconds: 1.24
+  - description: 'recorded: pad1 [DPAD_DOWN] held 0.17s'
+    buttons: [DPAD_DOWN]
+    pad: 1
+    duration_seconds: 0.17
+  - description: wait 0.28s
+    pad: 1
+    duration_seconds: 0.28
+  - description: 'recorded: pad1 [A] held 0.14s'
+    buttons: [A]
+    pad: 1
+    duration_seconds: 0.14
+  - description: wait 1.06s
+    pad: 1
+    duration_seconds: 1.06
+  - description: 'recorded: pad1 [A] held 0.14s'
+    buttons: [A]
+    pad: 1
+    duration_seconds: 0.14
+  - description: wait 0.48s
+    pad: 1
+    duration_seconds: 0.48
+  - description: 'recorded: pad1 [A] held 0.12s'
+    buttons: [A]
+    pad: 1
+    duration_seconds: 0.12
+  - description: wait 12.34s
+    expect_text: '与鬼佛对坐'
+    pad: 1
+    duration_seconds: 12.34
+  - description: 'recorded: pad1 [X] held 0.14s'
+    expect_text: '购买道具'
+    buttons: [X]
+    pad: 1
+    duration_seconds: 0.14
+  - description: wait 2.05s
+    pad: 1
+    duration_seconds: 2.05
+  - description: 'recorded: pad1 [DPAD_UP] held 0.12s'
+    buttons: [DPAD_UP]
+    pad: 1
+    duration_seconds: 0.12
+  - description: wait 0.22s
+    pad: 1
+    duration_seconds: 0.22
+  - description: 'recorded: pad1 [DPAD_UP] held 0.11s'
+    buttons: [DPAD_UP]
+    pad: 1
+    duration_seconds: 0.11
+  - description: wait 0.83s
+    pad: 1
+    duration_seconds: 0.83
+  - description: 'recorded: pad1 [A] held 0.16s'
+    buttons: [A]
+    pad: 1
+    duration_seconds: 0.16
+  - description: wait 1.53s
+    pad: 1
+    duration_seconds: 1.53
+  - description: 'recorded: pad1 [A] held 0.09s'
+    buttons: [A]
+    pad: 1
+    duration_seconds: 0.09
+  - description: wait 0.83s
+    pad: 1
+    duration_seconds: 0.83
+  - description: 'recorded: pad1 [A] held 0.11s'
+    buttons: [A]
+    pad: 1
+    duration_seconds: 0.11
+  - description: calibrated load wait 30.00s (20.00s was intermittently insufficient)
+    pad: 1
+    duration_seconds: 30.0
+  - description: 'calibrated: merged recorded forward holds, pad1 LS(0.00,1.00) 4.54s'
+    left_stick: [0.0, 1.0]
+    pad: 1
+    duration_seconds: 4.54
+  - description: wait 2.11s (trailing — last input → SAVE)
+    pad: 1
+    duration_seconds: 2.11
+
+screenshot_backend: printwindow_visible
+
+description: |
+  Sekiro: Shadows Die Twice is a third-person sword-combat action game. This
+  driver is reserved for the fixed Gyoubu Masataka Oniwa boss rematch selected
+  through the Sculptor's Idol rematch menu.
+
+actions:
+  neutral: {description: 'Raw Xbox neutral state.'}
+  a: {description: 'Raw Xbox A face button.', buttons: [A]}
+  b: {description: 'Raw Xbox B face button.', buttons: [B]}
+  x: {description: 'Raw Xbox X face button.', buttons: [X]}
+  y: {description: 'Raw Xbox Y face button.', buttons: [Y]}
+  lb: {description: 'Raw Xbox left shoulder button.', buttons: [LB]}
+  rb: {description: 'Raw Xbox right shoulder button.', buttons: [RB]}
+  ls: {description: 'Raw Xbox left-stick click.', buttons: [LS]}
+  rs: {description: 'Raw Xbox right-stick click.', buttons: [RS]}
+  dpad_up: {description: 'Raw Xbox D-pad up.', buttons: [DPAD_UP]}
+  dpad_down: {description: 'Raw Xbox D-pad down.', buttons: [DPAD_DOWN]}
+  dpad_left: {description: 'Raw Xbox D-pad left.', buttons: [DPAD_LEFT]}
+  dpad_right: {description: 'Raw Xbox D-pad right.', buttons: [DPAD_RIGHT]}
+  start: {description: 'Raw Xbox Menu button.', buttons: [START]}
+  back: {description: 'Raw Xbox View button.', buttons: [BACK]}
+  guide: {description: 'Raw Xbox Guide button.', buttons: [GUIDE]}

@@ -1,0 +1,128 @@
+name: Slay the Spire
+
+# Process name verified by dry launch (see scripts/test_auto_launch_dry.py).
+# packr-wrapped JVM; the wrapper exe itself is the long-running process.
+process: SlayTheSpire.exe
+
+# Required for Windows benchmark. OCR scorer (English text).
+scorer:
+  kind: ocr
+  implementation: ocr
+
+# OpenGL / LibGDX — not DX12/Vulkan; auto-detection will pick printwindow.
+# screenshot_backend: printwindow
+
+description: |
+  Slay the Spire: a roguelike deckbuilder. Build a deck of cards and climb
+  three Acts of procedurally generated floors, each containing combat rooms,
+  elite encounters, events, shops, and a Boss at the end of each Act. A run
+  ends when the player's HP reaches 0 (game over) or when the final boss is
+  defeated. The game is turn-based: each combat turn the player draws cards
+  from their deck, spends Energy to play them, and ends the turn to let the
+  enemy act. Between combats the player chooses one of three card rewards,
+  and may visit a shop, rest site, or event room.
+
+  Default character: Ironclad. Ascension 0 (no extra difficulty modifiers).
+
+  Controller support: the game has native XInput controller support.
+  Navigate menus and select cards/actions using the D-pad, face buttons, and
+  shoulder buttons. The left stick duplicates the D-pad. The raw XInput action
+  table below maps every physical input the game accepts.
+
+# ---------------------------------------------------------------------------
+# RAW GAMEPAD ACTIONS. The policy sees the labels printed on an Xbox pad.
+# The loader canonicalizes A/B/X/Y/LB/RB/LS/RS to XInput's positional names
+# internally; those implementation names are not part of the policy API.
+# ---------------------------------------------------------------------------
+
+actions:
+  neutral: {description: 'Raw Xbox neutral state.'}
+  a: {description: 'Raw Xbox A face button.', buttons: [A]}
+  b: {description: 'Raw Xbox B face button.', buttons: [B]}
+  x: {description: 'Raw Xbox X face button.', buttons: [X]}
+  y: {description: 'Raw Xbox Y face button.', buttons: [Y]}
+  lb: {description: 'Raw Xbox left shoulder button.', buttons: [LB]}
+  rb: {description: 'Raw Xbox right shoulder button.', buttons: [RB]}
+  ls: {description: 'Raw Xbox left-stick click.', buttons: [LS]}
+  rs: {description: 'Raw Xbox right-stick click.', buttons: [RS]}
+  dpad_up: {description: 'Raw Xbox D-pad up.', buttons: [DPAD_UP]}
+  dpad_down: {description: 'Raw Xbox D-pad down.', buttons: [DPAD_DOWN]}
+  dpad_left: {description: 'Raw Xbox D-pad left.', buttons: [DPAD_LEFT]}
+  dpad_right: {description: 'Raw Xbox D-pad right.', buttons: [DPAD_RIGHT]}
+  start: {description: 'Raw Xbox Start button.', buttons: [START]}
+  back: {description: 'Raw Xbox Back button.', buttons: [BACK]}
+  guide: {description: 'Raw Xbox Guide button.', buttons: [GUIDE]}
+
+# Restore the complete preferences directory before every formal benchmark
+# episode.  The canonical golden archive contains a single top-level
+# `preferences/` directory, so wipe_before removes the old directory as a
+# unit before extraction instead of leaving machine-local files behind.
+# Recreate it with: python scripts/checkpoint.py --game slay_the_spire golden
+#   --include preferences
+save_state:
+  restore_to: "E:/SteamLibrary/steamapps/common/SlayTheSpire"
+  wipe_before: true
+
+# One-command cold start via the installed executable.
+# settle_seconds is the registered post-launch wait used by auto-launch.
+auto_launch:
+  launch_path: "E:/SteamLibrary/steamapps/common/SlayTheSpire/SlayTheSpire.exe"
+  window_wait_seconds: 180.0
+  settle_seconds: 30.0
+
+# Recorded raw-pad cold path from the title screen into a live run.
+menu_skip:
+  - description: 'recorded: pad1 [A] held 0.11s'
+    buttons:
+      - A
+    pad: 1
+    duration_seconds: 0.11
+  - description: wait 1.41s
+    pad: 1
+    duration_seconds: 1.41
+  - description: 'recorded: pad1 [A] held 0.08s'
+    buttons:
+      - A
+    pad: 1
+    duration_seconds: 0.08
+  - description: wait 1.03s
+    pad: 1
+    duration_seconds: 1.03
+  - description: 'recorded: pad1 [A] held 0.09s'
+    buttons:
+      - A
+    pad: 1
+    duration_seconds: 0.09
+  - description: wait 8.99s
+    pad: 1
+    duration_seconds: 8.99
+  - description: 'recorded: pad1 [A] held 0.12s'
+    buttons:
+      - A
+    pad: 1
+    duration_seconds: 0.12
+  - description: wait 1.38s
+    pad: 1
+    duration_seconds: 1.38
+  - description: 'recorded: pad1 [A] held 0.08s'
+    buttons:
+      - A
+    pad: 1
+    duration_seconds: 0.08
+  - description: wait 0.97s
+    pad: 1
+    duration_seconds: 0.97
+  - description: 'recorded: pad1 [A] held 0.08s'
+    buttons:
+      - A
+    pad: 1
+    duration_seconds: 0.08
+  - description: wait 0.61s (trailing — last input → SAVE)
+    pad: 1
+    duration_seconds: 0.61
+
+  - description: 'recorded: pad1 [A] held 0.08s'
+    buttons:
+      - A
+    pad: 1
+    duration_seconds: 0.08

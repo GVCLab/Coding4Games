@@ -1,0 +1,52 @@
+{
+  "chopped_potato": {
+    "source": "out\\overcooked_repair_20261108\\human_scorer_03\\frames\\000705.png",
+    "label": "Visible chopped potato pile on the lower wooden raft",
+    "sha256": "4b93441f455137d960f3392f261b165db6b9b4c318f9f4ac83712abe75bb9b1b",
+    "dimensions": [
+      1920,
+      1200
+    ],
+    "human_play": true
+  },
+  "plated_cooked_fries": {
+    "source": "out\\overcooked_repair_20261108\\human_scorer_03\\frames\\000820.png",
+    "label": "Golden cooked fries on a physical plate at the right counter",
+    "sha256": "c456e9a3a6a3d7abb573dac926d6c22f7aacd451b67c9ccd6bb9b74815201a85",
+    "dimensions": [
+      1920,
+      1200
+    ],
+    "human_play": true
+  },
+  "raw_potato_on_plate": {
+    "source": "out\\overcooked_repair_20261108\\human_scorer_03\\frames\\000720.png",
+    "label": "Pale uncooked potato strips placed on a plate; not fried or a completed dish",
+    "sha256": "5f31c4dda3fe3321e5c019f2d14fa146fb01f2c9b26803028efa33e31914e03f",
+    "dimensions": [
+      1920,
+      1200
+    ],
+    "human_play": true
+  },
+  "frying_not_ready": {
+    "source": "out\\overcooked_repair_20261108\\human_scorer_03\\frames\\000780.png",
+    "label": "Fryer with an incomplete progress bar; no green completion check",
+    "sha256": "91fa8c4ee3732f453b2b745748b6abdc0970708ee87494dc39af430566ec6ed5",
+    "dimensions": [
+      1920,
+      1200
+    ],
+    "human_play": true
+  },
+  "empty_start": {
+    "source": "out\\overcooked_repair_20261108\\human_scorer_03\\frames\\000000.png",
+    "label": "Empty counters at the fresh 02:19 start",
+    "sha256": "a2f27b24a7b23937f8f3c2c97c7c917f8c18558fc1a534cc9efbf3c60a16e943",
+    "dimensions": [
+      1920,
+      1200
+    ],
+    "human_play": true
+  }
+}

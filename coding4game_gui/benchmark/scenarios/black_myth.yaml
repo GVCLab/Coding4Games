@@ -1,0 +1,199 @@
+title: "Black Myth: Wukong - fixed boss encounter"
+engine: windows
+driver_game: black_myth
+
+gameplay: |
+  Black Myth: Wukong is a third-person action RPG. This benchmark starts from
+  a fixed golden save immediately before one boss encounter. The player sees
+  client-area screenshots and uses the selected physical input protocol. Defeat
+  the visible boss by managing movement, camera, lock-on, dodges, attacks,
+  stamina, spells, and limited gourd healing.
+
+  <!-- C4G_WINDOWS_INPUT:gamepad:begin -->
+  Controller guide (game-default controller preset; context-sensitive):
+  Game-default preset: Xbox Type A, with Jump on A and Dodge on B; no custom
+  remapping is assumed.
+
+  | Input token | Gameplay meaning | Menu / contextual meaning |
+  |-------------|------------------|---------------------------|
+  | `neutral` | Release all controls; do not continue an attack, dodge, or movement hold. | Wait without changing selection. |
+  | `LS[x,y]` | Move the Destined One; combine direction with attacks or dodges. | Navigate menu focus. |
+  | `RS[x,y]` | Rotate the camera; while locked, influence target-relative framing. | Move camera/preview where supported. |
+  | `LT[v]` | Staff Spin while held in the configured Type A layout. | No benchmark-critical menu binding. |
+  | `RT[v]` | Hold as the modifier for spells with face buttons and on-hand items with D-pad buttons. | `RT[1]` plus Back enters Photo Mode; avoid during the encounter. |
+  | `a` | Xbox A jumps; with RT held it selects the A-slot spell. | Confirm/interact only when the UI explicitly shows A. |
+  | `b` | Xbox B dodges; direction plus B performs a directional dodge. With RT held it selects the B-slot spell. | Cancel or go back. |
+  | `x` | Xbox X performs a light attack; with RT held it selects the X-slot spell. | Use only when an X prompt is visible. |
+  | `y` | Xbox Y performs a heavy attack; with RT held it selects the Y-slot spell. | Use only when a Y prompt is visible. |
+  | `lb` | Xbox LB drinks from the limited healing gourd. | No benchmark-critical menu binding. |
+  | `rb` | Xbox RB sprints while held in Type A. | Switch tabs only if the current UI shows RB. |
+  | `ls` | Clicking the left stick also starts sprinting while moving. | No benchmark-critical menu binding. |
+  | `rs` | Clicking the right stick toggles enemy lock-on only when a target is available. Verify the reticle or camera follow before retrying. | No benchmark-critical menu binding. |
+  | `dpad_up` | Switch to Pillar Stance; with RT held, use the assigned up on-hand item. | Move selection up. |
+  | `dpad_down` | With RT held, use the assigned down on-hand item; avoid pressing it alone during combat. | Move selection down. |
+  | `dpad_left` | Switch to Smash Stance; with RT held, use the assigned left on-hand item. | Move selection left. |
+  | `dpad_right` | Switch to Thrust Stance; with RT held, use the assigned right on-hand item. | Move selection right. |
+  | `start` | Pause and open the game menu; avoid during active combat. | Open/close the menu. |
+  | `back` | No standalone encounter action; with RT held, enter Photo Mode. | Use only when the View/Back glyph is shown. |
+  | `guide` | Opens the platform guide rather than a game action; avoid it. | Avoid it because it can cover the captured game window. |
+
+  <!-- C4G_WINDOWS_INPUT:gamepad:end -->
+  <!-- C4G_WINDOWS_INPUT:gamepad-kbm:begin -->
+  Keyboard/mouse guide (game-default PC preset; context-sensitive):
+  Game-default preset: Black Myth: Wukong's unmodified default PC
+  keyboard/mouse layout; no custom remapping is assumed. Keyboard input
+  switches visible prompts from controller glyphs to keyboard labels. Check
+  the current screen and visible cooldown/resource state before retrying.
+
+  | Input token | Gameplay meaning | Context / boundary |
+  |-------------|------------------|--------------------|
+  | `KEY[W]`, `KEY[A]`, `KEY[S]`, `KEY[D]` | Move forward, left, backward, or right relative to the current view; combine two keys for diagonal movement. | Movement can be blocked by scenery. Multiple keys in one action are held together. |
+  | `KEY[SHIFT]` | Sprint while held; combine with movement. | Sprint consumes stamina and does not supply a movement direction by itself. |
+  | `KEY[SPACE]` | Dodge; combine with movement for a directional dodge. | Each action is one press. Time repeated dodges from the resulting animation rather than assuming they queue safely. |
+  | `KEY[CTRL]` | Jump. | Not normally needed in the fixed boss encounter unless an obstacle or attack calls for it. |
+  | `CLICK[x,y]` | One left click performs a light staff attack. | Use a point inside the gameplay viewport and outside visible menu controls. In a menu it selects the visible item at the pointer. |
+  | `RCLICK[x,y]` | One right click performs a heavy attack. | The structured click is a press/release pulse and cannot hold to charge a heavy attack. In a menu it is a contextual right click, not a combat attack. |
+  | `MCLICK[x,y]` | One middle click toggles lock-on when an enemy target is available; verify the target reticle or camera tracking before retrying. | Use a point inside the gameplay viewport. It resets/recentres the camera when no lockable target is acquired. |
+  | `KEY[R]` | Drink from the limited healing gourd. | It can fail when charges are empty or the character cannot act; confirm the health/charge change. |
+  | `KEY[Q]` | Use the currently selected on-hand item. | Availability and effect depend on the equipped item; switching on-hand items normally uses mouse side buttons, which this interface does not expose. |
+  | `KEY[V]` | Hold Staff Spin. | It consumes stamina and is mainly useful against suitable incoming projectiles or at close range. |
+  | `KEY[F]` | Use the equipped Spirit Skill. | It requires a ready equipped spirit and sufficient Qi. |
+  | `KEY[E]` | Interact when the E prompt is visible. | At a shrine, this starts the incense interaction; not a combat attack. |
+  | `KEY[1]`, `KEY[2]`, `KEY[3]`, `KEY[4]` | Use the displayed Mysticism, Alteration, Strand, or Transformation spell slot respectively. | Equipped abilities, unlock state, mana, cooldowns, and transformation availability can differ; trust the visible slot labels. |
+  | `KEY[Z]`, `KEY[X]`, `KEY[C]` | Switch to Smash, Pillar, or Thrust Stance respectively. | A stance key has no useful effect until that stance is unlocked. Confirm the stance indicator. |
+  | `KEY[P]` | Enter Photo Mode. | Avoid during scored combat. |
+  | `KEY[ESC]` | Open or back out of the game menu. | It must be the only control in its action; avoid during active combat. |
+  | `NEUTRAL` | Release inputs and advance animation/game time. | The game remains frozen between stepped actions. |
+
+  Other exposed physical keys and pointer operations retain the shared tool
+  syntax; do not assume an additional game binding without checking the
+  current controls or testing its effect. Absolute pointer movement is not
+  mouse-relative camera input, so free camera rotation is unavailable through
+  this stepped interface. Lock-on camera tracking remains available through
+  `MCLICK[x,y]`. A held mouse button and mouse side buttons are not supplied;
+  do not substitute repeated clicks and assume equivalent behavior.
+  <!-- C4G_WINDOWS_INPUT:gamepad-kbm:end -->
+
+objective: |
+  Defeat the fixed boss encounter. Score is the greatest confirmed fraction of
+  boss HP depleted during the episode, on a 0-100 scale: full boss HP is 0 and
+  an empty boss HP bar is 100. Death, stall, or timeout keep the progress score
+  already earned.
+
+episode_contract: |
+  Every episode cold-starts the game, restores the fixed golden state, replays
+  the recorded menu path, verifies the encounter start, and then gives control
+  to the policy. The host ends gameplay on the registered boss-defeated banner,
+  victory results, or defeat menu; never dismiss these or restart. Stalls and
+  unchanged screens are not terminal. An episode can also end by explicit
+  stop, program exit, a configured resource limit, operator
+  interruption, or infrastructure failure. The game is closed after every
+  episode and the next episode repeats the full cold-start path.
+
+runtime:
+  scenario: black_myth
+  tics_per_second: 10
+  # Episodes share the run budget unless the caller requests a shorter trial.
+  max_tics: 10000
+  max_burst: null
+  max_calls_per_ep: null
+
+startup:
+  golden_checkpoint: golden
+  # Black Myth switches its visible input mode on any keyboard event. Keep the
+  # startup replay controller-only and replay the recorded timeline exactly
+  # once, matching the TUI Full auto-launch verifier.
+  focus_alt_key: false
+  menu_skip_replay: open_loop
+  # The loading page also names the boss near the upper-right. Only accept the
+  # bottom boss-bar label, proving that the intended encounter has begun.
+  start_check:
+    pattern: '黑熊精'
+    rect: [400, 580, 220, 100]
+    # OCR runs while frozen; unfinished loading advances in 0.1-second pulses.
+    # Allow wall time for cold OCR and loading without a long live tail wait.
+    timeout_seconds: 120.0
+
+lifecycle:
+  terminal_detection: true
+
+scorer:
+  calibrated_client_size: [1280, 720]
+  ocr:
+    lang: ch
+    input_size: [1280, 720]
+    min_conf: 0.5
+    device: gpu:0
+  # The large defeat calligraphy makes a cheap candidate gate. Exact OCR of
+  # the central banner then prevents combat effects from becoming victories.
+  victory_splash_gate:
+    min_luma: 140
+    neutral_tolerance: 45
+    regions:
+      - frac: [0.421875, 0.578125, 0.4444444444444444, 0.5833333333333334]
+        min_ink_ratio: 0.045
+        max_ink_ratio: 0.110
+    background_regions:
+      - frac: [0.0, 0.328125, 0.1388888888888889, 0.9027777777777778]
+        max_mean_luma: 45
+      - frac: [0.671875, 1.0, 0.1388888888888889, 0.9027777777777778]
+        max_mean_luma: 45
+  victory_text:
+    pattern: '已击破'
+    rect: [540, 300, 220, 140]
+  # Victory terminal calibrated from the stable combat-results page in three
+  # successful episodes from run 20260822_152255:
+  # d8da2ca8, bbde0697, and 4f04a02b. The title and enclosing title block are
+  # invariant while the boss name, elapsed time, statistics, and background
+  # vary. Full-frame replay at 10 fps matched 191-297 frames in every victory
+  # and zero frames across five defeat, active-combat, timeout, or exhausted-
+  # budget recordings. Missing boss HUD alone deliberately remains unknown.
+  victory_screen:
+    min_luma: 140
+    neutral_tolerance: 35
+    regions:
+      - frac: [0.16015625, 0.24609375, 0.11388888888888889, 0.2361111111111111]
+        min_ink_ratio: 0.020
+        max_ink_ratio: 0.040
+      - frac: [0.171875, 0.234375, 0.12777777777777777, 0.18333333333333332]
+        min_ink_ratio: 0.065
+        max_ink_ratio: 0.095
+    background_regions:
+      # The result overlay darkens the complete left-side statistics panel.
+      # This rejects accidental title-like bright pixels in active combat;
+      # d8da2ca8 frame 609 was the measured hard negative (mean luma 68.3),
+      # while the three stable result pages measured 17.3-22.3.
+      - frac: [0.015625, 0.46875, 0.09722222222222222, 0.9444444444444444]
+        max_mean_luma: 30
+  # Failure terminal calibrated from the stable rematch menu at 39.0s in
+  # out/windows_bench/20260730_211657_black_myth_code-agentic_claude-sonnet-5/
+  # view_app/videos/a0d24274da06.mp4. The selected menu row changes, so only
+  # the fixed upper-left title ink is measured. All coordinates are fractional
+  # client-area coordinates; ratios count neutral bright pixels in each nested
+  # region. Full-video replay matched only 39.0s-43.9s, never the 38s defeat
+  # overlay or earlier combat/startup frames.
+  terminal_menu:
+    min_luma: 85
+    neutral_tolerance: 50
+    regions:
+      - frac: [0.04296875, 0.265625, 0.1388888888888889, 0.19722222222222222]
+        min_ink_ratio: 0.018
+        max_ink_ratio: 0.032
+      - frac: [0.05859375, 0.12890625, 0.1388888888888889, 0.19444444444444445]
+        min_ink_ratio: 0.060
+        max_ink_ratio: 0.100
+      - frac: [0.06640625, 0.1171875, 0.14583333333333334, 0.18888888888888888]
+        min_ink_ratio: 0.120
+        max_ink_ratio: 0.180
+  boss_health:
+    # Inner horizontal fill strip, fractional client coordinates x0,x1,y0,y1.
+    bar_frac: [0.359375, 0.64453125, 0.84722222, 0.86111111]
+    min_luma: 150
+    neutral_tolerance: 35
+    column_fill_ratio: 0.45
+    smooth_columns: 7
+    max_prefix_gap: 3
+    min_visible_fill: 0.05
+    confirm_frames: 2
+    confirm_tolerance: 0.04
+    scale: 100

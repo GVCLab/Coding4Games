@@ -1,0 +1,145 @@
+{
+  "raw_chicken": {
+    "source": "human_play_13/frames/000100.png",
+    "crop_xyxy": [
+      734,
+      338,
+      781,
+      371
+    ]
+  },
+  "raw_potato_a": {
+    "source": "human_play_13/frames/000155.png",
+    "crop_xyxy": [
+      1063,
+      371,
+      1101,
+      406
+    ]
+  },
+  "raw_potato_b": {
+    "source": "human_play_13/frames/000170.png",
+    "crop_xyxy": [
+      1067,
+      328,
+      1105,
+      363
+    ]
+  },
+  "chopped_potato_board": {
+    "source": "human_play_13/frames/000560.png",
+    "crop_xyxy": [
+      1074,
+      288,
+      1124,
+      333
+    ]
+  },
+  "chopped_chicken_pieces": {
+    "source": "human_play_13/frames/000295.png",
+    "crop_xyxy": [
+      1041,
+      831,
+      1097,
+      881
+    ]
+  },
+  "plated_chicken": {
+    "source": "human_play_13/frames/000570.png",
+    "crop_xyxy": [
+      1245,
+      770,
+      1320,
+      840
+    ]
+  },
+  "plated_fries": {
+    "source": "human_play_13/frames/000821.png",
+    "crop_xyxy": [
+      510,
+      760,
+      582,
+      830
+    ]
+  },
+  "plated_combo": {
+    "source": "human_play_13/frames/000890.png",
+    "crop_xyxy": [
+      574,
+      840,
+      656,
+      916
+    ]
+  },
+  "fryer_chicken_icon": {
+    "source": "human_play_13/frames/000230.png",
+    "crop_xyxy": [
+      1159,
+      900,
+      1201,
+      941
+    ]
+  },
+  "fryer_potato_icon": {
+    "source": "human_play_13/frames/000595.png",
+    "crop_xyxy": [
+      1232,
+      889,
+      1278,
+      934
+    ]
+  },
+  "order_fries": {
+    "source": "human_play_13/frames/000155.png",
+    "crop_xyxy": [
+      18,
+      72,
+      118,
+      141
+    ]
+  },
+  "order_fried_chicken": {
+    "source": "human_play_13/frames/000155.png",
+    "crop_xyxy": [
+      151,
+      72,
+      251,
+      141
+    ]
+  },
+  "order_chicken_with_fries": {
+    "source": "human_play_13/frames/000155.png",
+    "crop_xyxy": [
+      285,
+      72,
+      397,
+      141
+    ]
+  },
+  "chopped_potato_pile": {
+    "source": "out\\overcooked_repair_20261108\\human_scorer_03\\frames\\000700.png",
+    "crop_xyxy": [
+      1066,
+      849,
+      1131,
+      915
+    ],
+    "source_sha256": "aa3cc88dd501b7f0e4876bb8a736bd7fdff73ca5e2651782c27a4e053b3456e3",
+    "template_sha256": "fd6b201c3b91c3016570306a3baa30c1068b5ab927945e446f7d663d21542b15",
+    "human_play": true,
+    "calibration_date": "2026-11-08"
+  },
+  "plated_fries_current": {
+    "source": "out\\overcooked_repair_20261108\\human_scorer_03\\frames\\000820.png",
+    "crop_xyxy": [
+      1220,
+      784,
+      1278,
+      855
+    ],
+    "source_sha256": "c456e9a3a6a3d7abb573dac926d6c22f7aacd451b67c9ccd6bb9b74815201a85",
+    "template_sha256": "c7d844b94e409b8d8731a29bac99577e594250fa58708cf5c617f5aab3395b09",
+    "human_play": true,
+    "calibration_date": "2026-11-08"
+  }
+}

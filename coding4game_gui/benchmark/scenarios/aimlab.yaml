@@ -1,0 +1,116 @@
+title: "Aimlabs Gridshot 3x3 (exploratory one-round trial)"
+engine: windows
+driver_game: aimlab
+
+gameplay: |
+  Gridshot 3x3 is a 30-second aim-training task. Three blue spheres are visible
+  at a time. Aim the crosshair at a blue sphere and shoot it to score points.
+  A hit removes that sphere and immediately spawns a replacement at another
+  location. Each destroyed sphere adds one to the killed-target count; missed
+  shots add nothing. The benchmark reads that count on the results page after
+  the 30-second round. Hit as many spheres as possible before the timer reaches
+  zero. The crosshair stays at the centre of the
+  screenshot. The game captures the pointer, so screen-position clicks do not
+  work for shooting. Aim with relative mouse movement and fire at the current
+  captured pointer position. Observe the new frame to find the next target.
+  Do not assume a fixed mapping between relative movement input and movement
+  in the image. You can first explore how the current sensitivity relates to
+  observed image movement. Do not use CLICK[x,y] during gameplay; it moves
+  the Windows pointer rather than aiming at a visible target. Use CLICK_CURRENT
+  to fire. Shoot visible spheres promptly; do not wait for them to peek.
+  The host freezes the game process while you think, so the game timer advances
+  only during ACT pulses. Complete the visible round rather than quitting early.
+  The episode uses a fixed 350-tic endpoint. Once the results screen appears,
+  leave it visible and use NEUTRAL for any remaining tics; avoid clicking
+  results-page controls. The host reads the result after play stops.
+  Advance the timer through your aim and fire actions. Use NEUTRAL when needed
+  to let the remaining round finish; one ACT may aim or fire once, then let
+  game time advance for its tic duration.
+  The round needs about 300 gameplay tics plus a short results transition,
+  while you have at most 240 model calls. One tic per call throughout the
+  round cannot reach the results screen. Use at least two tics for most
+  actions, longer holds when appropriate, and reserve calls to advance the
+  remaining timer after shooting.
+
+  <!-- C4G_WINDOWS_INPUT:gamepad-kbm:begin -->
+  Keyboard/mouse guide (game-default PC controls):
+
+  | Input token | Gameplay meaning | Menu / contextual meaning |
+  |-------------|------------------|---------------------------|
+  | `NEUTRAL` | Let game time pass without input. | Wait for transitions. |
+  | `RMOVE[dx,dy]` | Move the first-person crosshair by relative mouse device units. Check the resulting frame to calibrate sensitivity. | Avoid in menus. |
+  | `CLICK_CURRENT` | Fire one shot without moving the captured pointer. | Click the currently hovered control only when a menu is visible. |
+  | `KEY[W]`, `KEY[A]`, `KEY[S]`, `KEY[D]` | Move if needed, but the task can be played from the spawn point. | Avoid in menus. |
+  | `KEY[ESC]` | Open the in-game pause menu; avoid during the scored round. | Return from a menu if needed. |
+  <!-- C4G_WINDOWS_INPUT:gamepad-kbm:end -->
+
+objective: |
+  Complete one Gridshot 3x3 round and earn as many in-game
+  points as possible by aiming at and shooting blue spheres. The benchmark
+  score is the killed-target count shown on the Gridshot 3x3 results screen.
+
+episode_contract: |
+  Cold-start Aimlabs, search for the exact Gridshot 3x3 task, wait for the results
+  list to load, enter the first result, click to start, and hand control to the
+  player after the recorded 3.5-second start wait. Run to the fixed 350-tic
+  endpoint, including the transition after the 30-second task. There is no
+  intermediate OCR terminal scan or early stop on the results page.
+  Explicit operator stops, game exits and infrastructure failures still stop play.
+  Settle the killed-target count from the results screen only; an unreadable
+  or missing results screen yields no score.
+
+runtime:
+  scenario: aimlab
+  tics_per_second: 10
+  max_tics: 350
+  max_burst: 50
+  max_calls_per_ep: 240
+  post_action_observation_delay_seconds: 0.12
+
+startup:
+  no_save_cleanup: process_kill
+  menu_skip_replay: closed_loop
+  menu_skip_ocr_rect: [0, 0, 2048, 420]
+  start_check:
+    timeout_seconds: 0
+    join_text_boxes: true
+    pattern: '(?s)(?=.*\bPOINTS\b)(?=.*00\s*[:：]\s*2\d)'
+    rect: [630, 20, 790, 100]
+
+lifecycle:
+  terminal_detection: false
+
+scorer:
+  settlement: latest_valid_frame
+  calibrated_client_size: [2048, 1152]
+  window_setup:
+    size: [2048, 1152]
+    mode: Windowed
+  ocr:
+    input_size: [2048, 420]
+    min_conf: 0.3
+    device: gpu:0
+    enable_mkldnn: false
+    rect: [145, 15, 1510, 300]
+  phases:
+    results:
+      pattern: 'Gridshot\s*3x3\b'
+      rect: [155, 25, 450, 150]
+      # Human recording: the labeled kill count is final before the large
+      # score animation and history graphs finish. Graphs may be empty at zero.
+      required_regions: [killed_targets]
+  score_phases: [results]
+  terminal_phases: [results]
+  regions:
+    killed_targets:
+      rect: [1385, 250, 90, 35]
+      kind: number
+      baseline: 0
+      label: {rect: [1390, 275, 145, 30], pattern: '^Targets\s*Killed$'}
+      # These one-health targets make hits and kills equal. The hit/shot
+      # counter remains legible when OCR misses a single-digit kill count.
+      fallback:
+        rect: [1200, 250, 105, 35]
+        pattern: '^(\d{1,5})/\d{1,5}$'
+        label: {rect: [1200, 275, 120, 30], pattern: '^Hits\s*/\s*Shots$'}
+  weights: {killed_targets: 1}

@@ -1,0 +1,215 @@
+title: "Palworld — capture Penking and Pengullet in the dungeon"
+engine: windows
+driver_game: palworld_capture
+
+gameplay: |
+  Play the prepared single-player world. Startup has already interacted with the
+  dungeon entrance, confirmed entry, and waited for the transition to finish.
+  Scored control begins on the first stable frame inside the dungeon.
+
+  Capture both required blue penguin Pals: exactly one Penking and exactly one
+  Pengullet. Penking is the large, boss-sized target: it is much taller and
+  broader than the other penguin, has a large blue-and-white body with prominent
+  yellow royal-looking head details, and normally has the English name `Penking`
+  visible above it when it is on screen. Pengullet is the small target: it has a
+  compact blue-and-white penguin body, short flipper-like arms, is only a small
+  fraction of Penking's height, and normally has the English name `Pengullet`
+  visible above it.
+
+  The two targets are in the same dungeon encounter but are not guaranteed to
+  remain together or in their initial positions. Either Pal may move while it is
+  off screen. Penking is usually easier to notice because of its boss-sized body,
+  while the much smaller Pengullet may be beside or behind Penking, near the edge
+  of the room, obscured by the character or environment, or outside the current
+  camera view. Capturing one target does not complete the task; after a confirmed
+  throw sequence, continue searching for the other named species.
+
+  The currently selected sphere has a 100% capture chance for this task. This
+  removes capture probability but does not guarantee that a poorly aimed throw
+  will make contact. Do not attack, deal damage, or summon a Pal.
+  Move close to each required Pal before attempting a capture, aim directly at
+  it, and use the configured sphere-throw control. A throw from too far away or
+  without aiming may miss. The two Pals may be captured in either order.
+  Capturing only one is incomplete.
+
+  <!-- C4G_WINDOWS_INPUT:gamepad:begin -->
+  The three labels permanently shown at the bottom-right of normal gameplay —
+  `Command Pal`, `Summon Pal`, and `Throw Pal Sphere` — are passive controller
+  hints, not an open radial menu or popup. When a required blue penguin is
+  visible, move close enough for a reliable throw and aim at it with `RS`.
+  Hold `rb` to aim the selected sphere, then release `rb` to throw it.
+
+  Use short-horizon closed-loop control and request a fresh observation after
+  each meaningful movement, aim correction, or interaction. After a sphere
+  throw, use the resulting fresh observation to choose the next gameplay action.
+  The host independently verifies saved progress and ends the episode
+  automatically when both required Pals are confirmed. Do not decide for
+  yourself that the task is complete or stop acting because a capture looked
+  successful. If the episode is still running, assume success has not yet been
+  verified and continue locating or capturing the missing target. Only the host
+  ending the episode confirms completion.
+
+  Controller guide (game-default controller preset; context-sensitive):
+  Game-default preset: Palworld's unmodified native Xbox controller layout;
+  no custom remapping is assumed. The selected capture sphere is already ready.
+
+  | Input token | Gameplay meaning | Menu / contextual meaning |
+  |-------------|------------------|---------------------------|
+  | `neutral` | Release all controls and wait. | Wait without moving selection. |
+  | `LS[x,y]` | Move the character. | Navigate focused menus where supported. |
+  | `RS[x,y]` | Rotate the third-person camera and aim. | Move a view or cursor where supported. |
+  | `LT[v]` | Aim the equipped weapon; do not use during this task. | Use only for a visible LT prompt. |
+  | `RT[v]` | Attack/use the held weapon; forbidden during this task. | Use only for a visible RT prompt. |
+  | `a` | Jump. | Confirm/select. |
+  | `b` | Dodge or cancel contextually. | Cancel/back. |
+  | `x` | Interact with the dungeon entrance or another visible X prompt. | Confirm the matching X prompt. |
+  | `y` | Task-irrelevant contextual action; avoid it. | Use only for a visible Y prompt. |
+  | `lb` | Summon/recall the selected Pal; do not use during this task. | Use only for a visible LB prompt. |
+  | `rb` | Hold to aim the selected capture sphere; release to throw it at the aimed Pal. | Use only for a visible RB prompt. |
+  | `ls` | Task-irrelevant stick click; avoid it. | Use only for a visible LS prompt. |
+  | `rs` | Task-irrelevant stick click; avoid it. | Use only for a visible RS prompt. |
+  | `dpad_up` | Task-irrelevant shortcut; avoid it. | Move selection up. |
+  | `dpad_down` | Task-irrelevant shortcut; avoid it. | Move selection down. |
+  | `dpad_left` | Task-irrelevant shortcut; avoid it. | Move selection left. |
+  | `dpad_right` | Task-irrelevant shortcut; avoid it. | Move selection right. |
+  | `start` | Open the pause menu; avoid during scored play. | Open/close pause. |
+  | `back` | Open a task-irrelevant view; avoid it. | Use only for a visible View/Back prompt. |
+  | `guide` | Open the platform guide; avoid it. | Avoid because it covers the game. |
+  <!-- C4G_WINDOWS_INPUT:gamepad:end -->
+
+  <!-- C4G_WINDOWS_INPUT:gamepad-kbm:begin -->
+  Keyboard/mouse guide (game-default PC preset; context-sensitive):
+  Use short-horizon closed-loop control and request a fresh screenshot after
+  each meaningful movement, camera correction, or throw. The game runs live
+  during GUI-agent reasoning. After pressing `Q` to throw a sphere, use a fresh
+  screenshot to choose the next action. The host independently verifies saved
+  progress and ends the episode when both targets are confirmed.
+
+  The three labels permanently shown at the bottom-right of normal gameplay —
+  `Command Pal`, `Summon Pal`, and `Throw Pal Sphere` — are passive input hints,
+  not an open menu. The selected Sol Sphere is already ready. Do not change the
+  selected sphere, weapon, or Pal.
+
+  | Input | Gameplay meaning |
+  |-------|------------------|
+  | `W`, `A`, `S`, `D` | Move forward, left, backward, or right relative to the camera. |
+  | `RMOVE[dx,dy]` | Rotate the third-person camera and aim with one relative mouse movement. Use small corrections and inspect the result. Positive DX turns right and positive DY looks down. |
+  | `Q` | Throw the currently selected Sol Sphere toward the aimed Pal. |
+  | `Shift` | Sprint while moving; normally unnecessary in this small room. |
+  | `Space` | Jump; normally unnecessary. |
+  | `Ctrl` | Dodge; avoid unless needed to recover from obstruction. |
+  | `F` | Contextual interaction; not needed after startup has entered the dungeon. |
+  | Left mouse button | Attack with the equipped weapon; forbidden during this task. |
+  | Right mouse button | Aim the equipped weapon; do not use during this task. |
+  | `E` | Summon or recall the selected Pal; forbidden during this task. |
+  | `Esc` | Open or close the pause menu; avoid during scored play. |
+
+  Do not attack, summon a Pal, or change equipment. Move close to one required
+  blue penguin, aim the camera directly at it, press `Q` once, and inspect the
+  resulting scene before locating the other target.
+  <!-- C4G_WINDOWS_INPUT:gamepad-kbm:end -->
+
+# Included only in the Direct prompt. Coding agents receive the
+# shared gameplay and objective, but not this direct-player pacing hint.
+objective: |
+  Starting inside the dungeon, capture both blue penguin Pals: one large,
+  boss-sized Penking and one smaller Pengullet. Defeating either Pal does not
+  count. One newly captured Penking and one newly captured Pengullet in the
+  saved-world Palbox are both required for success. Host-parsed saved state is
+  the sole success and completion-time evidence; visible capture banners do not
+  determine the score or end the episode.
+  Scoring uses only host-parsed saved state. Capturing neither target scores 0.
+  Each durably captured required species scores 30 capture points. Confirming
+  the first required species provides up to 10 additional speed points,
+  decreasing linearly from 10 at tic 0 to 0 at the 1200-tic episode limit.
+  Confirming both required species provides up to another 30 speed points,
+  decreasing linearly from 30 at tic 0 to 0 at the same limit. Each sphere
+  consumed beyond the number of durably captured required species deducts 2
+  points. Spheres used for successful required captures are not penalized, and
+  the total sphere-waste deduction is capped at 20 points. The final score
+  cannot fall below 0.
+
+episode_contract: |
+  The episode starts inside the configured dungeon at the task starting position.
+  Capture the required target alive; a defeated target alone does not complete the task.
+  The episode ends on confirmed capture, the registered failure condition, unexpected
+  game exit, an explicit stop, or the applicable resource limits.
+
+runtime:
+  scenario: palworld_capture_penking
+  tics_per_second: 10
+  max_tics: 1200
+  max_burst: 5
+  max_calls_per_ep: 240
+
+startup:
+  golden_checkpoint: entrance_singleplayer_20260922
+  # Mouse navigation needs the existing focus-unlock gesture when the running
+  # Steam client launches the game behind the operator window.
+  focus_alt_key: true
+  menu_skip_park_cursor: true
+  # The exterior entrance frame is bright sky (measured mean luma about 162),
+  # while the approved first dungeon frame is dark stone (about 61). Validate
+  # the actual frozen tic-0 frame before any model call. A failed check triggers
+  # the shared cold-start retry and remains an infrastructure-invalid episode.
+  start_check:
+    timeout_seconds: 0
+    mean_luma:
+      rect: [200, 75, 1500, 525]
+      max: 100
+    # The fixed right-hand dungeon wall remains visible when Penking walks
+    # outside the reticle and its contextual health bar disappears. Measured
+    # warm-stone fractions are 0.1726..0.1736 for the ready interior and at most
+    # 0.0525 for captured exterior, confirmation and loading negative controls.
+    hsv_fraction:
+      rect: [1900, 200, 500, 600]
+      ranges:
+      - lower: [8, 35, 60]
+        upper: [30, 160, 255]
+      min: 0.12
+  menu_skip_replay: closed_loop
+  # Navigation perception is separate from the durable save-based score. Require
+  # the observed entrance and confirmation text before the recorded Yes click,
+  # then the boss name after loading. Moving scenery or a loading overlay does
+  # not prove that the dungeon is ready for the frozen start assertion.
+  menu_skip_ocr:
+    input_size: [1920, 1080]
+    min_conf: 0.5
+    device: gpu:0
+    text_detection_model_name: PP-OCRv6_small_det
+    text_recognition_model_name: PP-OCRv6_small_rec
+
+  steam_logged_on_required: true
+lifecycle:
+  terminal_detection: true
+  save_verification:
+    implementation: palworld_capture
+    poll_interval_seconds: 1.0
+    stable_seconds: 2.0
+    # 0 disables wall-clock expiry; the game is frozen during model thinking.
+    timeout_seconds: 0.0
+    toolkit_root: out/third_party/palworld-save-toolkit
+    target_character_ids: [BOSS_CaptainPenguin, Penguin]
+    # Verified against the delivered save and live HUD: Sol Spheres fell from
+    # 193 to 191 after two throws. Exotic remained 189 and is a different item.
+    consumable_item_id: PalSphere_Ancient_1
+    # Verification is independent of any throw input; only new saved instances count.
+    # Inventory saves can lag behind capture saves; every post-handoff RB pulse
+    # is an audited sphere throw and is used as a consumption fallback.
+    candidate_actions: [RB, 'KEY[Q]']
+
+scorer:
+  kind: save
+  implementation: save_verification
+  calibrated_client_size: [2560, 1440]
+  window_setup:
+    size: [2560, 1440]
+    mode: Windowed
+  capture_progress:
+    max_tics: 1200
+    tics_per_second: 10
+    points_per_target: 30
+    first_capture_speed_points: 10
+    full_completion_speed_points: 30
+    waste_penalty_per_item: 2
+    max_waste_penalty: 20
