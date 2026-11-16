@@ -8,29 +8,29 @@
 <h2 align="center">🎮 Coding4Games: Can Modern Coding Agents Play Modern Video Games?</h2>
 
 <h4 align="center">
-  <a href="https://zzsf11.github.io/">Shifang Zhao</a><sup>1</sup> ·
-  <a href="https://zhuomo-1.github.io/">Haoyu Wang</a><sup>2</sup> ·
-  <a href="https://yuyangyin.github.io/">Yuyang Yin</a><sup>2</sup> ·
-  <a href="https://charliedod.github.io/">Dong Chen</a><sup>3</sup> ·
-  <a href="https://flow0314.github.io/">Xingyilang Yin</a><sup>4</sup> ·
-  <a href="https://yunkangtao.github.io/">Yunkang Tao</a><sup>1</sup><br>
-  <a href="https://scholar.google.com.hk/citations?user=j_yFqlsAAAAJ">Honghao Chen</a><sup>6</sup> ·
-  <a href="https://wangguangzhi.com/">Guangzhi Wang</a><sup>6</sup> ·
-  <a href="https://raymondwang987.github.io/">Yiran Wang</a><sup>6</sup> ·
-  <a href="https://pujunfu.github.io/">Junfu Pu</a><sup>6</sup> ·
-  <a href="https://scholar.google.com.hk/citations?user=QfKnJ7oAAAAJ">Cheng Cheng</a><sup>6</sup> ·
-  <a href="https://vinthony.github.io/academic/">Xiaodong Cun</a><sup>1,✉</sup> ·
-  <a href="https://scholar.google.com.hk/citations?user=4oXBp9UAAAAJ">Ying Shan</a><sup>6</sup>
+  <a href="https://zzsf11.github.io/">Shifang Zhao</a><sup>1,2</sup> ·
+  <a href="https://zhuomo-1.github.io/">Haoyu Wang</a><sup>3</sup> ·
+  <a href="https://yuyangyin.github.io/">Yuyang Yin</a><sup>3</sup> ·
+  <a href="https://charliedod.github.io/">Dong Chen</a><sup>4</sup> ·
+  <a href="https://flow0314.github.io/">Xingyilang Yin</a><sup>1,2</sup> ·
+  <a href="https://yunkangtao.github.io/">Yunkang Tao</a><sup>1,2</sup><br>
+  <a href="https://scholar.google.com.hk/citations?user=j_yFqlsAAAAJ">Honghao Chen</a><sup>1</sup> ·
+  <a href="https://wangguangzhi.com/">Guangzhi Wang</a><sup>1</sup> ·
+  <a href="https://raymondwang987.github.io/">Yiran Wang</a><sup>1</sup> ·
+  <a href="https://pujunfu.github.io/">Junfu Pu</a><sup>1</sup> ·
+  <a href="https://scholar.google.com.hk/citations?user=QfKnJ7oAAAAJ">Cheng Cheng</a><sup>1</sup> ·
+  <a href="https://vinthony.github.io/academic/">Xiaodong Cun</a><sup>1,2📫</sup> ·
+  <a href="https://scholar.google.com.hk/citations?user=4oXBp9UAAAAJ">Ying Shan</a><sup>1</sup>
 </h4>
 
 <h6 align="center">
-  <sup>1</sup> GVC Lab, Great Bay University ·
-  <sup>2</sup> Beijing Jiaotong University ·
-  <sup>3</sup> Nanjing University<br>
-  <sup>6</sup> Tencent Arc Lab
+  <sup>1</sup> Tencent Arc Lab ·
+  <sup>2</sup> GVC Lab, Great Bay University ·
+  <sup>3</sup> Beijing Jiaotong University ·
+  <sup>4</sup> Nanjing University
 </h6>
 
-<p align="center"><sup>✉</sup> Corresponding author: Xiaodong Cun</p>
+<p align="center"><sup>📫</sup> Corresponding author</p>
 
 <p align="center">
   <strong>A benchmark for coding agents that build programs to play real video games.</strong>
