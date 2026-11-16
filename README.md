@@ -24,7 +24,7 @@
 </h4>
 
 <h6 align="center">
-  <sup>1</sup> Tencent Arc Lab ·
+  <sup>1</sup> Tencent ARC Lab ·
   <sup>2</sup> GVC Lab, Great Bay University ·
   <sup>3</sup> Beijing Jiaotong University ·
   <sup>4</sup> Nanjing University
