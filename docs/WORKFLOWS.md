@@ -85,8 +85,13 @@ cap within the cumulative tic budget. With `-WindowsInput auto` (the default),
 the launcher uses the scenario's configured input mode. Review the profile,
 provider, limits and output location. Confirm in the menu or add `-Execute`
 in automation to launch the game, create the development environment and make
-paid model requests. The token threshold is enforced from reported usage and
-can be exceeded by a response.
+paid model requests. Reported input, including cached input, and output count
+toward the cumulative token threshold. A response can take usage past it.
+
+For an end-to-end smoke test, use a short tic budget and pass
+`-TaskInstructionsFile` with a request to evaluate and select a minimal player
+early. Allow for the model calls needed to write, run, and select the program
+even when gameplay is short.
 
 Keep the actual development directory printed by the launcher. Read
 `config.json` for the resolved configuration and run status. A completed
