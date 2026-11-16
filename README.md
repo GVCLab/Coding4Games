@@ -13,23 +13,24 @@
   <a href="https://yuyangyin.github.io/">Yuyang Yin</a><sup>2</sup> ·
   <a href="https://charliedod.github.io/">Dong Chen</a><sup>3</sup> ·
   <a href="https://flow0314.github.io/">Xingyilang Yin</a><sup>4</sup> ·
-  <a href="https://yunkangtao.github.io/">Yunkang Tao</a><sup>5,1</sup><br>
-  Honghao Chen<sup>6</sup> ·
+  <a href="https://yunkangtao.github.io/">Yunkang Tao</a><sup>1</sup><br>
+  <a href="https://scholar.google.com.hk/citations?user=j_yFqlsAAAAJ">Honghao Chen</a><sup>6</sup> ·
   <a href="https://wangguangzhi.com/">Guangzhi Wang</a><sup>6</sup> ·
   <a href="https://raymondwang987.github.io/">Yiran Wang</a><sup>6</sup> ·
   <a href="https://pujunfu.github.io/">Junfu Pu</a><sup>6</sup> ·
-  Cheng Cheng<sup>6</sup> ·
-  <a href="https://vinthony.github.io/academic/">Xiaodong Cun</a><sup>1</sup>
+  <a href="https://scholar.google.com.hk/citations?user=QfKnJ7oAAAAJ">Cheng Cheng</a><sup>6</sup> ·
+  <a href="https://vinthony.github.io/academic/">Xiaodong Cun</a><sup>1,✉</sup> ·
+  <a href="https://scholar.google.com.hk/citations?user=4oXBp9UAAAAJ">Ying Shan</a><sup>6</sup>
 </h4>
 
 <h6 align="center">
-  <sup>1</sup> Great Bay University ·
+  <sup>1</sup> GVC Lab, Great Bay University ·
   <sup>2</sup> Beijing Jiaotong University ·
   <sup>3</sup> Nanjing University<br>
-  <sup>4</sup> University of Macau ·
-  <sup>5</sup> Harbin Institute of Technology ·
-  <sup>6</sup> Tencent
+  <sup>6</sup> Tencent Arc Lab
 </h6>
+
+<p align="center"><sup>✉</sup> Corresponding author: Xiaodong Cun</p>
 
 <p align="center">
   <strong>A benchmark for coding agents that build programs to play real video games.</strong>
@@ -203,7 +204,7 @@ If you use Coding4Games in your research, please cite the [paper](https://openre
   title = {{Coding4Games: Can Modern Coding Agents Play Modern Video Games?}},
   author = {Zhao, Shifang and Wang, Haoyu and Yin, Yuyang and Chen, Dong and
             Yin, Xingyilang and Tao, Yunkang and Chen, Honghao and Wang, Guangzhi and
-            Wang, Yiran and Pu, Junfu and Cheng, Cheng and Cun, Xiaodong},
+            Wang, Yiran and Pu, Junfu and Cheng, Cheng and Cun, Xiaodong and Shan, Ying},
   howpublished = {OpenReview},
   url = {https://openreview.net/forum?id=BJMuS3H1Oh}
 }
