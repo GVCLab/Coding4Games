@@ -30,8 +30,6 @@
   <sup>4</sup> Nanjing University
 </h6>
 
-<p align="center"><sup>📫</sup> Corresponding author</p>
-
 <p align="center">
   <strong>A benchmark for coding agents that build programs to play real video games.</strong>
 </p>
