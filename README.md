@@ -19,12 +19,12 @@
   <a href="https://raymondwang987.github.io/">Yiran Wang</a><sup>1</sup> ·
   <a href="https://pujunfu.github.io/">Junfu Pu</a><sup>1</sup> ·
   <a href="https://scholar.google.com.hk/citations?user=QfKnJ7oAAAAJ">Cheng Cheng</a><sup>1</sup> ·
-  <a href="https://vinthony.github.io/academic/">Xiaodong Cun</a><sup>1,2📫</sup> ·
-  <a href="https://scholar.google.com.hk/citations?user=4oXBp9UAAAAJ">Ying Shan</a><sup>1</sup>
+  <a href="https://scholar.google.com.hk/citations?user=4oXBp9UAAAAJ">Ying Shan</a><sup>1</sup> ·
+  <a href="https://vinthony.github.io/academic/">Xiaodong Cun</a><sup>1,2📫</sup>
 </h4>
 
 <h6 align="center">
-  <sup>1</sup> Tencent Arc Lab ·
+  <sup>1</sup> Tencent ARC Lab ·
   <sup>2</sup> GVC Lab, Great Bay University ·
   <sup>3</sup> Beijing Jiaotong University ·
   <sup>4</sup> Nanjing University
@@ -202,7 +202,7 @@ If you use Coding4Games in your research, please cite the [paper](https://openre
   title = {{Coding4Games: Can Modern Coding Agents Play Modern Video Games?}},
   author = {Zhao, Shifang and Wang, Haoyu and Yin, Yuyang and Chen, Dong and
             Yin, Xingyilang and Tao, Yunkang and Chen, Honghao and Wang, Guangzhi and
-            Wang, Yiran and Pu, Junfu and Cheng, Cheng and Cun, Xiaodong and Shan, Ying},
+            Wang, Yiran and Pu, Junfu and Cheng, Cheng and Shan, Ying and Cun, Xiaodong},
   howpublished = {OpenReview},
   url = {https://openreview.net/forum?id=BJMuS3H1Oh}
 }
