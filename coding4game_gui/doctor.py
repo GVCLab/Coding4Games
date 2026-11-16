@@ -8,30 +8,46 @@ import json
 from pathlib import Path
 import shutil
 import sys
+import sysconfig
 import tomllib
 
 from coding4game_gui.catalog import FORMAL_SCENARIOS, onboarding_status, registered_scenario_paths
 from coding4game_gui.operator_config import operator_paths
 from coding4game_gui.paths import REPO_ROOT, SCENARIO_DIR
 
-def _host_packages() -> list[str]:
-    from packaging.markers import Marker
+def _host_packages(*, ocr=False) -> list[str]:
     from packaging.requirements import Requirement
 
     manifest = REPO_ROOT / "pyproject.toml"
     if manifest.is_file():
         with manifest.open("rb") as stream:
-            dependencies = tomllib.load(stream)["project"]["dependencies"]
+            project = tomllib.load(stream)["project"]
+        dependencies = project["optional-dependencies"]["ocr"] if ocr else project["dependencies"]
+        packages = (Requirement(item).name for item in dependencies)
     else:
         dependencies = metadata.requires("coding4game-gui")
         if not dependencies:
             raise ValueError("The installed project has no dependency metadata")
-    # Include Windows host dependencies and skip the dev extra in wheel
-    # metadata. Evaluating markers can spawn OS version probes on Windows.
-    dev_only = Marker('extra == "dev"')
-    packages = (item.name for item in map(Requirement, dependencies)
-                if item.marker != dev_only)
+        # These wheel markers use conjunctions. Evaluating their platform terms
+        # can probe OS version by spawning a process on Windows.
+        packages = []
+        for item in map(Requirement, dependencies):
+            clauses = str(item.marker).split(" and ") if item.marker else []
+            extras = [clause for clause in clauses if clause.startswith("extra ")]
+            selected = 'extra == "ocr"' in extras if ocr else not extras
+            if selected:
+                packages.append(item.name)
     return list(dict.fromkeys(packages))
+
+
+def _missing_packages(packages) -> list[str]:
+    missing = []
+    for package in packages:
+        try:
+            metadata.version(package)
+        except metadata.PackageNotFoundError:
+            missing.append(package)
+    return missing
 
 
 def diagnose(repo: Path = REPO_ROOT, *, game=None, agent="claude", model=None,
@@ -44,15 +60,10 @@ def diagnose(repo: Path = REPO_ROOT, *, game=None, agent="claude", model=None,
                        "detail": detail})
 
     check("windows", sys.platform == "win32", "Gameplay requires an unlocked interactive Windows desktop.")
-    check("python", sys.version_info[:2] == (3, 11) and sys.maxsize > 2**32,
-          "Documented host environment: Python 3.11 x64.")
-    missing = []
+    check("python", sys.implementation.name == "cpython" and sys.version_info[:2] == (3, 11)
+          and sysconfig.get_platform() == "win-amd64", "Documented host environment: CPython 3.11 x64.")
     try:
-        for package in _host_packages():
-            try:
-                metadata.version(package)
-            except metadata.PackageNotFoundError:
-                missing.append(package)
+        missing = _missing_packages(_host_packages())
     except (OSError, ValueError, ImportError, KeyError) as error:
         check("dependencies", False,
               f"Cannot inspect project dependencies ({type(error).__name__}). Run host setup.")
@@ -112,6 +123,16 @@ def diagnose(repo: Path = REPO_ROOT, *, game=None, agent="claude", model=None,
             check("game_acceptance_scope", game in FORMAL_SCENARIOS, onboarding_status(game), warning=True)
             from coding4game_gui.benchmark.windows.local_paths import read_driver_data
             driver_data = read_driver_data(repo / "games" / f"{driver}.yaml")
+            scorer = scenario.get("scorer") or {}
+            startup = scenario.get("startup") or {}
+            if (scorer.get("kind") == "ocr" or "ocr" in scorer or
+                    "menu_skip_ocr" in startup or "menu_skip_ocr_rect" in startup or
+                    (driver_data.get("scorer") or {}).get("kind") == "ocr"):
+                missing_ocr = _missing_packages(_host_packages(ocr=True))
+                check("game_ocr_dependencies", not missing_ocr,
+                      "Missing OCR distributions: " + ", ".join(missing_ocr) +
+                      ". Run ./scripts/start.ps1 -Setup -Ocr." if missing_ocr else
+                      "OCR distributions installed; verify the GPU and OCR runtime in game calibration.")
             if driver_data.get("ime_context_mode") == "disabled":
                 native = repo / "coding4game_gui/benchmark/windows/drivers/windows_xinput/native_ime"
                 try:
@@ -173,6 +194,8 @@ def main(argv=None) -> int:
             for item in report["game_checks"]["checks"]:
                 if item["status"] != "pass":
                     print(f"[{item['status'].upper()}] game/{item['id']}: {item['detail']}")
+                    if item.get("command"):
+                        print(f"  {item['command']}")
         print("Static checks only. No game, WSL clone, save restoration or model call was started.")
     return 0 if report["static_checks_pass"] else 1
 

@@ -4,6 +4,7 @@ import io
 import json
 import subprocess
 import socket
+import tarfile
 
 import pytest
 
@@ -216,7 +217,10 @@ def test_first_run_preview_and_bad_download_do_not_provision(tmp_path, monkeypat
     monkeypatch.setattr(setup, "run", lambda *_: pytest.fail("WSL setup was started"))
 
     assert setup.main(["--first-run"]) == 0
-    assert json.loads(capsys.readouterr().out)["claude_sha256"] == setup.CLAUDE_SHA256
+    preview = json.loads(capsys.readouterr().out)
+    assert preview["claude_sha256"] == setup.CLAUDE_SHA256
+    assert preview["claude_download"] == setup.CLAUDE_URL
+    assert preview["claude_download_fallback"] == setup.CLAUDE_NPM_URL
     assert downloads == []
     assert list(tmp_path.iterdir()) == []
 
@@ -227,6 +231,50 @@ def test_first_run_preview_and_bad_download_do_not_provision(tmp_path, monkeypat
     assert list((runtime / "downloads").iterdir()) == []
     assert not (runtime / "baseline").exists()
     assert not (tmp_path / "launcher.local.json").exists()
+
+
+@pytest.mark.parametrize("member_kind", ["pinned", "wrong_hash", "symlink", "missing"])
+def test_claude_download_falls_back_to_verified_npm_file(tmp_path, monkeypatch, member_kind):
+    monkeypatch.setattr(setup, "CLAUDE_SHA256", hashlib.sha256(b"pinned").hexdigest())
+    package = io.BytesIO()
+    with tarfile.open(fileobj=package, mode="w:gz") as archive:
+        unrelated = tarfile.TarInfo("../unexpected")
+        unrelated.size = len(b"ignored")
+        archive.addfile(unrelated, io.BytesIO(b"ignored"))
+        if member_kind != "missing":
+            executable = tarfile.TarInfo("package/claude")
+            if member_kind == "symlink":
+                executable.type = tarfile.SYMTYPE
+                executable.linkname = "../unexpected"
+                archive.addfile(executable)
+            else:
+                payload = b"pinned" if member_kind == "pinned" else b"wrong"
+                executable.size = len(payload)
+                archive.addfile(executable, io.BytesIO(payload))
+
+    downloads = []
+
+    def open_url(url, *, timeout):
+        downloads.append((url, timeout))
+        if url == setup.CLAUDE_URL:
+            raise TimeoutError()
+        return io.BytesIO(package.getvalue())
+
+    monkeypatch.setattr(setup, "urlopen", open_url)
+    directory = tmp_path / "downloads"
+    target = directory / f"claude-{setup.CLAUDE_VERSION}-linux-x64"
+    if member_kind == "pinned":
+        assert setup.download_claude(directory) == target
+        assert target.read_bytes() == b"pinned"
+        assert setup.download_claude(directory) == target
+        assert list(directory.iterdir()) == [target]
+    else:
+        reason = "hash mismatch" if member_kind == "wrong_hash" else "regular package/claude file"
+        with pytest.raises(RuntimeError, match=reason):
+            setup.download_claude(directory)
+        assert list(directory.iterdir()) == []
+    assert not (tmp_path / "unexpected").exists()
+    assert downloads == [(setup.CLAUDE_URL, 5), (setup.CLAUDE_NPM_URL, 60)]
 
 
 def test_missing_mandatory_cv2_prevents_export(tmp_path, monkeypatch):

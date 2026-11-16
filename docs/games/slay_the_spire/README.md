@@ -6,6 +6,12 @@ The ZIP contains the registered `preferences/` tree and restores into the
 game installation directory. Set the exact local restore destination and
 review its contents before the first restore. [Driver](../../../games/slay_the_spire.yaml)
 
+When recreating the checkpoint, include only the preferences tree.
+
+```powershell
+./.venv/Scripts/python.exe scripts/calibration/checkpoint.py --game slay_the_spire golden --include preferences
+```
+
 - Use an English, 1280×960 windowed client. Create the startup pad before
   launch so the game detects it. The default gameplay input is
   `gamepad-kbm`.

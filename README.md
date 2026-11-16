@@ -137,7 +137,7 @@ Use **Windows x64** with **Python 3.11 x64** and **WSL 2**. Follow the [Windows 
    ./scripts/start.ps1 -SetupWsl2
    ```
 
-   The second command prepares a Claude Code profile. The [WSL 2 profile guide](docs/QUICKSTART.md#existing-profiles-and-codex) explains how to reuse a profile or set up Codex.
+   For a game that uses OCR, add `-Ocr` to the first command. The second command prepares a Claude Code profile. The [WSL 2 profile guide](docs/QUICKSTART.md#existing-profiles-and-codex) explains how to reuse a profile or set up Codex.
 
 3. **Configure the game and model.** Use the [configuration examples](docs/QUICKSTART.md#2-configure-host-only-settings) to set your game and save paths in `games.local.json`, configure a model in `litellm.config.yaml`, and set its API key on Windows.
 4. **Run the benchmark.** Follow the [TUI walkthrough](#tui-walkthrough) to verify startup, develop a player, and score it in an independent test.

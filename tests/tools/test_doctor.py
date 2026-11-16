@@ -2,6 +2,8 @@
 import hashlib
 import json
 
+import pytest
+
 from coding4game_gui import doctor
 from coding4game_gui.benchmark.windows import save_verification
 from coding4game_gui.benchmark.windows.save_verification import PALWORLD_TOOLKIT_FILES
@@ -12,6 +14,7 @@ def host_fixture(tmp_path, monkeypatch):
     monkeypatch.setattr(doctor.metadata, "version", lambda package: "installed")
     monkeypatch.setattr(doctor.shutil, "which", lambda name: "C:/Windows/wsl.exe")
     monkeypatch.setattr(doctor.sys, "platform", "win32")
+    monkeypatch.setattr(doctor.sysconfig, "get_platform", lambda: "win-amd64")
     baseline = tmp_path / "baseline.tar"
     baseline.write_bytes(b"fixed baseline fixture")
     profile = tmp_path / "profile.json"
@@ -56,6 +59,36 @@ def test_doctor_rejects_missing_agent_and_modified_baseline(tmp_path, monkeypatc
     assert any(item["id"] == "baseline_hash" and item["status"] == "blocked" for item in report["checks"])
     report = doctor.diagnose(tmp_path, agent="codex")
     assert any(item["id"] == "profile" and item["status"] == "blocked" for item in report["checks"])
+
+
+@pytest.mark.parametrize(("game", "driver", "needs_ocr"), [
+    ("kof98_terminal", "kof98", False),
+    ("aimlab", "aimlab", True),
+    ("battleblock", "battleblock", True),
+])
+def test_doctor_checks_ocr_only_for_selected_scenarios(tmp_path, monkeypatch, game, driver, needs_ocr):
+    host_fixture(tmp_path, monkeypatch)
+    monkeypatch.setattr(add_new_game_preflight, "audit_game", lambda *_: {"config_ready": True})
+    monkeypatch.setattr(doctor, "_host_packages", lambda *, ocr=False: ["paddleocr"] if ocr else [])
+
+    def installed(package):
+        raise doctor.metadata.PackageNotFoundError(package)
+
+    monkeypatch.setattr(doctor.metadata, "version", installed)
+    scenario = tmp_path / "coding4game_gui" / "benchmark" / "scenarios" / f"{game}.yaml"
+    scenario.parent.mkdir(parents=True)
+    scenario.write_bytes((doctor.SCENARIO_DIR / f"{game}.yaml").read_bytes())
+    driver_path = tmp_path / "games" / f"{driver}.yaml"
+    driver_path.parent.mkdir()
+    driver_path.write_text("name: Demo\n", encoding="utf-8")
+    report = doctor.diagnose(tmp_path, game=game)
+    checks = {check["id"]: check for check in report["checks"]}
+    assert checks["dependencies"]["status"] == "pass"
+    if needs_ocr:
+        assert checks["game_ocr_dependencies"]["status"] == "blocked"
+        assert "./scripts/start.ps1 -Setup -Ocr" in checks["game_ocr_dependencies"]["detail"]
+    else:
+        assert "game_ocr_dependencies" not in checks
 
 
 def test_doctor_checks_palworld_toolkit_declared_in_lifecycle(tmp_path, monkeypatch):

@@ -14,7 +14,8 @@ dependencies = [
     "numpy",
     "pillow",
     "packaging",
-    "opencv-python",
+    # The OCR stack uses this same cv2 distribution.
+    "opencv-contrib-python==4.10.0.84",
     "pyautogui",
     "pyyaml",
     "ruamel.yaml",
@@ -24,16 +25,18 @@ dependencies = [
     "vgamepad==0.2.0; sys_platform == 'win32'",
     "pywin32; sys_platform == 'win32'",
     "xspeedhack; sys_platform == 'win32'",
-    "paddleocr==3.7.0; sys_platform == 'win32'",
-    # Paddle publishes the calibrated CUDA 11.8 Windows wheels outside PyPI.
-    "paddlepaddle-gpu @ https://paddle-whl.cdn.bcebos.com/stable/cu118/paddlepaddle-gpu/paddlepaddle_gpu-3.3.1-cp311-cp311-win_amd64.whl ; sys_platform == 'win32' and python_version == '3.11'",
-    "paddlepaddle-gpu @ https://paddle-whl.cdn.bcebos.com/stable/cu118/paddlepaddle-gpu/paddlepaddle_gpu-3.3.1-cp312-cp312-win_amd64.whl ; sys_platform == 'win32' and python_version == '3.12'",
-    "paddlepaddle-gpu @ https://paddle-whl.cdn.bcebos.com/stable/cu118/paddlepaddle-gpu/paddlepaddle_gpu-3.3.1-cp313-cp313-win_amd64.whl ; sys_platform == 'win32' and python_version == '3.13'",
     "anthropic",
 ]
 
 [project.optional-dependencies]
 dev = ["pytest==9.0.3"]
+ocr = [
+    "paddleocr==3.7.0; sys_platform == 'win32'",
+    # Paddle publishes the calibrated CUDA 11.8 Windows wheels outside PyPI.
+    "paddlepaddle-gpu @ https://paddle-whl.cdn.bcebos.com/stable/cu118/paddlepaddle-gpu/paddlepaddle_gpu-3.3.1-cp311-cp311-win_amd64.whl ; sys_platform == 'win32' and python_version == '3.11'",
+    "paddlepaddle-gpu @ https://paddle-whl.cdn.bcebos.com/stable/cu118/paddlepaddle-gpu/paddlepaddle_gpu-3.3.1-cp312-cp312-win_amd64.whl ; sys_platform == 'win32' and python_version == '3.12'",
+    "paddlepaddle-gpu @ https://paddle-whl.cdn.bcebos.com/stable/cu118/paddlepaddle-gpu/paddlepaddle_gpu-3.3.1-cp313-cp313-win_amd64.whl ; sys_platform == 'win32' and python_version == '3.13'",
+]
 
 [tool.setuptools.packages.find]
 where = ["."]

@@ -58,10 +58,12 @@ checkpoint_name = args.checkpoint or args.name
 if not checkpoint_name:
     parser.error("checkpoint name required (positional, or --checkpoint NAME)")
 
-cfg = load_game_config(args.game)
+cfg = load_game_config(args.game, validate_files=False)
 
-if cfg.save_state and cfg.save_state.restore_to:
+if cfg.save_state:
     save_dir = cfg.save_state.restore_to
+    if save_dir is None:
+        parser.error("set the verified save_state.restore_to in games.local.json")
     save_dir_source = f"yaml save_state.restore_to"
 else:
     try:
@@ -70,7 +72,7 @@ else:
         parser.error(str(exc))
     save_dir_source = "default registry"
 
-if not save_dir.exists():
+if not save_dir.is_dir():
     parser.error(f"save dir does not exist: {save_dir}")
 
 print(f"Save dir: {save_dir}  ({save_dir_source})")

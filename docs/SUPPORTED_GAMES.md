@@ -30,13 +30,18 @@ Install the licensed game separately. Keep the checkpoint ZIP linked in the
 table at its registered path under `snapshots/`. Use the [checkpoint guide](../snapshots/README.md)
 to verify that the save matches your account and task before restoring it.
 Set the local EXE and verified restore directory in `games.local.json`.
-An account-bound scenario can require this override before any save restore.
+Always review the restore destination before running a checkpoint scenario.
+For an account-bound checkpoint, explicitly set the restore directory for
+your account and confirm that the archive is compatible. Several driver
+defaults came from the original host.
 
 For scenarios using virtual controller input or menu navigation, install
 ViGEmBus. Drivers with `use_speedhack: true` require the xSpeed injector
-and DLL matching the game's process architecture. For OCR tasks, verify
-the required model and GPU runtime. The per-game page specifies additional
-native or toolkit prerequisites when required. [New-machine setup](QUICKSTART.md)
+and DLL matching the game's process architecture. All listed scenarios
+except KOF98 use OCR during navigation or scoring. Run
+`./scripts/start.ps1 -Setup -Ocr` for those scenarios, then verify their
+OCR model and GPU runtime. The per-game page specifies additional native
+or toolkit prerequisites when required. [New-machine setup](QUICKSTART.md)
 
 Run `python -m coding4game_gui.doctor --game SCENARIO` for the static
 resource check. Verify the registered frozen start, ordinary input,

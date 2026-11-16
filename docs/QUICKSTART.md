@@ -13,7 +13,8 @@ any additional dependencies. [Python installer](https://www.python.org/downloads
 
 ### Download the source
 
-Extract the source ZIP or clone the branch with Git for Windows. [Git for Windows](https://git-scm.com/install/windows)
+Use **Code → Download ZIP** on GitHub and open PowerShell in the extracted
+folder. You can also clone the repository with [Git for Windows](https://git-scm.com/install/windows).
 
 ```powershell
 git clone --depth 1 https://github.com/GVCLab/Coding4Games.git
@@ -40,11 +41,13 @@ Open regular PowerShell in the checkout and start host setup.
 ```
 
 Review the preview, enter `y`, then choose **Quit** when the menu opens.
+If your game guide lists OCR, run `./scripts/start.ps1 -Setup -Ocr` to add the
+OCR dependencies. You can use this command for the first setup or later.
 
 If you need to select the installer interpreter, use
 `./scripts/start.ps1 -Setup -Python C:/Python311/python.exe` with your actual
-Python path. The entry previews the installation and asks before running it.
-Add `-Preview` to print the plan and exit. Setup creates `.venv`,
+Python path. Add `-Preview` to check the interpreter and see the install plan.
+Setup creates `.venv`,
 installs this checkout and its host dependencies, runs `pip check`, and copies
 missing local configuration files. Existing environments and settings are never
 replaced. A failed installation remains available for diagnosis. Setup downloads
@@ -52,17 +55,18 @@ packages but does not provision WSL, install drivers, change saves, launch a gam
 or call a model. Use `-Dev` to include software-test dependencies.
 
 Python dependencies are declared in [pyproject.toml](../pyproject.toml).
-Setup downloads the official [CUDA 11.8 PaddlePaddle wheel](https://www.paddlepaddle.org.cn/packages/stable/cu118/paddlepaddle-gpu/) for Windows.
+The OCR extra downloads the official [CUDA 11.8 PaddlePaddle wheel](https://www.paddlepaddle.org.cn/packages/stable/cu118/paddlepaddle-gpu/) for Windows.
 Install ViGEmBus separately. When installing manually, set
 `VGAMEPAD_SKIP_VIGEMBUS_INSTALL=true` in the shell to keep its driver installer
-out of Python setup. Include `[dev]` for software-test dependencies.
+out of Python setup. Use `.[ocr]` for OCR, `.[dev]` for tests, or
+`.[dev,ocr]` for both.
 
 If you use Conda, create the environment with `conda create -n coding4game_gui python=3.11 pip tk`
 and activate it with `conda activate coding4game_gui` before running these commands.
 
 ```powershell
 $env:VGAMEPAD_SKIP_VIGEMBUS_INSTALL = 'true'
-python -m pip install -e ".[dev]"
+python -m pip install -e .
 python -c "from coding4game_gui.operator_config import initialize; print(initialize())"
 ```
 
@@ -109,18 +113,11 @@ the local account, world, and starting state before restoring a checkpoint.
 
 ### Model provider
 
-For the default Claude Code runtime, put a Claude API model you can access
-in `litellm.config.yaml`. Keep its alias in sync with `launcher.local.json`.
-[Claude API key setup](https://platform.claude.com/docs/en/get-started#get-your-api-key)
-
-```yaml
-model_list:
-  - model_name: my-model
-    litellm_params:
-      model: anthropic/claude-sonnet-4-6
-      api_base: https://api.anthropic.com
-      api_key: os.environ/C4G_MODEL_API_KEY
-```
+The generated `litellm.config.yaml` uses Claude Sonnet 4.6 with the Claude API.
+To use a different model or provider, edit the model ID and HTTPS endpoint,
+and keep the alias in sync with `launcher.local.json`.
+[Claude API key setup](https://platform.claude.com/docs/en/get-started#get-your-api-key) ·
+[Model details](https://platform.claude.com/docs/en/models/sonnet-4-6/overview)
 
 Enter the key in the PowerShell session that will open the operator menu.
 
@@ -137,10 +134,15 @@ After Windows setup, run this from the checkout in regular PowerShell.
 ```
 
 Review the preview and confirm. Setup downloads the pinned Linux x64 Claude
-Code binary from Anthropic and checks its SHA-256 before installing it. It
+Code binary from Anthropic and checks its SHA-256 before installing it.
+If the download fails, setup tries Anthropic's official npm package for the
+same binary and verifies it against the same SHA-256. Setup
 provisions `C4G-WSL2-Base-LOCAL`, exports its Debian baseline, and sets the
 generated profile in `launcher.local.json` for a new checkout. Use `-Preview`
 to see the plan. [Claude Code release verification](https://code.claude.com/docs/en/setup#binary-integrity-and-code-signing)
+
+Keep enough disk space for the distribution and archive under
+`runtime/wsl2/` and a temporary clone for each active run.
 
 ### Existing profiles and Codex
 
@@ -153,6 +155,10 @@ Linux x64 platform package. Select a new `--root` and a temporary `--distro`
 with the prefix `C4G-WSL2-Build-`. Review the plan before adding `--execute`.
 The setup prints the new profile path. Select it in `launcher.local.json`
 and configure a matching Codex model route. Keep personal CLI homes on the host.
+
+The Linux x64 Codex `0.153.4` package has SHA-256
+`54818cb9fce3360cc6e44cfc5a96952cd5c1243efb43cbe488e11dda84663e08`.
+[Download this platform package](https://registry.npmjs.org/@openai/codex/-/codex-0.153.4-linux-x64.tgz)
 
 ### Local CLI binary and interrupted setup
 
@@ -235,8 +241,10 @@ session and cumulative allowance. [Recovery limits](contracts/OPERATOR_WORKFLOWS
 |---|---|
 | PowerShell blocks launcher scripts | For a reviewed Git checkout, use `Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned` in the current PowerShell session if your machine policy permits. For a trusted source ZIP, unblock it in Windows file Properties before extracting. [PowerShell execution policies](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_execution_policies) |
 | Python version/dependency failure | Use a dedicated 3.11 x64 environment; inspect pip output. Preserve an incompatible existing `.venv`. |
+| Conflicting OpenCV packages in an existing environment | Use a clean environment for the setup. Both setup modes install `opencv-contrib-python` as the provider of `cv2`. |
 | Profile missing or selected agent absent | Complete WSL provisioning or create a new extended baseline; update `launcher.local.json`. |
-| Provider route rejected | Replace example model/HTTPS endpoint and set the referenced host environment variable. Doctor sends no request. |
+| Provider route rejected | Verify the model, its HTTPS endpoint, and the API key environment variable in your current shell. Doctor checks the local configuration. |
+| Claude Code reports a model or authentication error | Check the upstream HTTP status in the failed run's `model_gateway.jsonl`. Verify your provider endpoint, model access, and quota. |
 | Missing checkpoint/account mismatch | Obtain or prepare the registered task normally and verify it; see the game catalog. |
 | Missing timing/native components | Check architecture, upstream artifacts and security software. Do not bypass the registered timing protocol. |
 | Capture/focus/start check failure | Keep the game visible and desktop unlocked; inspect retained evidence and local display settings. |

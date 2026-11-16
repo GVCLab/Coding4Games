@@ -45,9 +45,13 @@ if __name__ == "__main__" and (
 
 try:
     import yaml
-except ImportError:
+    from coding4game_gui.benchmark.windows.games_config import load_game_config
+except ImportError as error:
+    if error.name and error.name.startswith("coding4game_gui"):
+        raise
+    dependency = "PyYAML" if error.name == "yaml" else error.name or "A required package"
     sys.exit(
-        "PyYAML is missing from the selected Python environment.\n"
+        f"{dependency} could not be imported from the selected Python environment.\n"
         "Run ./scripts/start.ps1 -Setup to prepare the project environment, "
         "or use -Python with a prepared interpreter."
     )
@@ -59,7 +63,6 @@ from coding4game_gui.benchmark.experiment_plan import ProgramTestPlan
 from coding4game_gui.benchmark.experiment_plan import build_development_args
 from coding4game_gui.benchmark.experiment_plan import build_program_test_args
 from coding4game_gui.benchmark.experiment_plan import discover_benchmark_scenarios
-from coding4game_gui.benchmark.windows.games_config import load_game_config
 from coding4game_gui.benchmark.windows.local_paths import read_driver_data
 from coding4game_gui.paths import GAMES_DIR
 from coding4game_gui.operator_config import (

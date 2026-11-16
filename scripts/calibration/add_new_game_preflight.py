@@ -14,6 +14,7 @@ import argparse
 import glob
 import json
 import os
+import re
 import sys
 from collections import Counter
 from importlib import metadata
@@ -80,31 +81,66 @@ def _golden_path(repo_root: Path, game: str, driver: dict,
     return repo_root / "snapshots" / f"{game}_{checkpoint}.zip"
 
 
+def _steam_target(launcher: Path, app_id: str, process: str) -> Path:
+    """Find the declared game executable inside the Steam app's own install."""
+    from coding4game_gui.benchmark.windows.steam_paths import steam_library_roots
+
+    if not re.fullmatch(r"[0-9]+", app_id) or not re.fullmatch(r'[^<>:"/\\|?*]+\.exe', process, re.I):
+        raise ValueError("Steam -applaunch requires an app ID and a game executable name")
+    manifests = [
+        root / "steamapps" / f"appmanifest_{app_id}.acf"
+        for root in steam_library_roots([launcher.parent])
+    ]
+    manifests = [manifest for manifest in manifests if manifest.is_file()]
+    if len(manifests) != 1:
+        reason = "is not installed in this client's Steam libraries" if not manifests else "has multiple install manifests"
+        raise ValueError(f"Steam app {app_id} {reason}; check its installation in Steam")
+    manifest = manifests[0]
+    content = manifest.read_text(encoding="utf-8-sig")
+    names = re.findall(r'^\s*"installdir"\s*"([^"]+)"\s*$', content, re.M | re.I)
+    if len(names) != 1 or not re.fullmatch(r"[^/\\:]+", names[0]) or names[0] in {".", ".."}:
+        raise ValueError(f"Steam app {app_id} has an invalid install directory in {manifest}")
+    installed = manifest.parent / "common" / names[0]
+    direct_target = installed / process
+    if direct_target.is_file():
+        return direct_target
+    matches = [candidate for candidate in installed.rglob(glob.escape(process)) if candidate.is_file()]
+    if len(matches) != 1:
+        reason = "is missing" if not matches else "has multiple matches"
+        raise ValueError(f"{process} {reason} in the Steam app {app_id} directory {installed}")
+    return matches[0]
+
+
+def _pe_arch(path: Path) -> str:
+    with path.open("rb") as executable:
+        header = executable.read(64)
+        if len(header) != 64 or header[:2] != b"MZ":
+            raise ValueError("missing or truncated DOS header")
+        offset = int.from_bytes(header[60:64], "little")
+        if not 64 <= offset <= path.stat().st_size - 6:
+            raise ValueError("invalid PE header offset")
+        executable.seek(offset)
+        coff = executable.read(6)
+        if coff[:4] != b"PE\0\0":
+            raise ValueError("missing PE signature")
+        machine = int.from_bytes(coff[4:6], "little")
+    arch = {0x14C: "x86", 0x8664: "x64"}.get(machine)
+    if arch is None:
+        raise ValueError(f"unsupported PE machine 0x{machine:04x}")
+    return arch
+
+
 def _check_time_control_resources(checks: list[dict], driver: dict,
-                                  launch_path: Path | None) -> None:
+                                  game_path: Path | None, arch: str | None = None) -> None:
     """Check required timing files without importing or executing an injector."""
     if driver.get("use_speedhack") is not True:
         return
-    if launch_path is None:
+    if game_path is None:
         _check(checks, "time_control_resources", "auto",
-               "resolve the launch executable before checking required timing resources")
+               "resolve the game executable before checking required timing resources")
         return
     try:
-        with Path(launch_path).open("rb") as executable:
-            header = executable.read(64)
-            if len(header) != 64 or header[:2] != b"MZ":
-                raise ValueError("missing or truncated DOS header")
-            offset = int.from_bytes(header[60:64], "little")
-            if not 64 <= offset <= Path(launch_path).stat().st_size - 6:
-                raise ValueError("invalid PE header offset")
-            executable.seek(offset)
-            coff = executable.read(6)
-            if coff[:4] != b"PE\0\0":
-                raise ValueError("missing PE signature")
-            machine = int.from_bytes(coff[4:6], "little")
-            arch = {0x14C: "x86", 0x8664: "x64"}.get(machine)
-            if arch is None:
-                raise ValueError(f"unsupported PE machine 0x{machine:04x}")
+        arch = arch or _pe_arch(game_path)
     except (OSError, ValueError) as exc:
         _check(checks, "time_control_resources", "error",
                f"cannot determine required timing architecture: {exc}")
@@ -125,7 +161,7 @@ def _check_time_control_resources(checks: list[dict], driver: dict,
         checks, "time_control_resources", "error" if missing else "pass",
         (f"required {arch} timing resources missing or empty: {', '.join(missing)}; "
          "review the installation and security history" if missing else
-         f"timing resources present for the {arch} launch executable; "
+         f"timing resources present for the {arch} game executable; "
          "native attachment and freeze acceptance remain required"),
     )
 
@@ -159,7 +195,7 @@ def audit_game(repo_root: Path, game: str,
     if driver:
         try:
             from coding4game_gui.benchmark.windows.games_config import parse_game_config
-            parse_game_config(driver, driver_path)
+            parse_game_config(driver, driver_path, validate_files=False)
         except Exception as exc:  # noqa: BLE001 - return the whole audit
             driver_parse_error = f"{type(exc).__name__}: {exc}"
     _check(checks, "driver_contract",
@@ -187,13 +223,14 @@ def audit_game(repo_root: Path, game: str,
     launch_path = str(launch.get("launch_path") or "").strip()
     legacy_steam = bool(launch.get("steam_url"))
     resolved_launch_path = None
+    launch_error = None
     if launch_path:
         from types import SimpleNamespace
         from coding4game_gui.benchmark.windows.game_launch import resolve_launch_path
         try:
             resolved_launch_path = resolve_launch_path(SimpleNamespace(launch_path=launch_path))
-        except (ValueError, RuntimeError, OSError):
-            pass
+        except (ValueError, RuntimeError, OSError) as exc:
+            launch_error = str(exc)
     launch_ok = resolved_launch_path is not None
     _check(
         checks,
@@ -204,9 +241,26 @@ def audit_game(repo_root: Path, game: str,
          (f"direct executable: {resolved_launch_path}"
           + (" (desktop_shell)" if launch.get("launch_method") == "desktop_shell" else "")
           if launch_ok else
-          "discover the installed executable launch path")),
+          f"{launch_error or 'Set the installed launch executable'}; review "
+          f"{game}.auto_launch.launch_path in games.local.json")),
     )
-    _check_time_control_resources(checks, driver, resolved_launch_path)
+    game_path = resolved_launch_path
+    game_arch = None
+    launch_args = launch.get("launch_args") or []
+    if (resolved_launch_path and resolved_launch_path.name.lower() == "steam.exe"
+            and isinstance(launch_args, list) and "-applaunch" in launch_args):
+        game_path = None
+        app_index = launch_args.index("-applaunch") + 1
+        app_id = str(launch_args[app_index]) if app_index < len(launch_args) else ""
+        try:
+            target = _steam_target(resolved_launch_path, app_id, str(driver.get("process") or ""))
+            game_arch = _pe_arch(target)
+        except (OSError, ValueError) as exc:
+            _check(checks, "steam_app_executable", "error", str(exc))
+        else:
+            game_path = target
+            _check(checks, "steam_app_executable", "pass", f"Steam app {app_id}: {target} ({game_arch})")
+    _check_time_control_resources(checks, driver, game_path, game_arch)
 
     save = driver.get("save_state") or {}
     if save:
@@ -254,12 +308,19 @@ def audit_game(repo_root: Path, game: str,
                "not required; no save restore is configured")
     else:
         golden_ok = golden.is_file()
+        prefix = f"{game}_"
+        checkpoint_name = golden.stem.removeprefix(prefix)
+        can_recreate = (
+            bool(re.fullmatch(r"[A-Za-z0-9_.-]+", checkpoint_name))
+            and golden == repo_root / "snapshots" / f"{prefix}{checkpoint_name}.zip"
+        )
         _check(
             checks, "golden_checkpoint", "pass" if golden_ok else "manual",
             (f"found {golden}" if golden_ok else
              f"prepare the exact task start and create {golden}"),
-            None if golden_ok else
-            f"python scripts/calibration/checkpoint.py --game {game} golden",
+            f"python scripts/calibration/checkpoint.py --game {game} {checkpoint_name}"
+            + (" --include preferences" if game == "slay_the_spire" else "")
+            if not golden_ok and can_recreate else None,
             blocks_config=not golden_ok,
         )
 

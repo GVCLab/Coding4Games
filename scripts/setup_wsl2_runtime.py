@@ -15,6 +15,7 @@ import subprocess
 import tarfile
 import tempfile
 import winreg
+from http.client import HTTPException
 from pathlib import Path
 from urllib.request import urlopen
 
@@ -24,6 +25,8 @@ DISTRO = "C4G-WSL2-Base-20261013"
 CLAUDE_VERSION = "2.1.274"
 CLAUDE_SHA256 = "15e2d05148f801b5774032faad87e624ecd172e9903288bda448b892eb58fa07"
 CLAUDE_URL = f"https://downloads.claude.ai/claude-code-releases/{CLAUDE_VERSION}/linux-x64/claude"
+CLAUDE_NPM_URL = ("https://registry.npmjs.org/@anthropic-ai/claude-code-linux-x64/-/"
+                  f"claude-code-linux-x64-{CLAUDE_VERSION}.tgz")
 PACKAGES = ("python3 python3-venv python3-pip python3-numpy python3-pil "
             "python3-opencv python3-requests git curl ca-certificates nftables procps nodejs npm "
             "build-essential")
@@ -240,6 +243,20 @@ def sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
+def download_claude_npm(binary: Path) -> None:
+    with urlopen(CLAUDE_NPM_URL, timeout=60) as response, tarfile.open(
+            fileobj=response, mode="r|gz") as archive:
+        for member in archive:
+            if member.name != "package/claude":
+                continue
+            if not member.isreg():
+                break
+            with archive.extractfile(member) as source, binary.open("wb") as stream:
+                shutil.copyfileobj(source, stream)
+            return
+    raise RuntimeError("Claude npm archive does not contain a regular package/claude file")
+
+
 def download_claude(directory: Path) -> Path:
     """Cache the pinned Linux executable only after its digest matches."""
     target = directory / f"claude-{CLAUDE_VERSION}-linux-x64"
@@ -249,8 +266,15 @@ def download_claude(directory: Path) -> Path:
     print(f"Downloading Claude Code {CLAUDE_VERSION} for Linux x64.", flush=True)
     with tempfile.TemporaryDirectory(dir=directory) as download_dir:
         binary = Path(download_dir) / "claude"
-        with urlopen(CLAUDE_URL, timeout=60) as response, binary.open("wb") as stream:
-            shutil.copyfileobj(response, stream)
+        try:
+            response = urlopen(CLAUDE_URL, timeout=5)
+        except (OSError, HTTPException) as error:
+            print(f"Claude download unavailable ({type(error).__name__}). "
+                  "Trying the pinned Anthropic npm package.", flush=True)
+            download_claude_npm(binary)
+        else:
+            with response, binary.open("wb") as stream:
+                shutil.copyfileobj(response, stream)
         if sha256(binary) != CLAUDE_SHA256:
             raise RuntimeError("Downloaded Claude binary hash mismatch")
         binary.replace(target)
@@ -574,7 +598,8 @@ def main(argv=None) -> int:
             print(f"Using the profile already set in launcher.local.json: {selected}")
             return 0
         plan.update(wsl_version=2, launcher_config=str(preset),
-                    claude_download=CLAUDE_URL if args.claude_source is None else None)
+                    claude_download=CLAUDE_URL if args.claude_source is None else None,
+                    claude_download_fallback=CLAUDE_NPM_URL if args.claude_source is None else None)
     print(json.dumps(plan, indent=2))
     if not args.execute: return 0
 

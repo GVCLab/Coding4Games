@@ -14,12 +14,25 @@ param(
     [switch]$Setup,
     [switch]$SetupWsl2,
     [switch]$Dev,
+    [switch]$Ocr,
     [switch]$Preview
 )
 
 $ErrorActionPreference = 'Stop'
 $repo = Split-Path -Parent $PSScriptRoot
 $hostPython = Join-Path $repo '.venv/Scripts/python.exe'
+if ($Python -and -not $Setup) {
+    $requested = if (Test-Path -LiteralPath $Python -PathType Leaf) {
+        (Get-Item -LiteralPath $Python).FullName
+    } else {
+        Get-Command -Name $Python -CommandType Application -ErrorAction SilentlyContinue |
+            Select-Object -First 1 -ExpandProperty Source
+    }
+    if (-not $requested -or $requested -match '[\\/]Microsoft[\\/]WindowsApps[\\/](python(3(\.\d+)?)?|py)\.exe$') {
+        throw "Supply the full path to a prepared Python executable. Cannot use -Python '$Python'."
+    }
+    $Python = $requested
+}
 if ($SetupWsl2) {
     if ($Setup) { throw 'Run -Setup before -SetupWsl2.' }
     if (-not $Python) {
@@ -36,9 +49,9 @@ if ($SetupWsl2) {
     & $Python @wslSetupArgs --execute
     exit $LASTEXITCODE
 }
-if ($Setup -or (-not $Python -and -not (Test-Path -LiteralPath $hostPython -PathType Leaf))) {
+if ($Setup -or $Ocr -or (-not $Python -and -not (Test-Path -LiteralPath $hostPython -PathType Leaf))) {
     $installer = Join-Path $PSScriptRoot 'launchers/setup.ps1'
-    $setupArgs = @{ Dev = $Dev }
+    $setupArgs = @{ Dev = $Dev; Ocr = $Ocr }
     if ($Python) { $setupArgs.Python = $Python }
     & $installer @setupArgs
     if ($Preview) { return }

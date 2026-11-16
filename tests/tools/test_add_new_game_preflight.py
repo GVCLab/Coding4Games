@@ -3,9 +3,11 @@ from importlib import metadata
 import json
 import os
 from pathlib import Path
+import runpy
 import subprocess
 import sys
 from types import SimpleNamespace
+from zipfile import ZipFile
 
 import pytest
 import yaml
@@ -136,6 +138,35 @@ def test_complete_fixture_has_no_manual_gates(tmp_path):
     assert "scorer_calibration" not in by_id
 
 
+def test_missing_checkpoint_command_uses_registered_name(tmp_path):
+    save_dir = tmp_path / "save"
+    save_dir.mkdir()
+    _driver(tmp_path, save_dir)
+    _benchmark(tmp_path, extra={"startup": {"golden_checkpoint": "account_compat"}})
+    report = _module().audit_game(tmp_path, "demo")
+    check = next(row for row in report["checks"] if row["id"] == "golden_checkpoint")
+    assert "demo_account_compat.zip" in check["detail"]
+    assert check["command"].endswith("--game demo account_compat")
+
+
+def test_checkpoint_creates_a_missing_registered_archive(tmp_path, monkeypatch):
+    from coding4game_gui.benchmark.windows import games_config, save_state
+
+    save_dir = tmp_path / "save"
+    save_dir.mkdir()
+    (save_dir / "fixture.sav").write_bytes(b"synthetic save")
+    _driver(tmp_path, save_dir, complete=True)
+    monkeypatch.setattr(games_config, "resolve_game_path", lambda _: tmp_path / "games/demo.yaml")
+    monkeypatch.setattr(save_state, "REPO_ROOT", tmp_path)
+    script = SCRIPT.with_name("checkpoint.py")
+    monkeypatch.setattr(sys, "argv", [str(script), "--game", "demo", "golden", "--no-prompt", "--keep-running"])
+
+    runpy.run_path(str(script), run_name="__main__")
+
+    with ZipFile(tmp_path / "snapshots/demo_golden.zip") as archive:
+        assert archive.read("fixture.sav") == b"synthetic save"
+
+
 def test_legacy_steam_uri_is_an_error(tmp_path):
     save_dir = tmp_path / "save"
     save_dir.mkdir()
@@ -237,6 +268,15 @@ def test_static_contract_rejects_action_durations_and_extra_bench_keys(tmp_path)
     assert report["config_ready"] is False
 
 
+def _write_pe(path, machine):
+    header = bytearray(70)
+    header[:2] = b"MZ"
+    header[60:64] = (64).to_bytes(4, "little")
+    header[64:68] = b"PE\0\0"
+    header[68:70] = machine.to_bytes(2, "little")
+    path.write_bytes(header)
+
+
 def _timing_fixture(tmp_path, monkeypatch, *, machine=0x14C):
     save_dir = tmp_path / "save"
     save_dir.mkdir()
@@ -248,12 +288,7 @@ def _timing_fixture(tmp_path, monkeypatch, *, machine=0x14C):
     driver = yaml.safe_load(driver_path.read_text(encoding="utf-8"))
     driver["use_speedhack"] = True
     driver_path.write_text(yaml.safe_dump(driver), encoding="utf-8")
-    header = bytearray(70)
-    header[:2] = b"MZ"
-    header[60:64] = (64).to_bytes(4, "little")
-    header[64:68] = b"PE\0\0"
-    header[68:70] = machine.to_bytes(2, "little")
-    (tmp_path / "Demo.exe").write_bytes(header)
+    _write_pe(tmp_path / "Demo.exe", machine)
     package_root = tmp_path / "site-packages"
     binaries = package_root / "xspeedhack/bin"
     binaries.mkdir(parents=True)
@@ -262,6 +297,35 @@ def _timing_fixture(tmp_path, monkeypatch, *, machine=0x14C):
     monkeypatch.setattr(metadata, "distribution", lambda name: SimpleNamespace(
         locate_file=lambda relative: package_root / relative))
     return binaries
+
+
+def test_steam_app_uses_declared_game_architecture_and_refuses_missing_target(tmp_path, monkeypatch):
+    binaries = _timing_fixture(tmp_path, monkeypatch)
+    (binaries / "injector32.exe").unlink()
+    steam = tmp_path / "steam.exe"
+    _write_pe(steam, 0x14C)
+    driver_path = tmp_path / "games/demo.yaml"
+    driver = yaml.safe_load(driver_path.read_text(encoding="utf-8"))
+    driver["auto_launch"] = {"launch_path": str(steam), "launch_args": ["-applaunch", "1234"]}
+    driver_path.write_text(yaml.safe_dump(driver), encoding="utf-8")
+    target = tmp_path / "steamapps/common/Demo/Binaries/Demo.exe"
+    target.parent.mkdir(parents=True)
+    manifest = tmp_path / "steamapps/appmanifest_1234.acf"
+    manifest.write_text('"AppState"\n{\n    "installdir" "Demo"\n}\n', encoding="utf-8")
+    _write_pe(target, 0x8664)
+
+    mod = _module()
+    report = mod.audit_game(tmp_path, "demo")
+    checks = {row["id"]: row for row in report["checks"]}
+    assert checks["steam_app_executable"]["status"] == "pass"
+    assert checks["time_control_resources"]["status"] == "pass"
+    assert "x64 game executable" in checks["time_control_resources"]["detail"]
+
+    target.unlink()
+    report = mod.audit_game(tmp_path, "demo")
+    assert report["config_ready"] is False
+    check = next(row for row in report["checks"] if row["id"] == "steam_app_executable")
+    assert "Demo.exe is missing" in check["detail"]
 
 
 @pytest.mark.parametrize("missing", ["injector32.exe", "speedhack32.dll"])

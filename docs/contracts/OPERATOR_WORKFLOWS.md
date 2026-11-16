@@ -27,8 +27,10 @@ Verify the intended host's game installation, account, task resources and
 ordinary input through the registered cold start before paid development.
 The [game guides](../SUPPORTED_GAMES.md) specify the required resources.
 
-For drivers requiring xspeedhack, the onboarding preflight reads the launch
+For drivers requiring xspeedhack, the onboarding preflight reads the game
 executable's PE architecture and checks the matching installed injector and DLL.
+For an explicit Steam app launch, it resolves the game executable through the
+installed app manifest.
 Missing, empty or unresolved resources block CONFIG READY. This check imports
 no injector, executes no native code and does not establish attachment, file
 safety or real-game timing acceptance.
