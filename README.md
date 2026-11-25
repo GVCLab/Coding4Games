@@ -35,7 +35,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/arXiv-Paper-b31b1b?style=for-the-badge" alt="arXiv">
+  <a href="https://arxiv.org/pdf/2611.31974"><img src="https://img.shields.io/badge/arXiv-Paper-b31b1b?style=for-the-badge" alt="arXiv"></a>
   <a href="https://coding4game.github.io/"><img src="https://img.shields.io/badge/Project%20Page-Explore-0f766e?style=for-the-badge" alt="Coding4Games project page"></a>
   <a href="https://coding4game.github.io/arcade/play.html"><img src="https://img.shields.io/badge/Challenge%20the%20Agents-7c3aed?style=for-the-badge" alt="Challenge the Agents"></a>
 </p>
@@ -191,23 +191,6 @@ Install the games separately. The [game catalog](docs/SUPPORTED_GAMES.md) links 
 
 The [Apache 2.0 license](LICENSE) covers the benchmark code and documentation. Game titles, logos, artwork, screenshots, gameplay footage, and save data are subject to their respective rights holders' terms. Obtain games from their publishers or authorized stores.
 
-<a name="citation"></a>
-
-## 📚 Citation
-
-If you use Coding4Games in your research, please cite the [paper](https://openreview.net/forum?id=BJMuS3H1Oh) using the BibTeX below.
-
-```bibtex
-@misc{zhao_coding4games,
-  title = {{Coding4Games: Can Modern Coding Agents Play Modern Video Games?}},
-  author = {Zhao, Shifang and Wang, Haoyu and Yin, Yuyang and Chen, Dong and
-            Yin, Xingyilang and Tao, Yunkang and Chen, Honghao and Wang, Guangzhi and
-            Wang, Yiran and Pu, Junfu and Cheng, Cheng and Cun, Xiaodong and Shan, Ying},
-  howpublished = {OpenReview},
-  url = {https://openreview.net/forum?id=BJMuS3H1Oh}
-}
-```
-
 <a name="acknowledgements"></a>
 
 ## 🙏 Acknowledgements
@@ -226,3 +209,21 @@ Thanks to the teams behind [NitroGen](https://github.com/MineDojo/NitroGen) and 
     </picture>
   </a>
 </p>
+
+<a name="citation"></a>
+
+## 📚 Citation
+
+If you use Coding4Games in your research, please cite our [paper](https://arxiv.org/pdf/2611.31974).
+
+```bibtex
+@misc{zhao2026coding4gamesmoderncodingagents,
+      title={Coding4Games: Can Modern Coding Agents Play Modern Video Games?},
+      author={Shifang Zhao and Haoyu Wang and Yuyang Yin and Dong Chen and Xingyilang Yin and Yunkang Tao and Honghao Chen and Guangzhi Wang and Yiran Wang and Junfu Pu and Cheng Cheng and Xiaodong Cun and Ying Shan},
+      year={2026},
+      eprint={2611.31974},
+      archivePrefix={arXiv},
+      primaryClass={cs.AI},
+      url={https://arxiv.org/abs/2611.31974},
+}
+```
